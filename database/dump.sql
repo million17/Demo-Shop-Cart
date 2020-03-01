@@ -209,6 +209,7 @@ CREATE TABLE `dbo_product_entity` (
   `product_id` int DEFAULT NULL,
   `color_id` int DEFAULT NULL,
   `size_id` int DEFAULT NULL,
+  `created_date` DATETIME DEFAULT NULL,
   PRIMARY KEY (`product_entity_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
