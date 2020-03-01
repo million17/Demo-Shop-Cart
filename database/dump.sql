@@ -99,6 +99,7 @@ DROP TABLE IF EXISTS `dbo_color`;
 CREATE TABLE `dbo_color` (
   `color_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `short_desc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`color_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -256,6 +257,7 @@ DROP TABLE IF EXISTS `dbo_size`;
 CREATE TABLE `dbo_size` (
   `size_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `short_desc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`size_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
