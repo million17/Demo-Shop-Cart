@@ -1,4 +1,7 @@
 package application.data.repository;
 
-public class ColorRepository {
+import application.data.model.Color;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ColorRepository extends JpaRepository<Color,Integer> {
 }

@@ -1,4 +1,7 @@
 package application.data.repository;
 
-public class ProductRepository {
+import application.data.model.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ProductRepository extends JpaRepository<Product,Integer> {
 }
