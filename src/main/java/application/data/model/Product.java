@@ -21,7 +21,7 @@ public class Product {
     private String shortDesc;
 
     @Column(name = "main_image")
-    private String main_image;
+    private String mainImage;
 
     @Column(name = "category_id",insertable = false, updatable = false)
     private int categoryId;
@@ -77,12 +77,12 @@ public class Product {
         this.shortDesc = shortDesc;
     }
 
-    public String getMain_image() {
-        return main_image;
+    public String getMainImage() {
+        return mainImage;
     }
 
-    public void setMain_image(String main_image) {
-        this.main_image = main_image;
+    public void setMainImage(String mainImage) {
+        this.mainImage = mainImage;
     }
 
     public Category getCategory() {
