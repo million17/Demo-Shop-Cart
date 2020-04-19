@@ -1,0 +1,120 @@
+{
+	"info": {
+		"_postman_id": "f08e0242-7f49-49c0-a511-b60f7848921c",
+		"name": "SpringBootT3H",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Fake",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/product/fake",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"product",
+								"fake"
+							]
+						},
+						"description": "Fake Product"
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"productName\" : \"Product 5\",\n\t\"shortDesc\" : \"Product 5 short description\",\n\t\"mainImage\" : \"/no_image.jpg\",\n\t\"categoryId\" : 2,\n\t\"price\" : 20.33,\n\t\"brand\" : \"Japan\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/product/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"product",
+								"create"
+							]
+						},
+						"description": "Create Product"
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"productName\" : \"Product 5\",\n\t\"shortDesc\" : \"Product 5 short description\",\n\t\"mainImage\" : \"/no_image.jpg\",\n\t\"categoryId\" : 3,\n\t\"price\" : 99.88,\n\t\"brand\" : \"Japan\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/product/update/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"product",
+								"update",
+								"5"
+							]
+						},
+						"description": "Update Product"
+					},
+					"response": []
+				},
+				{
+					"name": "Details",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/product/detail/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"product",
+								"detail",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Api Product",
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
