@@ -26,4 +26,9 @@ public class CategoryService {
             return new ArrayList<>();
         }
     }
+
+    public Category findOne(int categoryId){
+            return categoryRepository.findOne(categoryId);
+    }
+
 }
