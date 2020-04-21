@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b67287a3-3c3a-46f1-b865-3b4b972becb6",
+		"_postman_id": "315ea533-0303-4157-b114-45b9d5603237",
 		"name": "SpringBootT3H",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -165,6 +165,46 @@
 								"update",
 								"5"
 							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\" : \"Test Category Api\",\n\t\"shortDesc\" : \"Test Category Short desc\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/category/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"category",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
 						}
 					},
 					"response": []
