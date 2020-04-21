@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -29,6 +30,11 @@ public class CategoryService {
 
     public Category findOne(int categoryId){
             return categoryRepository.findOne(categoryId);
+    }
+
+    @Transactional
+    public void updateCategory(Category category) {
+        categoryRepository.save(category);
     }
 
 }
