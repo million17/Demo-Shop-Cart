@@ -22,6 +22,30 @@ public class CategoryApiController {
     @Autowired
     private CategoryService categoryService;
 
+    @PostMapping("/create")
+    public BaseApiResult createCategory(@RequestBody CategoryDTO dto) {
+        BaseApiResult result = new BaseApiResult();
+
+        try {
+            Category category = new Category();
+            category.setName(dto.getName());
+            category.setShortDesc(dto.getShortDesc());
+            category.setCreatedDate(new Date());
+
+            categoryService.addNewCategory(category);
+
+            result.setMessage("Create category success ! ");
+            result.setSuccess(true);
+        } catch (Exception ex) {
+            logger.error(ex.getMessage());
+
+            result.setMessage("Create category fails ! ");
+            result.setSuccess(false);
+        }
+
+        return result;
+    }
+
     @PostMapping("/detail/{categoryId}")
     public BaseApiResult detailCategory(@PathVariable int categoryId) {
         DataApiResult result = new DataApiResult();
@@ -70,4 +94,20 @@ public class CategoryApiController {
         return result;
     }
 
+    @PostMapping("/delete/{categoryId}")
+    public BaseApiResult deleteCategory(@PathVariable int categoryId) {
+        BaseApiResult result = new BaseApiResult();
+
+        try {
+            categoryService.deleteCategory(categoryId);
+            result.setSuccess(true);
+            result.setMessage("Delete category " + categoryId + " success !");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage());
+            result.setMessage("Delete fails !");
+            result.setSuccess(false);
+        }
+
+        return result;
+    }
 }

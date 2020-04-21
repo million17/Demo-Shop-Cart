@@ -19,7 +19,7 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public List<Category> getListAllCategories(){
+    public List<Category> getListAllCategories() {
         try {
             return categoryRepository.findAll();
         } catch (Exception ex) {
@@ -28,8 +28,20 @@ public class CategoryService {
         }
     }
 
-    public Category findOne(int categoryId){
-            return categoryRepository.findOne(categoryId);
+    public Category findOne(int categoryId) {
+        return categoryRepository.findOne(categoryId);
+    }
+
+    @Transactional
+    public boolean addNewCategory(Category category) {
+        try {
+            categoryRepository.save(category);
+            return true;
+        } catch (Exception ex) {
+            logger.error(ex.getMessage());
+            return false;
+        }
+
     }
 
     @Transactional
@@ -37,4 +49,13 @@ public class CategoryService {
         categoryRepository.save(category);
     }
 
+    public boolean deleteCategory(int categoryId) {
+        try {
+            categoryRepository.delete(categoryId);
+            return true;
+        } catch (Exception ex) {
+            logger.error(ex.getMessage());
+            return false;
+        }
+    }
 }
