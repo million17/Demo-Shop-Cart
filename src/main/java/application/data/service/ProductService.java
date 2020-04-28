@@ -24,8 +24,14 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    public Product findOne(int productId) {
-        return productRepository.findOne(productId);
+    public boolean findOne(int productId) {
+        try {
+            productRepository.findOne(productId);
+            return true;
+        } catch (Exception ex) {
+            logger.error(ex.getMessage());
+        }
+        return false;
     }
 
     public boolean updateProduct(Product product) {
