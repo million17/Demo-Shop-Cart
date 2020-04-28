@@ -29,15 +29,13 @@ public class SizeService {
         return false;
     }
 
-    public boolean findOne(Integer sizeId) {
+    public Size findOne(Integer sizeId) {
         try {
-            sizeRepository.findOne(sizeId);
-            return true;
+            return sizeRepository.findOne(sizeId);
         } catch (Exception ex) {
             logger.error(ex.getMessage());
-
         }
-        return false;
+        return null;
     }
 
     @Transactional

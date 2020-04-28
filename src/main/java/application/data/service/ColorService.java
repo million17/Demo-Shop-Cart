@@ -35,14 +35,13 @@ public class ColorService {
         colorRepository.save(colorList);
     }
 
-    public boolean findOne(int colorId) {
+    public Color findOne(int colorId) {
         try {
-            colorRepository.findOne(colorId);
-            return true;
+            return colorRepository.findOne(colorId);
         } catch (Exception ex) {
             logger.error(ex.getMessage());
         }
-        return false;
+        return null;
     }
 
     @Transactional

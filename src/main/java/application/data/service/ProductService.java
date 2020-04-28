@@ -24,14 +24,13 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    public boolean findOne(int productId) {
+    public Product findOne(int productId) {
         try {
-            productRepository.findOne(productId);
-            return true;
+            return productRepository.findOne(productId);
         } catch (Exception ex) {
             logger.error(ex.getMessage());
         }
-        return false;
+        return null;
     }
 
     public boolean updateProduct(Product product) {
