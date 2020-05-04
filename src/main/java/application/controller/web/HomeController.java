@@ -7,10 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping(path = "/user")
 public class HomeController {
 
-    @GetMapping("/")
+    @GetMapping(value = "/")
     public String homePage(Model model) {
         return "/home";
     }
