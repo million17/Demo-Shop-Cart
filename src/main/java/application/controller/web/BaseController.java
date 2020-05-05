@@ -43,6 +43,38 @@ public class BaseController {
                 response.addCookie(cookie2);
             }
         } else {
+            boolean flag2 = true;
+
+            String guid = null;
+
+            if (cookie != null) {
+                for (Cookie c : cookie) {
+                    if (c.getName().equals("guid")) {
+                        flag2 = false;
+                        guid = c.getValue();
+                    }
+                }
+            }
+
+            if (flag2 == true) {
+                UUID uuid = UUID.randomUUID();
+                String guid2 = uuid.toString();
+                Cart cart2 = new Cart();
+                cart2.setGuid(guid2);
+                cartService.addNewCart(cart2);
+
+                Cookie cookie3 = new Cookie("guid", guid2);
+                cookie3.setPath("/");
+                cookie3.setMaxAge(60 * 60 * 24);
+                response.addCookie(cookie3);
+            } else {
+                Cart cartEntity = cartService.findFirstCartByGuid(guid);
+                if (cartEntity != null) {
+                    Cart cart3 = new Cart();
+                    cart3.setGuid(guid);
+                    cartService.addNewCart(cart3);
+                }
+            }
 
         }
 

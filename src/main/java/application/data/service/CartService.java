@@ -25,6 +25,15 @@ public class CartService {
         return null;
     }
 
+    public Cart findFirstCartByGuid(String guid) {
+        try {
+            return cartRepository.findFirstCartByGuid(guid);
+        } catch (Exception ex) {
+            logger.error(ex.getMessage());
+        }
+        return null;
+    }
+
     public Cart addNewCart(Cart cart) {
         return cartRepository.save(cart);
     }
