@@ -65,4 +65,8 @@ public class ColorService {
         }
         return false;
     }
+
+    public List<Color> getAll() {
+        return colorRepository.findAll();
+    }
 }

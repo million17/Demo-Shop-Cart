@@ -1,12 +1,11 @@
 package application.model.viewmodel;
 
-import application.data.model.Size;
-
-import java.util.*;
+import java.util.List;
 
 public class HomeVM {
     List<SizeVM> sizeVMList;
     List<ProductVM> productVMList;
+    List<ColorVM> colorVMList;
 
     public HomeVM() {
     }
@@ -25,5 +24,13 @@ public class HomeVM {
 
     public void setSizeVMList(List<SizeVM> sizeVMList) {
         this.sizeVMList = sizeVMList;
+    }
+
+    public List<ColorVM> getColorVMList() {
+        return colorVMList;
+    }
+
+    public void setColorVMList(List<ColorVM> colorVMList) {
+        this.colorVMList = colorVMList;
     }
 }
