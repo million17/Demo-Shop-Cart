@@ -102,6 +102,7 @@ public class HomeController extends BaseController {
 
         for (Product product : productService.getListProductByCategoryOrProductNameContaining(null, null, null)) {
             ProductVM productVM = new ProductVM();
+            productVM.setId(product.getProductId());
             productVM.setProductName(product.getProductName());
             productVM.setCategoryId(product.getCategoryId());
             productVM.setBrand(product.getBrand());

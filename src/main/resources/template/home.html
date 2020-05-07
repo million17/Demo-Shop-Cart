@@ -174,16 +174,7 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#best-seller" role="tab">Best Seller</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#featured" role="tab">Featured</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#sale" role="tab">Sale</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#top-rate" role="tab">Top Rate</a>
+                    <a class="nav-link active" data-toggle="tab" href="#best-seller" role="tab">Product</a>
                 </li>
             </ul>
 
@@ -192,11 +183,11 @@
                 <!-- - -->
                 <div class="tab-pane fade show active" id="best-seller" role="tabpanel">
                     <div class="row">
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50" th:each="product : ${vm.getProductVMList()}">
                             <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                                    <img th:src="@{/user/images/item-02.jpg}" alt="IMG-PRODUCT">
+                                    <img th:src="'/user/images' + ${product.getMainImage()}" alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -214,247 +205,12 @@
                                 </div>
 
                                 <div class="block2-txt p-t-20">
-                                    <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                        Herschel supply co 25l
+                                    <a th:href="${'/product/'+product.getId()}" class="block2-name dis-block s-text3 p-b-5">
+                                        <span th:text="${product.getProductName()}"></span>
                                     </a>
 
-                                    <span class="block2-price m-text6 p-r-5">
+                                    <span class="block2-price m-text6 p-r-5" th:text="${product.getPrice()} + '$'">
 											$75.00
-										</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
-                            <div class="block2">
-                                <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                    <img th:src="@{/user/images/item-08.jpg}" alt="IMG-PRODUCT">
-
-                                    <div class="block2-overlay trans-0-4">
-                                        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                            <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                            <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                        </a>
-
-                                        <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
-                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                Add to Cart
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="block2-txt p-t-20">
-                                    <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                        Denim jacket blue
-                                    </a>
-
-                                    <span class="block2-price m-text6 p-r-5">
-											$92.50
-										</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
-                            <div class="block2">
-                                <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                    <img th:src="@{/user/images/item-10.jpg}" alt="IMG-PRODUCT">
-
-                                    <div class="block2-overlay trans-0-4">
-                                        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                            <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                            <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                        </a>
-
-                                        <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
-                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                Add to Cart
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="block2-txt p-t-20">
-                                    <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                        Coach slim easton black
-                                    </a>
-
-                                    <span class="block2-price m-text6 p-r-5">
-											$165.90
-										</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
-                            <div class="block2">
-                                <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                                    <img th:src="@{/user/images/item-06.jpg}" alt="IMG-PRODUCT">
-
-                                    <div class="block2-overlay trans-0-4">
-                                        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                            <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                            <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                        </a>
-
-                                        <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
-                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                Add to Cart
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="block2-txt p-t-20">
-                                    <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                        Herschel supply co 25l
-                                    </a>
-
-                                    <span class="block2-price m-text6 p-r-5">
-											$75.00
-										</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
-                            <div class="block2">
-                                <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                    <img th:src="@{/user/images/item-12.jpg}" alt="IMG-PRODUCT">
-
-                                    <div class="block2-overlay trans-0-4">
-                                        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                            <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                            <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                        </a>
-
-                                        <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
-                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                Add to Cart
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="block2-txt p-t-20">
-                                    <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                        Herschel supply co 25l
-                                    </a>
-
-                                    <span class="block2-price m-text6 p-r-5">
-											$75.00
-										</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
-                            <div class="block2">
-                                <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                    <img th:src="@{/user/images/item-14.jpg}" alt="IMG-PRODUCT">
-
-                                    <div class="block2-overlay trans-0-4">
-                                        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                            <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                            <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                        </a>
-
-                                        <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
-                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                Add to Cart
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="block2-txt p-t-20">
-                                    <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                        Denim jacket blue
-                                    </a>
-
-                                    <span class="block2-price m-text6 p-r-5">
-											$92.50
-										</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
-                            <div class="block2">
-                                <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                    <img th:src="@{/user/images/item-05.jpg}" alt="IMG-PRODUCT">
-
-                                    <div class="block2-overlay trans-0-4">
-                                        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                            <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                            <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                        </a>
-
-                                        <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
-                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                Add to Cart
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="block2-txt p-t-20">
-                                    <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                        Coach slim easton black
-                                    </a>
-
-                                    <span class="block2-price m-text6 p-r-5">
-											$165.90
-										</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
-                            <div class="block2">
-                                <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                    <img th:src="@{/user/images/item-07.jpg}" alt="IMG-PRODUCT">
-
-                                    <div class="block2-overlay trans-0-4">
-                                        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                            <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                            <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                        </a>
-
-                                        <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
-                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                Add to Cart
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="block2-txt p-t-20">
-                                    <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                        Frayed denim shorts
-                                    </a>
-
-                                    <span class="block2-oldprice m-text7 p-r-5">
-											$29.50
-										</span>
-
-                                    <span class="block2-newprice m-text8 p-r-5">
-											$15.90
 										</span>
                                 </div>
                             </div>
@@ -462,11 +218,11 @@
                     </div>
                 </div>
 
-                <!-- - -->
+                <!-- -
                 <div class="tab-pane fade" id="featured" role="tabpanel">
                     <div class="row">
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
+                            &lt;!&ndash; Block2 &ndash;&gt;
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
                                     <img th:src="@{/user/images/item-07.jpg}" alt="IMG-PRODUCT">
@@ -478,7 +234,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
+                                            &lt;!&ndash; Button &ndash;&gt;
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -503,7 +259,7 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
+                            &lt;!&ndash; Block2 &ndash;&gt;
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
                                     <img th:src="@{/user/images/item-01.jpg}" alt="IMG-PRODUCT">
@@ -515,7 +271,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
+                                            &lt;!&ndash; Button &ndash;&gt;
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -536,7 +292,7 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
+                            &lt;!&ndash; Block2 &ndash;&gt;
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative">
                                     <img th:src="@{/user/images/item-14.jpg}" alt="IMG-PRODUCT">
@@ -548,7 +304,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
+                                            &lt;!&ndash; Button &ndash;&gt;
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -569,7 +325,7 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
+                            &lt;!&ndash; Block2 &ndash;&gt;
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
                                     <img th:src="@{/user/images/item-06.jpg}" alt="IMG-PRODUCT">
@@ -581,7 +337,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
+                                            &lt;!&ndash; Button &ndash;&gt;
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -602,7 +358,7 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
+                            &lt;!&ndash; Block2 &ndash;&gt;
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
                                     <img th:src="@{/user/images/item-11.jpg}" alt="IMG-PRODUCT">
@@ -614,7 +370,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
+                                            &lt;!&ndash; Button &ndash;&gt;
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -639,7 +395,7 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
+                            &lt;!&ndash; Block2 &ndash;&gt;
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
                                     <img th:src="@{/user/images/item-12.jpg}" alt="IMG-PRODUCT">
@@ -651,7 +407,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
+                                            &lt;!&ndash; Button &ndash;&gt;
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -672,7 +428,7 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
+                            &lt;!&ndash; Block2 &ndash;&gt;
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative">
                                     <img th:src="@{/user/images/item-15.jpg}" alt="IMG-PRODUCT">
@@ -684,7 +440,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
+                                            &lt;!&ndash; Button &ndash;&gt;
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -706,11 +462,11 @@
                     </div>
                 </div>
 
-                <!--  -->
+                &lt;!&ndash;  &ndash;&gt;
                 <div class="tab-pane fade" id="sale" role="tabpanel">
                     <div class="row">
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
+                            &lt;!&ndash; Block2 &ndash;&gt;
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
                                     <img th:src="@{/user/images/item-01.jpg}" alt="IMG-PRODUCT">
@@ -722,7 +478,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
+                                            &lt;!&ndash; Button &ndash;&gt;
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -743,7 +499,7 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
+                            &lt;!&ndash; Block2 &ndash;&gt;
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
                                     <img th:src="@{/user/images/item-14.jpg}" alt="IMG-PRODUCT">
@@ -755,7 +511,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
+                                            &lt;!&ndash; Button &ndash;&gt;
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -776,7 +532,7 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
+                            &lt;!&ndash; Block2 &ndash;&gt;
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
                                     <img th:src="@{/user/images/item-06.jpg}" alt="IMG-PRODUCT">
@@ -788,7 +544,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
+                                            &lt;!&ndash; Button &ndash;&gt;
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -809,7 +565,7 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
+                            &lt;!&ndash; Block2 &ndash;&gt;
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
                                     <img th:src="@{/user/images/item-08.jpg}" alt="IMG-PRODUCT">
@@ -821,7 +577,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
+                                            &lt;!&ndash; Button &ndash;&gt;
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -843,11 +599,11 @@
                     </div>
                 </div>
 
-                <!--  -->
+                &lt;!&ndash;  &ndash;&gt;
                 <div class="tab-pane fade" id="top-rate" role="tabpanel">
                     <div class="row">
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
+                            &lt;!&ndash; Block2 &ndash;&gt;
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
                                     <img th:src="@{/user/images/item-02.jpg}" alt="IMG-PRODUCT">
@@ -859,7 +615,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
+                                            &lt;!&ndash; Button &ndash;&gt;
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -880,7 +636,7 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
+                            &lt;!&ndash; Block2 &ndash;&gt;
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative">
                                     <img th:src="@{/user/images/item-03.jpg}" alt="IMG-PRODUCT">
@@ -892,7 +648,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
+                                            &lt;!&ndash; Button &ndash;&gt;
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -913,7 +669,7 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
+                            &lt;!&ndash; Block2 &ndash;&gt;
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative">
                                     <img th:src="@{/user/images/item-05.jpg}" alt="IMG-PRODUCT">
@@ -925,7 +681,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
+                                            &lt;!&ndash; Button &ndash;&gt;
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -946,7 +702,7 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
+                            &lt;!&ndash; Block2 &ndash;&gt;
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
                                     <img th:src="@{/user/images/item-07.jpg}" alt="IMG-PRODUCT">
@@ -958,7 +714,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
+                                            &lt;!&ndash; Button &ndash;&gt;
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -983,7 +739,7 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
+                            &lt;!&ndash; Block2 &ndash;&gt;
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative">
                                     <img th:src="@{/user/images/item-10.jpg}" alt="IMG-PRODUCT">
@@ -995,7 +751,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
+                                            &lt;!&ndash; Button &ndash;&gt;
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -1016,7 +772,7 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
+                            &lt;!&ndash; Block2 &ndash;&gt;
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
                                     <img th:src="@{/user/images/item-11.jpg}" alt="IMG-PRODUCT">
@@ -1028,7 +784,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
+                                            &lt;!&ndash; Button &ndash;&gt;
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -1053,7 +809,7 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
+                            &lt;!&ndash; Block2 &ndash;&gt;
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
                                     <img th:src="@{/user/images/item-12.jpg}" alt="IMG-PRODUCT">
@@ -1065,7 +821,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
+                                            &lt;!&ndash; Button &ndash;&gt;
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -1086,7 +842,7 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            <!-- Block2 -->
+                            &lt;!&ndash; Block2 &ndash;&gt;
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative">
                                     <img th:src="@{/user/images/item-15.jpg}" alt="IMG-PRODUCT">
@@ -1098,7 +854,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
+                                            &lt;!&ndash; Button &ndash;&gt;
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -1118,7 +874,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>
