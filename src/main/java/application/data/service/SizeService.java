@@ -29,6 +29,10 @@ public class SizeService {
         return false;
     }
 
+    public List<Size> getAll() {
+        return sizeRepository.findAll();
+    }
+
     public Size findOne(Integer sizeId) {
         try {
             return sizeRepository.findOne(sizeId);
