@@ -21,6 +21,10 @@ public class ProductEntityService {
         return productEntityRepository.getProductColorSize(productId, colorId, sizeId);
     }
 
+    public List<ProductEntity> getAll() {
+        return productEntityRepository.findAll();
+    }
+
     public ProductEntity findOne(Integer productEntityId) {
         return productEntityRepository.findOne(productEntityId);
     }

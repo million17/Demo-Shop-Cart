@@ -53,4 +53,13 @@ public class SizeService {
         return false;
 
     }
+
+    public List<Size> getListSizeByProductId(Integer productId) {
+        try {
+            return sizeRepository.getListSizeByProductId(productId);
+        } catch (Exception ex) {
+            logger.error(ex.getMessage());
+        }
+        return null;
+    }
 }
