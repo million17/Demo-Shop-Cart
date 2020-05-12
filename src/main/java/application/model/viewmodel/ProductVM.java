@@ -3,7 +3,9 @@ package application.model.viewmodel;
 import application.extension.CustomDateSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ProductVM {
     private int id;
@@ -12,11 +14,14 @@ public class ProductVM {
     private String mainImage;
     private int categoryId;
     private Double price;
+    private String categoryName;
     private String brand;
+    List<ProductImageVM>  productImageVMS;
+    List<ProductEntityVM> productEntityVMS;
 
     private Date createdDate;
 
-    public ProductVM(int id, String productName, String shortDesc, String mainImage, int categoryId, Double price, String brand, Date createdDate) {
+    public ProductVM(int id, String productName, String shortDesc, String categoryName, String mainImage, int categoryId, Double price, String brand, List<ProductImageVM> productImageVMS, List<ProductEntityVM> productEntityVMS, Date createdDate) {
         this.id = id;
         this.productName = productName;
         this.shortDesc = shortDesc;
@@ -24,10 +29,37 @@ public class ProductVM {
         this.categoryId = categoryId;
         this.price = price;
         this.brand = brand;
+        this.productImageVMS = productImageVMS;
+        this.productEntityVMS = productEntityVMS;
         this.createdDate = createdDate;
+        this.categoryName = categoryName;
     }
 
     public ProductVM() {
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public List<ProductImageVM> getProductImageVMS() {
+        return productImageVMS;
+    }
+
+    public void setProductImageVMS(List<ProductImageVM> productImageVMS) {
+        this.productImageVMS = productImageVMS;
+    }
+
+    public List<ProductEntityVM> getProductEntityVMS() {
+        return productEntityVMS;
+    }
+
+    public void setProductEntityVMS(List<ProductEntityVM> productEntityVMS) {
+        this.productEntityVMS = productEntityVMS;
     }
 
     public int getId() {

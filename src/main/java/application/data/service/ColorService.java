@@ -69,4 +69,13 @@ public class ColorService {
     public List<Color> getAll() {
         return colorRepository.findAll();
     }
+
+    public List<Color> getListColorByProductId(Integer productId) {
+        try {
+            return colorRepository.getListColorByProductId(productId);
+        } catch (Exception ex) {
+            logger.error(ex.getMessage());
+        }
+        return null;
+    }
 }
