@@ -2,12 +2,21 @@ package application.model.viewmodel;
 
 import java.util.List;
 
-public class HomeVM {
+public class ShopProductVM {
     List<SizeVM> sizeVMList;
     List<ProductVM> productVMList;
     List<ColorVM> colorVMList;
+    List<CategoryVM> categoryVMList;
 
-    public HomeVM() {
+    public List<CategoryVM> getCategoryVMList() {
+        return categoryVMList;
+    }
+
+    public void setCategoryVMList(List<CategoryVM> categoryVMList) {
+        this.categoryVMList = categoryVMList;
+    }
+
+    public ShopProductVM() {
     }
 
     public List<SizeVM> getSizeVMList() {
