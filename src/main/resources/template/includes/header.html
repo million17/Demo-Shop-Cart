@@ -3,49 +3,20 @@
 <head>
     <title>Home</title>
 </head>
-<body th:fragment="header">
+<body th:fragment="header (vm)">
 <!-- header fixed -->
 <div class="wrap_header fixed-header2 trans-0-4">
     <!-- Logo -->
     <a href="index.html" class="logo">
-        <img th:src="@{/user/images/icons/logo.png}" alt="IMG-LOGO">
+        <img th:src="${vm.getCompanyName()}" alt="IMG-LOGO">
     </a>
 
     <!-- Menu -->
     <div class="wrap_menu">
         <nav class="menu">
             <ul class="main_menu">
-                <li>
-                    <a href="index.html">Home</a>
-                    <ul class="sub_menu">
-                        <li><a href="index.html">Homepage V1</a></li>
-                        <li><a href="home-02.html">Homepage V2</a></li>
-                        <li><a href="home-03.html">Homepage V3</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="product.html">Shop</a>
-                </li>
-
-                <li class="sale-noti">
-                    <a href="product.html">Sale</a>
-                </li>
-
-                <li>
-                    <a href="cart.html">Features</a>
-                </li>
-
-                <li>
-                    <a href="blog.html">Blog</a>
-                </li>
-
-                <li>
-                    <a href="about.html">About</a>
-                </li>
-
-                <li>
-                    <a href="contact.html">Contact</a>
+                <li th:each="vm : ${vm.getHeaderMenuVMArrayList()}">
+                    <a th:href="${vm.getLink()}" th:text="${vm.getName()}"></a>
                 </li>
             </ul>
         </nav>
@@ -166,7 +137,7 @@
 
             <!-- Logo2 -->
             <a href="/" class="logo2">
-                <img th:src="@{/user/images/icons/logo.png}" alt="IMG-LOGO">
+                <img th:src="${vm.getCompanyName()}" alt="IMG-LOGO">
             </a>
 
             <div class="topbar-child2">
@@ -274,37 +245,13 @@
             <div class="wrap_menu">
                 <nav class="menu">
                     <ul class="main_menu">
-                        <li>
-                            <a href="/">Home</a>
-                            <ul class="sub_menu">
-                                <li><a href="index.html">Homepage V1</a></li>
-                                <li><a href="home-02.html">Homepage V2</a></li>
-                                <li><a href="home-03.html">Homepage V3</a></li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="product.html">Shop</a>
-                        </li>
-
-                        <li class="sale-noti">
-                            <a href="product.html">Sale</a>
-                        </li>
-
-                        <li>
-                            <a href="cart.html">Features</a>
-                        </li>
-
-                        <li>
-                            <a href="blog.html">Blog</a>
-                        </li>
-
-                        <li>
-                            <a href="about.html">About</a>
-                        </li>
-
-                        <li>
-                            <a href="contact.html">Contact</a>
+                        <li th:each="vm : ${vm.getHeaderMenuVMArrayList()}">
+                            <a th:href="${vm.getLink()}" th:text="${vm.getName()}"></a>
+<!--                            <ul class="sub_menu">-->
+<!--                                <li><a href="index.html">Homepage V1</a></li>-->
+<!--                                <li><a href="home-02.html">Homepage V2</a></li>-->
+<!--                                <li><a href="home-03.html">Homepage V3</a></li>-->
+<!--                            </ul>-->
                         </li>
                     </ul>
                 </nav>
@@ -456,38 +403,14 @@
                     </div>
                 </li>
 
-                <li class="item-menu-mobile">
-                    <a href="index.html">Home</a>
-                    <ul class="sub-menu">
-                        <li><a href="index.html">Homepage V1</a></li>
-                        <li><a href="home-02.html">Homepage V2</a></li>
-                        <li><a href="home-03.html">Homepage V3</a></li>
-                    </ul>
+                <li class="item-menu-mobile" th:each="vm : ${vm.getHeaderMenuVMArrayList()}">
+                    <a th:href="${vm.getLink()}" th:text="${vm.getName()}"></a>
+<!--                    <ul class="sub-menu">-->
+<!--                        <li><a href="index.html">Homepage V1</a></li>-->
+<!--                        <li><a href="home-02.html">Homepage V2</a></li>-->
+<!--                        <li><a href="home-03.html">Homepage V3</a></li>-->
+<!--                    </ul>-->
                     <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="product.html">Shop</a>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="product.html">Sale</a>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="cart.html">Features</a>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="blog.html">Blog</a>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="about.html">About</a>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="contact.html">Contact</a>
                 </li>
             </ul>
         </nav>

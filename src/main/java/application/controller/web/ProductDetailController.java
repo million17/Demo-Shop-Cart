@@ -64,7 +64,7 @@ public class ProductDetailController extends BaseController {
         productVM.setShortDesc(product.getShortDesc());
 
         /*set List Product Image*/
-         List<ProductImage> productImageList = productImageService.getListProductImageByProductId(productId);
+        List<ProductImage> productImageList = productImageService.getListProductImageByProductId(productId);
         List<ProductImageVM> productImageVMS = new ArrayList<>();
         for (ProductImage productImage : productImageList) {
             ProductImageVM productImageVM = new ProductImageVM();
@@ -75,19 +75,6 @@ public class ProductDetailController extends BaseController {
             productImageVMS.add(productImageVM);
         }
 
-
-        /*set List Product Entity chưa biết để làm gì , nên t comment lại =))
-        List<ProductEntity> productEntityList = productEntityService.getAll();
-        List<ProductEntityVM> productEntityVMS = new ArrayList<>();
-        for (ProductEntity productEntity : productEntityList) {
-            ProductEntityVM productEntityVM = new ProductEntityVM();
-            productEntityVM.setProductEntityId(productEntity.getProductEntityId());
-            productEntityVM.setColorId(productEntity.getColorId());
-            productEntityVM.setProductId(productEntity.getProductId());
-            productEntityVM.setSizeId(productEntity.getSizeId());
-
-            productEntityVMS.add(productEntityVM);
-        }*/
 
         /*set Size List By ProductId*/
         List<Size> sizeList = sizeService.getListSizeByProductId(productId);
@@ -119,9 +106,9 @@ public class ProductDetailController extends BaseController {
 
         vm.setProductImageVMList(productImageVMS);
         vm.setProductVM(productVM);
-        /*vm.setProductEntityVMList(productEntityVMS);*/
         vm.setSizeVMList(sizeVMList);
         vm.setColorVMList(colorVMList);
+        vm.setLayoutHeaderVM(this.getLayoutHeaderVM());
 
         model.addAttribute("vm", vm);
 

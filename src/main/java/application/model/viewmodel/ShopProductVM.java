@@ -1,12 +1,23 @@
 package application.model.viewmodel;
 
+import application.model.viewmodel.common.LayoutHeaderVM;
+
 import java.util.List;
 
 public class ShopProductVM {
-    List<SizeVM> sizeVMList;
-    List<ProductVM> productVMList;
-    List<ColorVM> colorVMList;
-    List<CategoryVM> categoryVMList;
+    private List<SizeVM> sizeVMList;
+    private List<ProductVM> productVMList;
+    private List<ColorVM> colorVMList;
+    private List<CategoryVM> categoryVMList;
+    private LayoutHeaderVM layoutHeaderVM;
+
+    public LayoutHeaderVM getLayoutHeaderVM() {
+        return layoutHeaderVM;
+    }
+
+    public void setLayoutHeaderVM(LayoutHeaderVM layoutHeaderVM) {
+        this.layoutHeaderVM = layoutHeaderVM;
+    }
 
     public List<CategoryVM> getCategoryVMList() {
         return categoryVMList;
