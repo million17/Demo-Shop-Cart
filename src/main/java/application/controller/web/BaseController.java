@@ -1,7 +1,10 @@
 package application.controller.web;
 
+import application.constant.Constant;
 import application.data.model.Cart;
 import application.data.service.CartService;
+import application.model.viewmodel.common.HeaderMenuVM;
+import application.model.viewmodel.common.LayoutHeaderVM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -9,7 +12,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.UUID;
+
+import static application.constant.Constant.COMPANY_NAME;
 
 public class BaseController {
 
@@ -78,5 +84,19 @@ public class BaseController {
 
         }
 
+    }
+
+    public LayoutHeaderVM getLayoutHeaderVM() {
+        LayoutHeaderVM vm = new LayoutHeaderVM();
+        ArrayList<HeaderMenuVM> headerMenuVMArrayList = new ArrayList<>();
+
+        headerMenuVMArrayList.add(new HeaderMenuVM("Home","/"));
+        headerMenuVMArrayList.add(new HeaderMenuVM("Product","/product"));
+        headerMenuVMArrayList.add(new HeaderMenuVM("",""));
+
+
+        vm.setHeaderMenuVMArrayList(headerMenuVMArrayList);
+        vm.setCompanyName(COMPANY_NAME);
+        return vm;
     }
 }

@@ -1,15 +1,25 @@
 package application.model.viewmodel;
 
 import application.data.model.Color;
+import application.model.viewmodel.common.LayoutHeaderVM;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDetailVM {
-    private List<ProductEntityVM> productEntityVMList;
     private ProductVM productVM;
     private List<ProductImageVM> productImageVMList;
     private List<SizeVM> sizeVMList;
     private List<ColorVM> colorVMList;
+    private LayoutHeaderVM layoutHeaderVM;
+
+    public LayoutHeaderVM getLayoutHeaderVM() {
+        return layoutHeaderVM;
+    }
+
+    public void setLayoutHeaderVM(LayoutHeaderVM layoutHeaderVM) {
+        this.layoutHeaderVM = layoutHeaderVM;
+    }
 
     public List<ColorVM> getColorVMList() {
         return colorVMList;
@@ -25,14 +35,6 @@ public class ProductDetailVM {
 
     public void setSizeVMList(List<SizeVM> sizeVMList) {
         this.sizeVMList = sizeVMList;
-    }
-
-    public List<ProductEntityVM> getProductEntityVMList() {
-        return productEntityVMList;
-    }
-
-    public void setProductEntityVMList(List<ProductEntityVM> productEntityVMList) {
-        this.productEntityVMList = productEntityVMList;
     }
 
     public List<ProductImageVM> getProductImageVMList() {

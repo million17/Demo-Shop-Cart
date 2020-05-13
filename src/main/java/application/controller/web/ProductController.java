@@ -1,15 +1,14 @@
 package application.controller.web;
 
+import application.data.model.Category;
 import application.data.model.Color;
 import application.data.model.Product;
 import application.data.model.Size;
+import application.data.service.CategoryService;
 import application.data.service.ColorService;
 import application.data.service.ProductService;
 import application.data.service.SizeService;
-import application.model.viewmodel.ColorVM;
-import application.model.viewmodel.HomeVM;
-import application.model.viewmodel.ProductVM;
-import application.model.viewmodel.SizeVM;
+import application.model.viewmodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,7 +26,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 
 @Controller
-public class HomeController extends BaseController {
+public class ProductController extends BaseController {
 
     @Autowired
     private ProductService productService;
@@ -38,8 +37,11 @@ public class HomeController extends BaseController {
     @Autowired
     private ColorService colorService;
 
+    @Autowired
+    private CategoryService categoryService;
 
-    @GetMapping(value = "/")
+
+    @GetMapping(value = "/product")
     public String homePage(Model model,
                            @Valid @ModelAttribute("productName") ProductVM productName,
                            @RequestParam(name = "categoryId", required = false) Integer categoryId,
@@ -52,7 +54,17 @@ public class HomeController extends BaseController {
 
         this.getCookie(response, request, principal);
 
-        HomeVM vm = new HomeVM();
+        ShopProductVM vm = new ShopProductVM();
+
+        List<CategoryVM> categoryVMList = new ArrayList<>();
+        for (Category category : categoryService.getListAllCategories()) {
+            CategoryVM categoryVM = new CategoryVM();
+            categoryVM.setName(category.getName());
+            categoryVM.setShortDesc(category.getShortDesc());
+            categoryVM.setCreatedDate(category.getCreatedDate());
+
+            categoryVMList.add(categoryVM);
+        }
 
         /*set List Size*/
         List<SizeVM> sizeVMList = new ArrayList<>();
@@ -118,9 +130,12 @@ public class HomeController extends BaseController {
         vm.setProductVMList(productVMList);
         vm.setSizeVMList(sizeVMList);
         vm.setColorVMList(colorVMList);
+        vm.setCategoryVMList(categoryVMList);
+        vm.setLayoutHeaderVM(this.getLayoutHeaderVM());
+
 
         model.addAttribute("vm", vm);
         model.addAttribute("page", productPage);
-        return "/home";
+        return "/product";
     }
 }
