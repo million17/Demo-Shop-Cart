@@ -39,74 +39,31 @@
 </head>
 <body class="animsition">
 <!--header-->
-<div th:replace="includes/header :: header"></div>
+<div th:replace="includes/header :: header (vm=${vm.getLayoutHeaderVM()})"></div>
 <!--end header-->
 <!-- Slide1 -->
 <section class="slide1">
     <div class="wrap-slick1">
         <div class="slick1">
-            <div class="item-slick1 item1-slick1" style="background-image: url(user/images/master-slide-07.jpg);">
+            <div class="item-slick1 item1-slick1" th:style="'background:url(' + @{${slide.getImageSlide()}} + ');'"  th:each="slide : ${vm.getLayoutHeaderVM().getSlideVMArrayList()}">
                 <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
-                    <h2 class="caption1-slide1 xl-text2 t-center bo14 p-b-6 animated visible-false m-b-22"
-                        data-appear="fadeInUp">
-                        Leather Bags
+                    <h2 class="caption1-slide1 xl-text2 t-center bo14 p-b-6 animated visible-false m-b-22" data-appear="fadeInUp" th:text="${slide.getTitle()}">
+
                     </h2>
 
-                    <span class="caption2-slide1 m-text1 t-center animated visible-false m-b-33"
-                          data-appear="fadeInDown">
-							New Collection 2018
+                    <span class="caption2-slide1 m-text1 t-center animated visible-false m-b-33" data-appear="fadeInDown" th:text="${slide.getCaption()}">
+
 						</span>
 
                     <div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="zoomIn">
                         <!-- Button -->
-                        <a href="product.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
-                            Shop Now
+                        <a th:href="${slide.getLink()}" th:text="${slide.getName()}" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4" >
+
                         </a>
                     </div>
                 </div>
             </div>
 
-            <div class="item-slick1 item2-slick1" style="background-image: url(user/images/master-slide-06.jpg);">
-                <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
-                    <h2 class="caption1-slide1 xl-text2 t-center bo14 p-b-6 animated visible-false m-b-22"
-                        data-appear="rollIn">
-                        Leather Bags
-                    </h2>
-
-                    <span class="caption2-slide1 m-text1 t-center animated visible-false m-b-33"
-                          data-appear="lightSpeedIn">
-							New Collection 2018
-						</span>
-
-                    <div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="slideInUp">
-                        <!-- Button -->
-                        <a href="product.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
-                            Shop Now
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item-slick1 item3-slick1" style="background-image: url(user/images/master-slide-02.jpg);">
-                <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
-                    <h2 class="caption1-slide1 xl-text2 t-center bo14 p-b-6 animated visible-false m-b-22"
-                        data-appear="rotateInDownLeft">
-                        Leather Bags
-                    </h2>
-
-                    <span class="caption2-slide1 m-text1 t-center animated visible-false m-b-33"
-                          data-appear="rotateInUpRight">
-							New Collection 2018
-						</span>
-
-                    <div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="rotateIn">
-                        <!-- Button -->
-                        <a href="product.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
-                            Shop Now
-                        </a>
-                    </div>
-                </div>
-            </div>
 
         </div>
     </div>
@@ -119,7 +76,7 @@
             <div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
                 <!-- block1 -->
                 <div class="block1 hov-img-zoom pos-relative m-b-30">
-                    <img th:src="@{/user/images/banner-05.jpg}" alt="IMG-BENNER">
+                    <img src="images/banner-05.jpg" alt="IMG-BENNER">
 
                     <div class="block1-wrapbtn w-size2">
                         <!-- Button -->
@@ -133,7 +90,7 @@
             <div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
                 <!-- block1 -->
                 <div class="block1 hov-img-zoom pos-relative m-b-30">
-                    <img th:src="@{/user/images/banner-03.jpg}" alt="IMG-BENNER">
+                    <img src="images/banner-03.jpg" alt="IMG-BENNER">
 
                     <div class="block1-wrapbtn w-size2">
                         <!-- Button -->
@@ -147,7 +104,7 @@
             <div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
                 <!-- block1 -->
                 <div class="block1 hov-img-zoom pos-relative m-b-30">
-                    <img th:src="@{/user/images/banner-10.jpg}" alt="IMG-BENNER">
+                    <img src="images/banner-10.jpg" alt="IMG-BENNER">
 
                     <div class="block1-wrapbtn w-size2">
                         <!-- Button -->
@@ -176,20 +133,29 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#best-seller" role="tab">Product</a>
+                    <a class="nav-link active" data-toggle="tab" href="#new" role="tab">New</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " data-toggle="tab" href="#best-seller" role="tab">Best Seller</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#featured" role="tab">Featured</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#top-rate" role="tab">Top Rate</a>
                 </li>
             </ul>
 
             <!-- Tab panes -->
             <div class="tab-content p-t-35">
                 <!-- - -->
-                <div class="tab-pane fade show active" id="best-seller" role="tabpanel">
+                <div class="tab-pane fade" id="best-seller" role="tabpanel">
                     <div class="row">
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50" th:each="product : ${vm.getProductVMList()}">
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
                             <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                                    <img th:src="'/user/images' + ${product.getMainImage()}" alt="IMG-PRODUCT">
+                                    <img src="images/item-02.jpg" alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -207,12 +173,247 @@
                                 </div>
 
                                 <div class="block2-txt p-t-20">
-                                    <a th:href="${'/product/'+product.getId()}" class="block2-name dis-block s-text3 p-b-5">
-                                        <span th:text="${product.getProductName()}"></span>
+                                    <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                        Herschel supply co 25l
                                     </a>
 
-                                    <span class="block2-price m-text6 p-r-5" th:text="${product.getPrice()} + '$'">
+                                    <span class="block2-price m-text6 p-r-5">
 											$75.00
+										</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+                            <!-- Block2 -->
+                            <div class="block2">
+                                <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                    <img src="images/item-08.jpg" alt="IMG-PRODUCT">
+
+                                    <div class="block2-overlay trans-0-4">
+                                        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                            <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                            <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                        </a>
+
+                                        <div class="block2-btn-addcart w-size1 trans-0-4">
+                                            <!-- Button -->
+                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                                Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="block2-txt p-t-20">
+                                    <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                        Denim jacket blue
+                                    </a>
+
+                                    <span class="block2-price m-text6 p-r-5">
+											$92.50
+										</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+                            <!-- Block2 -->
+                            <div class="block2">
+                                <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                    <img src="images/item-10.jpg" alt="IMG-PRODUCT">
+
+                                    <div class="block2-overlay trans-0-4">
+                                        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                            <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                            <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                        </a>
+
+                                        <div class="block2-btn-addcart w-size1 trans-0-4">
+                                            <!-- Button -->
+                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                                Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="block2-txt p-t-20">
+                                    <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                        Coach slim easton black
+                                    </a>
+
+                                    <span class="block2-price m-text6 p-r-5">
+											$165.90
+										</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+                            <!-- Block2 -->
+                            <div class="block2">
+                                <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
+                                    <img src="images/item-06.jpg" alt="IMG-PRODUCT">
+
+                                    <div class="block2-overlay trans-0-4">
+                                        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                            <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                            <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                        </a>
+
+                                        <div class="block2-btn-addcart w-size1 trans-0-4">
+                                            <!-- Button -->
+                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                                Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="block2-txt p-t-20">
+                                    <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                        Herschel supply co 25l
+                                    </a>
+
+                                    <span class="block2-price m-text6 p-r-5">
+											$75.00
+										</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+                            <!-- Block2 -->
+                            <div class="block2">
+                                <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                    <img src="images/item-12.jpg" alt="IMG-PRODUCT">
+
+                                    <div class="block2-overlay trans-0-4">
+                                        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                            <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                            <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                        </a>
+
+                                        <div class="block2-btn-addcart w-size1 trans-0-4">
+                                            <!-- Button -->
+                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                                Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="block2-txt p-t-20">
+                                    <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                        Herschel supply co 25l
+                                    </a>
+
+                                    <span class="block2-price m-text6 p-r-5">
+											$75.00
+										</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+                            <!-- Block2 -->
+                            <div class="block2">
+                                <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                    <img src="images/item-14.jpg" alt="IMG-PRODUCT">
+
+                                    <div class="block2-overlay trans-0-4">
+                                        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                            <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                            <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                        </a>
+
+                                        <div class="block2-btn-addcart w-size1 trans-0-4">
+                                            <!-- Button -->
+                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                                Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="block2-txt p-t-20">
+                                    <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                        Denim jacket blue
+                                    </a>
+
+                                    <span class="block2-price m-text6 p-r-5">
+											$92.50
+										</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+                            <!-- Block2 -->
+                            <div class="block2">
+                                <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                    <img src="images/item-05.jpg" alt="IMG-PRODUCT">
+
+                                    <div class="block2-overlay trans-0-4">
+                                        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                            <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                            <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                        </a>
+
+                                        <div class="block2-btn-addcart w-size1 trans-0-4">
+                                            <!-- Button -->
+                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                                Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="block2-txt p-t-20">
+                                    <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                        Coach slim easton black
+                                    </a>
+
+                                    <span class="block2-price m-text6 p-r-5">
+											$165.90
+										</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+                            <!-- Block2 -->
+                            <div class="block2">
+                                <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                    <img src="images/item-07.jpg" alt="IMG-PRODUCT">
+
+                                    <div class="block2-overlay trans-0-4">
+                                        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                            <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                            <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                        </a>
+
+                                        <div class="block2-btn-addcart w-size1 trans-0-4">
+                                            <!-- Button -->
+                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                                Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="block2-txt p-t-20">
+                                    <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                        Frayed denim shorts
+                                    </a>
+
+                                    <span class="block2-oldprice m-text7 p-r-5">
+											$29.50
+										</span>
+
+                                    <span class="block2-newprice m-text8 p-r-5">
+											$15.90
 										</span>
                                 </div>
                             </div>
@@ -220,14 +421,14 @@
                     </div>
                 </div>
 
-                <!-- -
+                <!-- - -->
                 <div class="tab-pane fade" id="featured" role="tabpanel">
                     <div class="row">
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            &lt;!&ndash; Block2 &ndash;&gt;
+                            <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                                    <img th:src="@{/user/images/item-07.jpg}" alt="IMG-PRODUCT">
+                                    <img src="images/item-07.jpg" alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -236,7 +437,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            &lt;!&ndash; Button &ndash;&gt;
+                                            <!-- Button -->
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -261,10 +462,10 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            &lt;!&ndash; Block2 &ndash;&gt;
+                            <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                                    <img th:src="@{/user/images/item-01.jpg}" alt="IMG-PRODUCT">
+                                    <img src="images/item-01.jpg" alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -273,7 +474,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            &lt;!&ndash; Button &ndash;&gt;
+                                            <!-- Button -->
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -294,10 +495,10 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            &lt;!&ndash; Block2 &ndash;&gt;
+                            <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                    <img th:src="@{/user/images/item-14.jpg}" alt="IMG-PRODUCT">
+                                    <img src="images/item-14.jpg" alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -306,7 +507,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            &lt;!&ndash; Button &ndash;&gt;
+                                            <!-- Button -->
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -327,10 +528,10 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            &lt;!&ndash; Block2 &ndash;&gt;
+                            <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                                    <img th:src="@{/user/images/item-06.jpg}" alt="IMG-PRODUCT">
+                                    <img src="images/item-06.jpg" alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -339,7 +540,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            &lt;!&ndash; Button &ndash;&gt;
+                                            <!-- Button -->
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -360,10 +561,10 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            &lt;!&ndash; Block2 &ndash;&gt;
+                            <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                                    <img th:src="@{/user/images/item-11.jpg}" alt="IMG-PRODUCT">
+                                    <img src="images/item-11.jpg" alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -372,7 +573,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            &lt;!&ndash; Button &ndash;&gt;
+                                            <!-- Button -->
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -397,10 +598,10 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            &lt;!&ndash; Block2 &ndash;&gt;
+                            <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                                    <img th:src="@{/user/images/item-12.jpg}" alt="IMG-PRODUCT">
+                                    <img src="images/item-12.jpg" alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -409,7 +610,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            &lt;!&ndash; Button &ndash;&gt;
+                                            <!-- Button -->
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -430,10 +631,10 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            &lt;!&ndash; Block2 &ndash;&gt;
+                            <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                    <img th:src="@{/user/images/item-15.jpg}" alt="IMG-PRODUCT">
+                                    <img src="images/item-15.jpg" alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -442,7 +643,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            &lt;!&ndash; Button &ndash;&gt;
+                                            <!-- Button -->
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -464,14 +665,14 @@
                     </div>
                 </div>
 
-                &lt;!&ndash;  &ndash;&gt;
-                <div class="tab-pane fade" id="sale" role="tabpanel">
+                <!--  -->
+                <div class="tab-pane fade show active" id="new" role="tabpanel">
                     <div class="row">
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            &lt;!&ndash; Block2 &ndash;&gt;
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50"  th:each="hot_product : ${vm.getProductHotVMList()}">
+                            <!-- Block2 -->
                             <div class="block2">
-                                <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                                    <img th:src="@{/user/images/item-01.jpg}" alt="IMG-PRODUCT">
+                                <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+                                    <img th:src="'/user/images' + ${hot_product.getMainImage()}" alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -480,7 +681,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            &lt;!&ndash; Button &ndash;&gt;
+                                            <!-- Button -->
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -489,126 +690,23 @@
                                 </div>
 
                                 <div class="block2-txt p-t-20">
-                                    <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                        Herschel supply co 25l
-                                    </a>
+                                    <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5" th:text="${hot_product.getProductName()}"></a>
 
-                                    <span class="block2-price m-text6 p-r-5">
-											$75.00
-										</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            &lt;!&ndash; Block2 &ndash;&gt;
-                            <div class="block2">
-                                <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                                    <img th:src="@{/user/images/item-14.jpg}" alt="IMG-PRODUCT">
-
-                                    <div class="block2-overlay trans-0-4">
-                                        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                            <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                            <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                        </a>
-
-                                        <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            &lt;!&ndash; Button &ndash;&gt;
-                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                Add to Cart
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="block2-txt p-t-20">
-                                    <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                        Denim jacket blue
-                                    </a>
-
-                                    <span class="block2-price m-text6 p-r-5">
-											$92.50
-										</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            &lt;!&ndash; Block2 &ndash;&gt;
-                            <div class="block2">
-                                <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                                    <img th:src="@{/user/images/item-06.jpg}" alt="IMG-PRODUCT">
-
-                                    <div class="block2-overlay trans-0-4">
-                                        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                            <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                            <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                        </a>
-
-                                        <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            &lt;!&ndash; Button &ndash;&gt;
-                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                Add to Cart
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="block2-txt p-t-20">
-                                    <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                        Herschel supply co 25l
-                                    </a>
-
-                                    <span class="block2-price m-text6 p-r-5">
-											$75.00
-										</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            &lt;!&ndash; Block2 &ndash;&gt;
-                            <div class="block2">
-                                <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                                    <img th:src="@{/user/images/item-08.jpg}" alt="IMG-PRODUCT">
-
-                                    <div class="block2-overlay trans-0-4">
-                                        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                            <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                            <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                        </a>
-
-                                        <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            &lt;!&ndash; Button &ndash;&gt;
-                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                Add to Cart
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="block2-txt p-t-20">
-                                    <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                        Denim jacket blue
-                                    </a>
-
-                                    <span class="block2-price m-text6 p-r-5">
-											$92.50
-										</span>
+                                    <span class="block2-price m-text6 p-r-5" th:text="${hot_product.getPrice()}"></span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                &lt;!&ndash;  &ndash;&gt;
+                <!--  -->
                 <div class="tab-pane fade" id="top-rate" role="tabpanel">
                     <div class="row">
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            &lt;!&ndash; Block2 &ndash;&gt;
+                            <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                                    <img th:src="@{/user/images/item-02.jpg}" alt="IMG-PRODUCT">
+                                    <img src="images/item-02.jpg" alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -617,7 +715,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            &lt;!&ndash; Button &ndash;&gt;
+                                            <!-- Button -->
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -638,10 +736,10 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            &lt;!&ndash; Block2 &ndash;&gt;
+                            <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                    <img th:src="@{/user/images/item-03.jpg}" alt="IMG-PRODUCT">
+                                    <img src="images/item-03.jpg" alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -650,7 +748,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            &lt;!&ndash; Button &ndash;&gt;
+                                            <!-- Button -->
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -671,10 +769,10 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            &lt;!&ndash; Block2 &ndash;&gt;
+                            <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                    <img th:src="@{/user/images/item-05.jpg}" alt="IMG-PRODUCT">
+                                    <img src="images/item-05.jpg" alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -683,7 +781,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            &lt;!&ndash; Button &ndash;&gt;
+                                            <!-- Button -->
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -704,10 +802,10 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            &lt;!&ndash; Block2 &ndash;&gt;
+                            <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                                    <img th:src="@{/user/images/item-07.jpg}" alt="IMG-PRODUCT">
+                                    <img src="images/item-07.jpg" alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -716,7 +814,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            &lt;!&ndash; Button &ndash;&gt;
+                                            <!-- Button -->
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -741,10 +839,10 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            &lt;!&ndash; Block2 &ndash;&gt;
+                            <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                    <img th:src="@{/user/images/item-10.jpg}" alt="IMG-PRODUCT">
+                                    <img src="images/item-10.jpg" alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -753,7 +851,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            &lt;!&ndash; Button &ndash;&gt;
+                                            <!-- Button -->
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -774,10 +872,10 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            &lt;!&ndash; Block2 &ndash;&gt;
+                            <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                                    <img th:src="@{/user/images/item-11.jpg}" alt="IMG-PRODUCT">
+                                    <img src="images/item-11.jpg" alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -786,7 +884,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            &lt;!&ndash; Button &ndash;&gt;
+                                            <!-- Button -->
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -811,10 +909,10 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            &lt;!&ndash; Block2 &ndash;&gt;
+                            <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                                    <img th:src="@{/user/images/item-12.jpg}" alt="IMG-PRODUCT">
+                                    <img src="images/item-12.jpg" alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -823,7 +921,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            &lt;!&ndash; Button &ndash;&gt;
+                                            <!-- Button -->
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -844,10 +942,10 @@
                         </div>
 
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                            &lt;!&ndash; Block2 &ndash;&gt;
+                            <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                    <img th:src="@{/user/images/item-15.jpg}" alt="IMG-PRODUCT">
+                                    <img src="images/item-15.jpg" alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
                                         <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -856,7 +954,7 @@
                                         </a>
 
                                         <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            &lt;!&ndash; Button &ndash;&gt;
+                                            <!-- Button -->
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
@@ -876,7 +974,7 @@
                             </div>
                         </div>
                     </div>
-                </div>-->
+                </div>
             </div>
         </div>
     </div>
@@ -913,80 +1011,29 @@
         </div>
 
         <div class="row">
-            <div class="col-sm-10 col-md-4 p-b-30 m-l-r-auto">
+            <div class="col-sm-10 col-md-4 p-b-30 m-l-r-auto" th:each="blog : ${vm.getBlogVMList()}">
                 <!-- Block3 -->
                 <div class="block3">
-                    <a href="blog-detail.html" class="block3-img dis-block hov-img-zoom">
-                        <img th:src="@{/user/images/blog-01.jpg}" alt="IMG-BLOG">
+                    <a  class="block3-img dis-block hov-img-zoom">
+                        <img th:src="'/user/images' + ${blog.getImageBlog()}" alt="IMG-BLOG">
                     </a>
 
                     <div class="block3-txt p-t-14">
                         <h4 class="p-b-7">
-                            <a href="blog-detail.html" class="m-text11">
-                                Black Friday Guide: Best Sales & Discount Codes
+                            <a  class="m-text11" th:text="${blog.getTitle()}">
                             </a>
                         </h4>
 
-                        <span class="s-text6">By</span> <span class="s-text7">Nancy Ward</span>
-                        <span class="s-text6">on</span> <span class="s-text7">July 22, 2017</span>
+                        <span class="s-text6">By</span> <span class="s-text7" th:text="${blog.getFullName()}"></span>
+                        <span class="s-text6">on</span> <span class="s-text7" th:text="${blog.getCreatedDate()}"></span>
 
-                        <p class="s-text8 p-t-16">
-                            Duis ut velit gravida nibh bibendum commodo. Sus-pendisse pellentesque mattis augue id
-                            euismod. Inter-dum et malesuada fames
+                        <p class="s-text8 p-t-16" th:text="${blog.getContent()}">
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div class="col-sm-10 col-md-4 p-b-30 m-l-r-auto">
-                <!-- Block3 -->
-                <div class="block3">
-                    <a href="blog-detail.html" class="block3-img dis-block hov-img-zoom">
-                        <img th:src="@{/user/images/blog-02.jpg}" alt="IMG-BLOG">
-                    </a>
 
-                    <div class="block3-txt p-t-14">
-                        <h4 class="p-b-7">
-                            <a href="blog-detail.html" class="m-text11">
-                                The White Sneakers Nearly Every Fashion Girls Own
-                            </a>
-                        </h4>
-
-                        <span class="s-text6">By</span> <span class="s-text7">Nancy Ward</span>
-                        <span class="s-text6">on</span> <span class="s-text7">July 18, 2017</span>
-
-                        <p class="s-text8 p-t-16">
-                            Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla
-                            in tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit ame
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-10 col-md-4 p-b-30 m-l-r-auto">
-                <!-- Block3 -->
-                <div class="block3">
-                    <a href="blog-detail.html" class="block3-img dis-block hov-img-zoom">
-                        <img th:src="@{/user/images/blog-03.jpg}" alt="IMG-BLOG">
-                    </a>
-
-                    <div class="block3-txt p-t-14">
-                        <h4 class="p-b-7">
-                            <a href="blog-detail.html" class="m-text11">
-                                New York SS 2018 Street Style: Annina Mislin
-                            </a>
-                        </h4>
-
-                        <span class="s-text6">By</span> <span class="s-text7">Nancy Ward</span>
-                        <span class="s-text6">on</span> <span class="s-text7">July 2, 2017</span>
-
-                        <p class="s-text8 p-t-16">
-                            Proin nec vehicula lorem, a efficitur ex. Nam vehicula nulla vel erat tincidunt, sed
-                            hendrerit ligula porttitor. Fusce sit amet maximus nunc
-                        </p>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </section>
@@ -1002,7 +1049,7 @@
     <div class="flex-w">
         <!-- Block4 -->
         <div class="block4 wrap-pic-w">
-            <img th:src="@{/user/images/gallery-03.jpg}" alt="IMG-INSTAGRAM">
+            <img src="images/gallery-03.jpg" alt="IMG-INSTAGRAM">
 
             <a href="#" class="block4-overlay sizefull ab-t-l trans-0-4">
 					<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">
@@ -1012,9 +1059,7 @@
 
                 <div class="block4-overlay-txt trans-0-4 p-l-40 p-r-25 p-b-30">
                     <p class="s-text10 m-b-15 h-size1 of-hidden">
-                        Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla in
-                        tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit amet enim orci. Nam eget metus
-                        elit.
+                        Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla in tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit amet enim orci. Nam eget metus elit.
                     </p>
 
                     <span class="s-text9">
@@ -1026,7 +1071,7 @@
 
         <!-- Block4 -->
         <div class="block4 wrap-pic-w">
-            <img th:src="@{/user/images/gallery-07.jpg}" alt="IMG-INSTAGRAM">
+            <img src="images/gallery-07.jpg" alt="IMG-INSTAGRAM">
 
             <a href="#" class="block4-overlay sizefull ab-t-l trans-0-4">
 					<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">
@@ -1036,9 +1081,7 @@
 
                 <div class="block4-overlay-txt trans-0-4 p-l-40 p-r-25 p-b-30">
                     <p class="s-text10 m-b-15 h-size1 of-hidden">
-                        Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla in
-                        tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit amet enim orci. Nam eget metus
-                        elit.
+                        Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla in tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit amet enim orci. Nam eget metus elit.
                     </p>
 
                     <span class="s-text9">
@@ -1050,7 +1093,7 @@
 
         <!-- Block4 -->
         <div class="block4 wrap-pic-w">
-            <img th:src="@{/user/images/gallery-09.jpg}" alt="IMG-INSTAGRAM">
+            <img src="images/gallery-09.jpg" alt="IMG-INSTAGRAM">
 
             <a href="#" class="block4-overlay sizefull ab-t-l trans-0-4">
 					<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">
@@ -1060,9 +1103,7 @@
 
                 <div class="block4-overlay-txt trans-0-4 p-l-40 p-r-25 p-b-30">
                     <p class="s-text10 m-b-15 h-size1 of-hidden">
-                        Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla in
-                        tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit amet enim orci. Nam eget metus
-                        elit.
+                        Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla in tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit amet enim orci. Nam eget metus elit.
                     </p>
 
                     <span class="s-text9">
@@ -1074,7 +1115,7 @@
 
         <!-- Block4 -->
         <div class="block4 wrap-pic-w">
-            <img th:src="@{/user/images/gallery-13.jpg}" alt="IMG-INSTAGRAM">
+            <img src="images/gallery-13.jpg" alt="IMG-INSTAGRAM">
 
             <a href="#" class="block4-overlay sizefull ab-t-l trans-0-4">
 					<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">
@@ -1084,9 +1125,7 @@
 
                 <div class="block4-overlay-txt trans-0-4 p-l-40 p-r-25 p-b-30">
                     <p class="s-text10 m-b-15 h-size1 of-hidden">
-                        Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla in
-                        tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit amet enim orci. Nam eget metus
-                        elit.
+                        Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla in tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit amet enim orci. Nam eget metus elit.
                     </p>
 
                     <span class="s-text9">
@@ -1098,7 +1137,7 @@
 
         <!-- Block4 -->
         <div class="block4 wrap-pic-w">
-            <img th:src="@{/user/images/gallery-15.jpg}" alt="IMG-INSTAGRAM">
+            <img src="images/gallery-15.jpg" alt="IMG-INSTAGRAM">
 
             <a href="#" class="block4-overlay sizefull ab-t-l trans-0-4">
 					<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">
@@ -1108,9 +1147,7 @@
 
                 <div class="block4-overlay-txt trans-0-4 p-l-40 p-r-25 p-b-30">
                     <p class="s-text10 m-b-15 h-size1 of-hidden">
-                        Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla in
-                        tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit amet enim orci. Nam eget metus
-                        elit.
+                        Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla in tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit amet enim orci. Nam eget metus elit.
                     </p>
 
                     <span class="s-text9">
