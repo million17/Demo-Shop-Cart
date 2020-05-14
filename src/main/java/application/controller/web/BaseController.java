@@ -1,10 +1,12 @@
 package application.controller.web;
 
-import application.constant.Constant;
 import application.data.model.Cart;
+import application.data.model.User;
 import application.data.service.CartService;
+import application.data.service.UserService;
 import application.model.viewmodel.common.HeaderMenuVM;
 import application.model.viewmodel.common.LayoutHeaderVM;
+import application.model.viewmodel.home.SlideVM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -21,6 +23,9 @@ public class BaseController {
 
     @Autowired
     private CartService cartService;
+
+    @Autowired
+    private UserService userService;
 
     public void getCookie(HttpServletResponse response,
                           HttpServletRequest request,
@@ -89,14 +94,37 @@ public class BaseController {
     public LayoutHeaderVM getLayoutHeaderVM() {
         LayoutHeaderVM vm = new LayoutHeaderVM();
         ArrayList<HeaderMenuVM> headerMenuVMArrayList = new ArrayList<>();
+        ArrayList<SlideVM> slideVMArrayList = new ArrayList<>();
 
+        /*set list slide*/
+        slideVMArrayList.add(new SlideVM("Title Slide 1", "Caption Slide 1" ,"Link Slide 1","Name Slide 1","/user/images/master-slide-07.jpg"));
+        slideVMArrayList.add(new SlideVM("Title Slide 2", "Caption Slide 2" ,"Link Slide 2","Name Slide 2","/user/images/master-slide-07.jpg"));
+        slideVMArrayList.add(new SlideVM("Title Slide 3", "Caption Slide 3" ,"Link Slide 3","Name Slide 3","/user/images/master-slide-07.jpg"));
+
+        /*set list navigation*/
         headerMenuVMArrayList.add(new HeaderMenuVM("Home","/"));
         headerMenuVMArrayList.add(new HeaderMenuVM("Product","/product"));
-        headerMenuVMArrayList.add(new HeaderMenuVM("",""));
+        headerMenuVMArrayList.add(new HeaderMenuVM("Blog","#"));
+        headerMenuVMArrayList.add(new HeaderMenuVM("About","#"));
+        headerMenuVMArrayList.add(new HeaderMenuVM("Contact","#"));
 
+        /*set User Login*/
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        User userEntity = userService.findUserByUsername(userName);
+
+        if (userEntity != null) {
+            vm.setUserName(userName);
+            if (userEntity.getAvatar() != null ) {
+                vm.setAvatar(userEntity.getAvatar());
+            } else {
+                vm.setAvatar("/icons/icon-header-01.png");
+            }
+        }
 
         vm.setHeaderMenuVMArrayList(headerMenuVMArrayList);
         vm.setCompanyName(COMPANY_NAME);
+        vm.setSlideVMArrayList(slideVMArrayList);
+
         return vm;
     }
 }

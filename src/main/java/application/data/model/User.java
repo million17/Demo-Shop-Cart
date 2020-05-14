@@ -1,11 +1,12 @@
 package application.data.model;
 
 
-
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-@Entity( name = "dbo_user")
+@Entity(name = "dbo_user")
 public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
@@ -17,6 +18,9 @@ public class User {
 
     @Column(name = "email")
     private String email;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Blog> blogList = new ArrayList<>();
 
     @Column(name = "avatar")
     private String avatar;
@@ -41,6 +45,14 @@ public class User {
 
     @Transient
     private String password;
+
+    public List<Blog> getBlogList() {
+        return blogList;
+    }
+
+    public void setBlogList(List<Blog> blogList) {
+        this.blogList = blogList;
+    }
 
     public int getId() {
         return id;

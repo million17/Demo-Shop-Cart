@@ -207,6 +207,22 @@ CREATE TABLE IF NOT EXISTS `dbo_user_role` (
 
 -- Data exporting was unselected.
 
+-- Dumping structure for table db_demo_t3h.dbo_product
+DROP TABLE IF EXISTS `dbo_blog`;
+CREATE TABLE IF NOT EXISTS `dbo_blog` (
+  `blog_id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image_blog` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`blog_id`),
+  KEY `fk_user_id` (`user_id`),
+  CONSTRAINT `fk_user_blog_id` FOREIGN KEY (`user_id`) REFERENCES `dbo_user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Data exporting was unselected.
+
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

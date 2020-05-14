@@ -69,4 +69,8 @@ public class ProductService {
         return productRepository.getListProductByCategoryOrProductNameContaining(pageable,categoryId,productName);
     }
 
+    public List<Product> getListProductHot() {
+        return productRepository.getListProductHot();
+    }
+
 }
