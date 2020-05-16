@@ -31,8 +31,19 @@ public class ProductEntity {
     @JoinColumn(name = "size_id")
     private Size size;
 
+    @Column(name = "amount")
+    private long amount;
+
     @Column(name = "created_date")
     private Date createdDate;
+
+    public long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
+    }
 
     public int getProductEntityId() {
         return productEntityId;

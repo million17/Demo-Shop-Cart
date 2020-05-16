@@ -86,8 +86,8 @@
                     </div>
 
                     <div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16" >
-                        <select class="selection-2" name="size">
-                            <option>Choose an option</option>
+                        <select class="selection-2" id="selectSize" name="size">
+                            <option value="0">Choose an option</option>
                             <option th:each="size : ${vm.getSizeVMList()}" th:value="${size.getId()}" th:text="${size.getName()}"></option>
                         </select>
                     </div>
@@ -99,8 +99,8 @@
                     </div>
 
                     <div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
-                        <select class="selection-2" name="color">
-                            <option>Choose an option</option>
+                        <select class="selection-2" id="selectColor" name="color">
+                            <option value="0">Choose an option</option>
                             <option th:each="color : ${vm.getColorVMList()}"  th:value="${color.getId()}"  th:text="${color.getName()}"></option>
                         </select>
                     </div>
@@ -122,7 +122,7 @@
 
                         <div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
                             <!-- Button -->
-                            <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+                            <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 add-to-cart" th:attr="data-product=${vm.getProductVM().getId()}" >
                                 Add to Cart
                             </button>
                         </div>
@@ -132,7 +132,8 @@
 
             <div class="p-b-45">
                 <span class="s-text8 m-r-35" th:text="'SKU: ' + ${vm.getProductVM().getId()}"> MUG-01</span>
-                <span class="s-text8" th:text="'Categories: ' + ${vm.getProductVM().getCategoryName()}"></span>
+                <span class="s-text8 m-r-35" th:text="'Categories: ' + ${vm.getProductVM().getCategoryName()}"></span>
+                <span class="s-text8" id="warehouse"></span>
             </div>
 
             <!--  -->
@@ -516,8 +517,13 @@
 <script type="text/javascript" th:src="@{/user/js/slick-custom.js}"></script>
 <!--===============================================================================================-->
 <script type="text/javascript" th:src="@{/user/vendor/sweetalert/sweetalert.min.js}"></script>
+<!--===============================================================================================-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<!--===============================================================================================-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+<!--===============================================================================================-->
 <script type="text/javascript">
-    $('.block2-btn-addcart').each(function(){
+    /*$('.block2-btn-addcart').each(function(){
         var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
         $(this).on('click', function(){
             swal(nameProduct, "is added to cart !", "success");
@@ -536,11 +542,17 @@
         $(this).on('click', function(){
             swal(nameProduct, "is added to wishlist !", "success");
         });
-    });
+    });*/
 </script>
 
 <!--===============================================================================================-->
 <script th:src="@{/user/js/main.js}"></script>
+<!--===============================================================================================-->
+<script th:inline="javascript">
+    let vm = [[${vm}]];
+    console.log("vm: ", vm);
+</script>
+<script th:src="@{/user/js/add-to-cart.js}"></script>
 
 </body>
 </html>

@@ -9,12 +9,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Integer> {
 
-    @Query(value = "SELECT c FROM dbo_cart c " +
+    @Query(value = "SELECT c.* FROM dbo_cart c " +
             "WHERE (:userName IS NULL OR (c.user_name = :userName))" +
             "ORDER BY c.cart_id DESC LIMIT 1", nativeQuery = true)
     Cart findByUserName(@Param("userName") String userName);
 
-    @Query(value = "SELECT c FROM dbo_cart c " +
+    @Query(value = "SELECT c.* FROM dbo_cart c " +
             "WHERE (:guid IS NULL OR (c.guid = :guid))" +
             "ORDER BY c.cart_id DESC LIMIT 1", nativeQuery = true)
     Cart findFirstCartByGuid(@Param("guid") String guid);

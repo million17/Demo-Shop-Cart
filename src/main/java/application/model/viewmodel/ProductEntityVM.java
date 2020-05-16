@@ -5,6 +5,15 @@ public class ProductEntityVM {
     private int productId;
     private int colorId;
     private int sizeId;
+    private long amount;
+
+    public long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
+    }
 
     public int getProductEntityId() {
         return productEntityId;

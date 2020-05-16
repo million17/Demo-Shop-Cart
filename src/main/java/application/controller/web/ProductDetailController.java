@@ -55,6 +55,7 @@ public class ProductDetailController extends BaseController {
         ProductVM productVM = new ProductVM();
 
 
+        productVM.setId(product.getProductId());
         productVM.setBrand(product.getBrand());
         productVM.setCreatedDate(product.getCreatedDate());
         productVM.setMainImage(product.getMainImage());
@@ -103,10 +104,28 @@ public class ProductDetailController extends BaseController {
             colorVMList.add(colorVM);
         }
 
+        /*set List Product Entity By ProductId*/
+        List<ProductEntity> productEntityList = productEntityService.findByProductId(productId);
+        List<ProductEntityVM> productEntityVMList = new ArrayList<>();
+        for (ProductEntity productEntity : productEntityList) {
+            ProductEntityVM productEntityVM = new ProductEntityVM();
+
+            productEntityVM.setProductEntityId(productEntity.getProductEntityId());
+            productEntityVM.setAmount(productEntity.getAmount());
+            productEntityVM.setColorId(productEntity.getColorId());
+            productEntityVM.setProductId(productEntity.getProductId());
+            productEntityVM.setSizeId(productEntity.getSizeId());
+
+
+            productEntityVMList.add(productEntityVM);
+
+        }
+
 
         vm.setProductImageVMList(productImageVMS);
         vm.setProductVM(productVM);
         vm.setSizeVMList(sizeVMList);
+        vm.setProductEntityVMList(productEntityVMList);
         vm.setColorVMList(colorVMList);
         vm.setLayoutHeaderVM(this.getLayoutHeaderVM());
 

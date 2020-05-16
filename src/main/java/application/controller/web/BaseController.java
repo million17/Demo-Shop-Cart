@@ -80,7 +80,7 @@ public class BaseController {
                 response.addCookie(cookie3);
             } else {
                 Cart cartEntity = cartService.findFirstCartByGuid(guid);
-                if (cartEntity != null) {
+                if (cartEntity == null) {
                     Cart cart3 = new Cart();
                     cart3.setGuid(guid);
                     cartService.addNewCart(cart3);

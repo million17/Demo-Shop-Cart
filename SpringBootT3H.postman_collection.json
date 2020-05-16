@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "315ea533-0303-4157-b114-45b9d5603237",
+		"_postman_id": "e1a81146-bb6f-4157-a64f-ad36dcd5bf7a",
 		"name": "SpringBootT3H",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -418,6 +418,41 @@
 								"size",
 								"delete",
 								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "CartProduct",
+			"item": [
+				{
+					"name": "Add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cartId\" : 1,\n\t\"productEntityId\" : 1,\n\t\"amount\" : 2,\n\t\"guid\" : \"d7b39da6-9636-4dd7-a325-18006d864b05\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/cart-product/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"cart-product",
+								"add"
 							]
 						}
 					},
