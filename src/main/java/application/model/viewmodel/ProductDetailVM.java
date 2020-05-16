@@ -12,6 +12,15 @@ public class ProductDetailVM {
     private List<SizeVM> sizeVMList;
     private List<ColorVM> colorVMList;
     private LayoutHeaderVM layoutHeaderVM;
+    private List<ProductEntityVM> productEntityVMList;
+
+    public List<ProductEntityVM> getProductEntityVMList() {
+        return productEntityVMList;
+    }
+
+    public void setProductEntityVMList(List<ProductEntityVM> productEntityVMList) {
+        this.productEntityVMList = productEntityVMList;
+    }
 
     public LayoutHeaderVM getLayoutHeaderVM() {
         return layoutHeaderVM;
