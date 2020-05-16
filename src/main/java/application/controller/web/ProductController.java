@@ -46,7 +46,7 @@ public class ProductController extends BaseController {
                            @Valid @ModelAttribute("productName") ProductVM productName,
                            @RequestParam(name = "categoryId", required = false) Integer categoryId,
                            @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
-                           @RequestParam(name = "maxSize", required = false, defaultValue = "12") Integer maxSize,
+                           @RequestParam(name = "maxSize", required = false, defaultValue = "3") Integer maxSize,
                            @RequestParam(name = "sortByPrice", required = false) String sort,
                            HttpServletRequest request,
                            HttpServletResponse response,
@@ -104,7 +104,7 @@ public class ProductController extends BaseController {
         if (categoryId != null) {
             productPage = productService.getListProductByCategoryOrProductNameContaining(pageable, categoryId, null);
         } else if (productName.getProductName() != null && !productName.getProductName().isEmpty()) {
-            productPage = productService.getListProductByCategoryOrProductNameContaining(pageable, categoryId, productName.getProductName());
+            productPage = productService.getListProductByCategoryOrProductNameContaining(pageable, categoryId, productName.getProductName().trim());
         } else {
             productPage = productService.getListProductByCategoryOrProductNameContaining(pageable, null, null);
         }
@@ -112,7 +112,7 @@ public class ProductController extends BaseController {
         /*set List Product*/
         List<ProductVM> productVMList = new ArrayList<>();
 
-        for (Product product : productService.getListProductByCategoryOrProductNameContaining(null, null, null)) {
+        for (Product product : productPage.getContent()) {
             ProductVM productVM = new ProductVM();
             productVM.setId(product.getProductId());
             productVM.setProductName(product.getProductName());
@@ -127,10 +127,14 @@ public class ProductController extends BaseController {
 
         }
 
+
+        long totalProduct = productService.getToltalProducts();
+
         vm.setProductVMList(productVMList);
         vm.setSizeVMList(sizeVMList);
         vm.setColorVMList(colorVMList);
         vm.setCategoryVMList(categoryVMList);
+        vm.setTotalProduct(totalProduct);
         vm.setLayoutHeaderVM(this.getLayoutHeaderVM());
 
 

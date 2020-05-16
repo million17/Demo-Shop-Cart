@@ -180,7 +180,7 @@
                     </div>
 
                     <span class="s-text8 p-t-5 p-b-5">
-							Showing 1–12 of 16 results
+							Page <span th:text="${#httpServletRequest.getParameter('page')}"></span> in <span th:text="${vm.getTotalProduct()}"></span> results
 						</span>
                 </div>
 
@@ -220,9 +220,20 @@
                 </div>
 
                 <!-- Pagination -->
-                <div class="pagination flex-m flex-w p-t-26">
-                    <a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>
-                    <a href="#" class="item-pagination flex-c-m trans-0-4">2</a>
+                <div class="pagination flex-m flex-w p-t-26" th:if="${vm.getProductVMList().size() > 0 }">
+                    <th:block th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}">
+                        <th:block th:if="${page.number == i}">
+                            <a class="item-pagination flex-c-m trans-0-4 active-pagination" th:href="${''}" th:text="${i+1}"></a>
+                        </th:block>
+                        <th:block th:unless="${page.number == i}">
+                            <a class="item-pagination flex-c-m trans-0-4" th:text="${i+1}"
+                               th:href="${'?'+(#httpServletRequest.getParameter('categoryId')==null?'':('&categoryId='+#httpServletRequest.getParameter('categoryId')))
+                                                                                       +('&page='+i)
+                                                                                       +(#httpServletRequest.getParameter('maxSize')==null?'':('&maxSize='+#httpServletRequest.getParameter('maxSize')))
+                                                                                       +(#httpServletRequest.getParameter('sortByPrice')==null?'':('&sortByPrice='+#httpServletRequest.getParameter('sortByPrice')))
+                                                                                       +(#httpServletRequest.getParameter('name')==null?'':('&name='+#httpServletRequest.getParameter('name')))}"></a>
+                        </th:block>
+                    </th:block>
                 </div>
             </div>
         </div>
