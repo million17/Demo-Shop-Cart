@@ -59,6 +59,7 @@ public class ProductController extends BaseController {
         List<CategoryVM> categoryVMList = new ArrayList<>();
         for (Category category : categoryService.getListAllCategories()) {
             CategoryVM categoryVM = new CategoryVM();
+            categoryVM.setId(category.getCategoryId());
             categoryVM.setName(category.getName());
             categoryVM.setShortDesc(category.getShortDesc());
             categoryVM.setCreatedDate(category.getCreatedDate());

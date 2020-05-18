@@ -67,7 +67,7 @@
 
                     <ul class="p-b-54">
                         <li class="p-t-4" th:each="category : ${vm.getCategoryVMList()}">
-                            <a class="s-text13 active1" th:text="${category.getName()}">
+                            <a class="s-text13 active1" th:href="${'?categoryId=' + category.getId()}" th:text="${category.getName()}">
                             </a>
                         </li>
                     </ul>
