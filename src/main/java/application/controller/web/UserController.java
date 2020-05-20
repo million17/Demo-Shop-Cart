@@ -2,12 +2,14 @@ package application.controller.web;
 
 import application.data.model.User;
 import application.data.service.UserService;
-import application.model.viewmodel.UserDetailVM;
-import application.model.viewmodel.UserVM;
+import application.model.viewmodel.user.ChangePasswordVM;
+import application.model.viewmodel.user.UserDetailVM;
+import application.model.viewmodel.user.UserVM;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,9 @@ public class UserController extends BaseController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @GetMapping("/detail")
@@ -87,4 +92,40 @@ public class UserController extends BaseController {
 
         return "redirect:/user/detail?updateFail";
     }
+
+    @GetMapping("/change-password")
+    public String changePassword(Model model) {
+        ChangePasswordVM changePasswordVM = new ChangePasswordVM();
+
+        changePasswordVM.setLayoutHeaderVM(this.getLayoutHeaderVM());
+
+
+        model.addAttribute("changePassword", changePasswordVM);
+
+
+        return "/change-password";
+    }
+
+    @PostMapping("change-password")
+    public String updatePassword(@Valid @ModelAttribute("changePassword") ChangePasswordVM password) {
+
+        try {
+            if (password.getCurrentPassword() != null && password.getConfirmPassword() != null && password.getNewPassword() != null) {
+                String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+                User userEntity = userService.findUserByUsername(userName);
+
+                if (passwordEncoder.matches(password.getCurrentPassword(), userEntity.getPasswordHash()) == true) {
+                    userEntity.setPasswordHash(passwordEncoder.encode(password.getNewPassword()));
+                    userService.updateUser(userEntity);
+
+                    return "redirect:/user/change-password?success";
+                }
+            }
+        } catch (Exception ex) {
+            logger.error(ex.getMessage());
+        }
+
+        return "redirect:/user/change-password?fail";
+    }
+
 }

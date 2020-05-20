@@ -1,4 +1,4 @@
-package application.model.viewmodel;
+package application.model.viewmodel.user;
 
 import application.model.viewmodel.common.LayoutHeaderVM;
 

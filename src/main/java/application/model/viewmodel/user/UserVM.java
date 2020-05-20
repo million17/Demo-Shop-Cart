@@ -1,4 +1,4 @@
-package application.model.viewmodel;
+package application.model.viewmodel.user;
 
 public class UserVM {
     private int userId;
