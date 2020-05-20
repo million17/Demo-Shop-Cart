@@ -21,7 +21,6 @@ import javax.validation.Valid;
 import java.util.Date;
 
 @Controller
-@RequestMapping(path = "/user")
 public class UserController extends BaseController {
 
     private static final Logger logger = LogManager.getLogger(UserController.class);
@@ -53,7 +52,7 @@ public class UserController extends BaseController {
                 userVM.setGender(userEntity.getGender());
                 userVM.setName(userEntity.getName());
 
-                model.addAttribute("user", userVM);
+                model.addAttribute("userDetail", userVM);
 
             }
         } catch (Exception ex) {
@@ -69,7 +68,7 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/update")
-    public String updateDetail(@Valid @ModelAttribute("user") User user) {
+    public String updateDetail(@Valid @ModelAttribute("userDetail") User user) {
         try {
             String userName = SecurityContextHolder.getContext().getAuthentication().getName();
             User userEntity = userService.findUserByUsername(userName);
