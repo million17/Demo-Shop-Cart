@@ -21,6 +21,7 @@ import javax.validation.Valid;
 import java.util.Date;
 
 @Controller
+@RequestMapping(path = "/profile")
 public class UserController extends BaseController {
 
     private static final Logger logger = LogManager.getLogger(UserController.class);
@@ -51,8 +52,9 @@ public class UserController extends BaseController {
                 userVM.setEmail(userEntity.getEmail());
                 userVM.setGender(userEntity.getGender());
                 userVM.setName(userEntity.getName());
+                userVM.setPhoneNumber(userEntity.getPhoneNumber());
 
-                model.addAttribute("userDetail", userVM);
+                model.addAttribute("user", userVM);
 
             }
         } catch (Exception ex) {
@@ -68,7 +70,7 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/update")
-    public String updateDetail(@Valid @ModelAttribute("userDetail") User user) {
+    public String updateDetail(@Valid @ModelAttribute("user") User user) {
         try {
             String userName = SecurityContextHolder.getContext().getAuthentication().getName();
             User userEntity = userService.findUserByUsername(userName);
@@ -83,13 +85,13 @@ public class UserController extends BaseController {
 
             userService.updateUser(userEntity);
 
-            return "redirect:/user/detail?updateSuccess";
+            return "redirect:/profile/detail?updateSuccess";
 
         } catch (Exception ex) {
             logger.error(ex.getMessage());
         }
 
-        return "redirect:/user/detail?updateFail";
+        return "redirect:/profile/detail?updateFail";
     }
 
     @GetMapping("/change-password")
@@ -105,7 +107,7 @@ public class UserController extends BaseController {
         return "/change-password";
     }
 
-    @PostMapping("change-password")
+    @PostMapping("/change-password")
     public String updatePassword(@Valid @ModelAttribute("changePassword") ChangePasswordVM password) {
 
         try {
@@ -117,14 +119,14 @@ public class UserController extends BaseController {
                     userEntity.setPasswordHash(passwordEncoder.encode(password.getNewPassword()));
                     userService.updateUser(userEntity);
 
-                    return "redirect:/user/change-password?success";
+                    return "redirect:/profile/change-password?success";
                 }
             }
         } catch (Exception ex) {
             logger.error(ex.getMessage());
         }
 
-        return "redirect:/user/change-password?fail";
+        return "redirect:/profile/change-password?fail";
     }
 
 }

@@ -9,7 +9,7 @@ public class UserVM {
     private int gender;
     private String address;
     private String password;
-    private int phoneNumber;
+    private String phoneNumber;
     private String createdDate;
 
     public int getUserId() {
@@ -76,11 +76,11 @@ public class UserVM {
         this.password = password;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

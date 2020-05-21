@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/head :: head">
+    <title>Profile</title>
+</head>
+<body class="animsition">
+<!--header-->
+<div th:replace="includes/header :: header (vm=${vm.getLayoutHeaderVM()})"></div>
+<!--end header-->
+<!-- Title Page -->
+<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(/user/images/heading-pages-06.jpg);">
+    <h2 class="l-text2 t-center">
+        Profile
+    </h2>
+</section>
+
+<!-- content page -->
+<section class="bgwhite p-t-66 p-b-60">
+    <div class="container">
+        <div class="row">
+<!--            <div class="col-md-6 p-b-30">-->
+<!--                <div class="p-r-20 p-r-0-lg">-->
+<!--                    <div class="contact-map size21" id="google_map" data-map-x="40.614439" data-map-y="-73.926781" data-pin="images/icons/icon-position-map.png" data-scrollwhell="0" data-draggable="1"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="col-md-12 p-b-30">
+                <form class="leave-comment" th:action="@{/profile/update}" th:object="${user}" method="post">
+                    <div th:if="${param.updateSuccess}">
+                        <div class="alert alert-primary m-b-20">
+                            Update success !!
+                        </div>
+                    </div>
+                    <div th:if="${param.updateFail}">
+                        <div class="alert alert-danger m-b-20">
+                            Update fail !!
+                        </div>
+                    </div>
+                    <h4 class="m-text26 p-b-36 p-t-15">
+                        Change Profile
+                    </h4>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="s-text20 w-size15 t-left m-b-20">
+                                Avatar
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="s-text20 w-size15 t-left m-b-20">
+                                User Name
+                            </div>
+                            <div class="bo4 of-hidden size15 m-b-20">
+                                <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="userName" th:field="*{userName}" placeholder="User Name" disabled readonly>
+                            </div>
+
+                            <div class="s-text20 w-size15 t-left m-b-20">
+                                Full Name
+                            </div>
+                            <div class="bo4 of-hidden size15 m-b-20">
+                                <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="name" th:field="*{name}" placeholder="Full Name">
+                            </div>
+
+                            <div class="s-text20 w-size15 t-left m-b-20">
+                                Phone Number
+                            </div>
+                            <div class="bo4 of-hidden size15 m-b-20">
+                                <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="phoneNumber" th:field="*{phoneNumber}" placeholder="Phone Number">
+                            </div>
+
+                            <div class="s-text20 w-size15 t-left m-b-20">
+                                Email Address
+                            </div>
+                            <div class="bo4 of-hidden size15 m-b-20">
+                                <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="email" th:field="*{email}" placeholder="Email Address">
+                            </div>
+
+                            <div class="s-text20 w-size15 t-left m-b-20">
+                                Address
+                            </div>
+                            <div class="bo4 of-hidden size15 m-b-20">
+                                <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="address" th:field="*{address}" placeholder="Address">
+                            </div>
+
+                            <div class="s-text20 w-size15 t-left m-b-20">
+                                Gender
+                            </div>
+
+                            <div class="rs2-select2 rs3-select2 bo4 of-hidden w-size13 m-b-20" >
+                                <select class="selection-2" name="gender" th:field="*{gender}">
+                                    <option value="0">Undefined</option>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                </select>
+                            </div>
+
+                            <div class="w-size25 m-b-30">
+                                <!-- Button -->
+                                <button class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
+                                    Send
+                                </button>
+                            </div>
+
+                            <div class="w-size26">
+                                <!-- Button -->
+                                <a th:href="@{/profile/change-password}" class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
+                                    Change Password
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--include footer-->
+<div th:replace="includes/footer :: footer"></div>
+<!--end footer-->
+<!-- Container Selection -->
+<div id="dropDownSelect1"></div>
+<div id="dropDownSelect2"></div>
+<!--===============================================================================================-->
+<script type="text/javascript" th:src="@{/user/vendor/jquery/jquery-3.2.1.min.js}"></script>
+<!--===============================================================================================-->
+<script type="text/javascript" th:src="@{/user/vendor/animsition/js/animsition.min.js}"></script>
+<!--===============================================================================================-->
+<script type="text/javascript" th:src="@{/user/vendor/bootstrap/js/popper.js}"></script>
+<script type="text/javascript" th:src="@{/user/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<!--===============================================================================================-->
+<!--===============================================================================================-->
+<script type="text/javascript" th:src="@{/user/vendor/select2/select2.min.js}"></script>
+<script type="text/javascript">
+    $(".selection-1").select2({
+        minimumResultsForSearch: 20,
+        dropdownParent: $('#dropDownSelect1')
+    });
+
+    $(".selection-2").select2({
+        minimumResultsForSearch: 20,
+        dropdownParent: $('#dropDownSelect2')
+    });
+</script>
+<!--===============================================================================================-->
+<script th:src="@{/user/js/map-custom.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/user/js/main.js}"></script>
+</body>
+</html>
