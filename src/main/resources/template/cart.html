@@ -42,21 +42,21 @@
 						<td class="column-2" th:text="${cartProduct.getProductName()}"></td>
 						<td class="column-2" th:text="${cartProduct.getColorName()}"></td>
 						<td class="column-2" th:text="${cartProduct.getSizeName()}"></td>
-						<td class="column-3" th:text="${cartProduct.getPrice()}"></td>
+						<td class="column-3" th:text="${cartProduct.getPrice()} + ' $'"></td>
 						<td class="column-4">
 							<div class="flex-w bo5 of-hidden w-size17">
 								<button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
 									<i class="fs-12 fa fa-minus" aria-hidden="true"></i>
 								</button>
 
-								<input class="size8 m-text18 t-center num-product" type="number" name="num-product1"  th:value="${cartProduct.getAmount()}">
+								<input class="size8 m-text18 t-center num-product change-product-amount" type="number" name="num-product1"  th:value="${cartProduct.getAmount()}" th:attr="data-id=${cartProduct.getCartProductId()}">
 
 								<button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
 									<i class="fs-12 fa fa-plus" aria-hidden="true"></i>
 								</button>
 							</div>
 						</td>
-						<td class="column-5" th:text="${cartProduct.getTotalProductPrice()}"></td>
+						<td class="column-5" th:text="${cartProduct.getTotalProductPrice()}  + ' $'"></td>
 					</tr>
 				</table>
 			</div>
@@ -96,7 +96,7 @@
 						Subtotal:
 					</span>
 
-				<span class="m-text21 w-size20 w-full-sm"  th:text="${vm.getTotalPrice()}" >
+				<span class="m-text21 w-size20 w-full-sm"  th:text="${vm.getTotalPrice()}  + ' $'" >
 					</span>
 			</div>
 
@@ -105,7 +105,7 @@
 					<span class="s-text18 w-size19 w-full-sm">
 						Shipping:
 					</span>
-				<span class="m-text21 w-size20 w-full-sm"  th:text="${vm.getShipPrice()}" >
+				<span class="m-text21 w-size20 w-full-sm"  th:text="${vm.getShipPrice()}  + ' $'" >
 					</span>
 
 				<!--<div class="w-size20 w-full-sm">
@@ -149,7 +149,7 @@
 						Total:
 					</span>
 
-				<span class="m-text21 w-size20 w-full-sm" th:text="${vm.getTotal()}">
+				<span class="m-text21 w-size20 w-full-sm" th:text="${vm.getTotal()} + ' $'">
 					</span>
 			</div>
 
@@ -199,6 +199,11 @@
 <!--===============================================================================================-->
 <script type="text/javascript" th:src="@{/user/vendor/noui/nouislider.min.js}"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<!--===============================================================================================-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+<!--===============================================================================================-->
+
 <script type="text/javascript">
     $(".selection-1").select2({
         minimumResultsForSearch: 20,
@@ -212,5 +217,7 @@
 </script>
 <!--===============================================================================================-->
 <script th:src="@{/user/js/main.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/user/js/cart.js}"></script>
 </body>
 </html>

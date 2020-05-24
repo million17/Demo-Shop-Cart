@@ -25,6 +25,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static application.constant.Constant.SHIP_PRICE;
+
 @Controller
 @RequestMapping(path = "/cart")
 public class CartController extends BaseController {
@@ -73,6 +75,7 @@ public class CartController extends BaseController {
                 productAmount = cartEntity.getCartProductList().size();
                 for (CartProduct cartProduct : cartEntity.getCartProductList()) {
                     CartProductVM cartProductVM = new CartProductVM();
+                    cartProductVM.setCartProductId(cartProduct.getCartProductId());
                     cartProductVM.setProductName(cartProduct.getProductEntity().getProduct().getProductName());
                     cartProductVM.setMainImage(cartProduct.getProductEntity().getProduct().getMainImage());
                     cartProductVM.setColorName(cartProduct.getProductEntity().getColor().getName());
@@ -96,12 +99,12 @@ public class CartController extends BaseController {
         vm.setTotalPrice(df.format(totalPrice));
         vm.setCartProductVMList(cartProductVMList);
         vm.setLayoutHeaderVM(this.getLayoutHeaderVM());
-        if (totalPrice > 300) {
+        if (totalPrice > 3000) {
             vm.setShipPrice(0);
-            vm.setTotal(df.format(totalPrice));
+            vm.setTotal(df.format(vm.getShipPrice()));
         } else {
-            vm.setShipPrice(totalPrice + 10);
-            vm.setTotal(df.format(totalPrice));
+            vm.setShipPrice(totalPrice + SHIP_PRICE);
+            vm.setTotal(df.format(vm.getShipPrice()));
         }
 
         model.addAttribute("vm", vm);
