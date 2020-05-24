@@ -9,7 +9,16 @@ public class CartVM {
     private List<CartProductVM> cartProductVMList;
     private String totalPrice;
     private double shipPrice;
+    private int productAmount;
     private String total;
+
+    public int getProductAmount() {
+        return productAmount;
+    }
+
+    public void setProductAmount(int productAmount) {
+        this.productAmount = productAmount;
+    }
 
     public String getTotal() {
         return total;

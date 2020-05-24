@@ -74,12 +74,14 @@ public class CartController extends BaseController {
                 for (CartProduct cartProduct : cartEntity.getCartProductList()) {
                     CartProductVM cartProductVM = new CartProductVM();
                     cartProductVM.setProductName(cartProduct.getProductEntity().getProduct().getProductName());
+                    cartProductVM.setMainImage(cartProduct.getProductEntity().getProduct().getMainImage());
                     cartProductVM.setColorName(cartProduct.getProductEntity().getColor().getName());
                     cartProductVM.setSizeName(cartProduct.getProductEntity().getSize().getName());
                     cartProductVM.setPrice(df.format(cartProduct.getProductEntity().getProduct().getPrice()));
+                    cartProductVM.setAmount(cartProduct.getAmount());
                     double price = cartProduct.getAmount() * cartProduct.getProductEntity().getProduct().getPrice();
+                    cartProductVM.setTotalProductPrice(df.format(price));
                     totalPrice += price;
-
 
 
                     cartProductVMList.add(cartProductVM);
@@ -90,10 +92,11 @@ public class CartController extends BaseController {
 
         }
 
+        vm.setProductAmount(productAmount);
         vm.setTotalPrice(df.format(totalPrice));
         vm.setCartProductVMList(cartProductVMList);
         vm.setLayoutHeaderVM(this.getLayoutHeaderVM());
-        if (totalPrice > 300 ) {
+        if (totalPrice > 300) {
             vm.setShipPrice(0);
             vm.setTotal(df.format(totalPrice));
         } else {

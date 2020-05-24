@@ -1,7 +1,9 @@
 package application.model.viewmodel.cart;
 
 public class CartProductVM {
+    private String mainImage;
     private int productAmount;
+    private int amount;
     private int productId;
     private String productName;
     private String price;
@@ -9,6 +11,31 @@ public class CartProductVM {
     private String sizeName;
     private String colorName;
     private int productEntityId;
+    private String totalProductPrice;
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public String getTotalProductPrice() {
+        return totalProductPrice;
+    }
+
+    public void setTotalProductPrice(String totalProductPrice) {
+        this.totalProductPrice = totalProductPrice;
+    }
+
+    public String getMainImage() {
+        return mainImage;
+    }
+
+    public void setMainImage(String mainImage) {
+        this.mainImage = mainImage;
+    }
 
     public int getProductAmount() {
         return productAmount;
