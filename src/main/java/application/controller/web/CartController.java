@@ -80,10 +80,10 @@ public class CartController extends BaseController {
                     cartProductVM.setMainImage(cartProduct.getProductEntity().getProduct().getMainImage());
                     cartProductVM.setColorName(cartProduct.getProductEntity().getColor().getName());
                     cartProductVM.setSizeName(cartProduct.getProductEntity().getSize().getName());
-                    cartProductVM.setPrice(df.format(cartProduct.getProductEntity().getProduct().getPrice()));
+                    cartProductVM.setPrice(cartProduct.getProductEntity().getProduct().getPrice());
                     cartProductVM.setAmount(cartProduct.getAmount());
                     double price = cartProduct.getAmount() * cartProduct.getProductEntity().getProduct().getPrice();
-                    cartProductVM.setTotalProductPrice(df.format(price));
+                    cartProductVM.setTotalProductPrice(price);
                     totalPrice += price;
 
 
@@ -94,17 +94,17 @@ public class CartController extends BaseController {
             }
 
         }
-
         vm.setProductAmount(productAmount);
-        vm.setTotalPrice(df.format(totalPrice));
+        vm.setTotalPrice(totalPrice);
         vm.setCartProductVMList(cartProductVMList);
         vm.setLayoutHeaderVM(this.getLayoutHeaderVM());
         if (totalPrice > 3000) {
             vm.setShipPrice(0);
-            vm.setTotal(df.format(vm.getShipPrice()));
+            vm.setTotal(vm.getShipPrice() + vm.getTotalPrice());
         } else {
-            vm.setShipPrice(totalPrice + SHIP_PRICE);
-            vm.setTotal(df.format(vm.getShipPrice()));
+            vm.setShipPrice(SHIP_PRICE);
+
+            vm.setTotal(vm.getShipPrice() + vm.getTotalPrice());
         }
 
         model.addAttribute("vm", vm);

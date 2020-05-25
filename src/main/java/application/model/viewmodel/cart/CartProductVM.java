@@ -7,12 +7,36 @@ public class CartProductVM {
     private int amount;
     private int productId;
     private String productName;
-    private String price;
-    private String totalPrice;
+    private double price;
+    private double totalPrice;
     private String sizeName;
     private String colorName;
     private int productEntityId;
-    private String totalProductPrice;
+    private double totalProductPrice;
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public double getTotalProductPrice() {
+        return totalProductPrice;
+    }
+
+    public void setTotalProductPrice(double totalProductPrice) {
+        this.totalProductPrice = totalProductPrice;
+    }
 
     public int getCartProductId() {
         return cartProductId;
@@ -28,14 +52,6 @@ public class CartProductVM {
 
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-
-    public String getTotalProductPrice() {
-        return totalProductPrice;
-    }
-
-    public void setTotalProductPrice(String totalProductPrice) {
-        this.totalProductPrice = totalProductPrice;
     }
 
     public String getMainImage() {
@@ -68,22 +84,6 @@ public class CartProductVM {
 
     public void setProductName(String productName) {
         this.productName = productName;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(String totalPrice) {
-        this.totalPrice = totalPrice;
     }
 
     public String getSizeName() {

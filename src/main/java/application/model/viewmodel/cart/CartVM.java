@@ -7,10 +7,26 @@ import java.util.*;
 public class CartVM {
     private LayoutHeaderVM layoutHeaderVM;
     private List<CartProductVM> cartProductVMList;
-    private String totalPrice;
+    private double totalPrice;
     private double shipPrice;
     private int productAmount;
-    private String total;
+    private double total;
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
 
     public int getProductAmount() {
         return productAmount;
@@ -20,28 +36,12 @@ public class CartVM {
         this.productAmount = productAmount;
     }
 
-    public String getTotal() {
-        return total;
-    }
-
-    public void setTotal(String total) {
-        this.total = total;
-    }
-
     public double getShipPrice() {
         return shipPrice;
     }
 
     public void setShipPrice(double shipPrice) {
         this.shipPrice = shipPrice;
-    }
-
-    public String getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(String totalPrice) {
-        this.totalPrice = totalPrice;
     }
 
     public LayoutHeaderVM getLayoutHeaderVM() {
