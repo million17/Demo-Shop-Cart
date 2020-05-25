@@ -34,7 +34,7 @@
                     </div>
                     <div class="item-slick3" th:each="productimage : ${vm.getProductImageVMList()}" th:attr="data-thumb='/user/images' + ${productimage.getLink()}" >
                         <div class="wrap-pic-w">
-                            <img th:src="'/user/images' + ${productimage.getLink()}" alt="IMG-PRODUCT">
+                            <img th:src="${productimage.getLink()}" alt="IMG-PRODUCT">
                         </div>
                     </div>
                 </div>

@@ -1,12 +1,12 @@
 $(document).ready(function () {
-    $('.change-product-amount').click(function () {
+    $('.update-cart').on('click', function () {
+        console.log("click");
         dataCartProduct = {};
-        let cPInfo = $(this).data("id");
-        console.log(cPInfo);
-        dataCartProduct.cartProductId = cPInfo;
-        dataCartProduct.amount = $(this).val();
 
-        console.log(dataCartProduct);
+        var cartProductId = $(this).data("id");
+
+        dataCartProduct.cartProductId = cartProductId;
+        dataCartProduct.amount = $('.num-product').val();
 
         NProgress.start();
 
@@ -15,23 +15,29 @@ $(document).ready(function () {
         axios.post(linkPost, dataCartProduct).then(function (res) {
             NProgress.done();
             if (res.data.success) {
-                location.reload();
+                swal(
+                    'Success ',
+                    'Update Success ',
+                    'success'
+                ).then()
+                {
+                    location.reload();
+                }
             } else {
                 swal(
-                    'Fail',
-                    res.data.message,
+                    'Fails',
+                    'Update Fail',
                     'error'
-                ).then(function () {
-                    location.reload();
-                });
+                )
             }
+
         }, function (err) {
             NProgress.done();
             swal(
-                'Error',
-                'Fail',
+                'Fails',
+                'Fails',
                 'error'
-            );
+            )
         });
     });
 });
