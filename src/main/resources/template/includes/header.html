@@ -62,7 +62,7 @@
                 <div class="header-cart header-dropdown">
                     <ul class="header-cart-wrapitem">
                         <li class="header-cart-item" th:each="cartProducts : ${vm.getCartProductVMList()}">
-                            <div class="header-cart-item-img">
+                            <div class="header-cart-item-img delete-cart-product" th:attr="data-id=${cartProducts.getCartProductId()}">
                                 <img th:src="${cartProducts.getMainImage()}" alt="IMG">
                             </div>
 
@@ -179,7 +179,7 @@
                     <div class="header-cart header-dropdown">
                         <ul class="header-cart-wrapitem">
                             <li class="header-cart-item" th:each="cartProducts : ${vm.getCartProductVMList()}">
-                                <div class="header-cart-item-img">
+                                <div class="header-cart-item-img delete-cart-product" th:attr="data-id=${cartProducts.getCartProductId()}">
                                     <img th:src="${cartProducts.getMainImage()}" alt="IMG">
                                 </div>
 
@@ -271,7 +271,7 @@
                     <div class="header-cart header-dropdown">
                         <ul class="header-cart-wrapitem">
                             <li class="header-cart-item" th:each="cartProducts : ${vm.getCartProductVMList()}">
-                                <div class="header-cart-item-img">
+                                <div class="header-cart-item-img delete-cart-product" th:attr="data-id=${cartProducts.getCartProductId()}">
                                     <img th:src="${cartProducts.getMainImage()}" alt="IMG">
                                 </div>
 
@@ -367,4 +367,6 @@
     </div>
 </header>
 </body>
+
+
 </html>
