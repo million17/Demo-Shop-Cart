@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class HomeController extends BaseController {
     private UserService userService;
 
     @GetMapping(value = "/")
-    public String home(Model model) {
+    public String home(Model model, HttpServletRequest request) {
         HomeVM vm = new HomeVM();
 
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -97,7 +98,7 @@ public class HomeController extends BaseController {
 
         vm.setBlogVMList(blogVMList);
         vm.setProductHotVMList(productHotVMList);
-        vm.setLayoutHeaderVM(this.getLayoutHeaderVM());
+        vm.setLayoutHeaderVM(this.getLayoutHeaderVM(request));
 
 
         model.addAttribute("vm", vm);
