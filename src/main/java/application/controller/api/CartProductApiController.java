@@ -130,7 +130,7 @@ public class CartProductApiController {
         return result;
     }
 
-    @PostMapping("/delete/{cartProductId}")
+    @GetMapping("/delete/{cartProductId}")
     public BaseApiResult deleteToCartProduct(@PathVariable Integer cartProductId) {
         BaseApiResult result = new BaseApiResult();
         try {

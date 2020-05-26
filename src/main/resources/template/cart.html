@@ -35,7 +35,7 @@
 
 					<tr class="table-row" th:each="cartProduct : ${vm.getCartProductVMList()}">
 						<td class="column-1">
-							<div class="cart-img-product b-rad-4 o-f-hidden">
+							<div class="cart-img-product b-rad-4 o-f-hidden delete-cart-product" th:attr="data-id=${cartProduct.getCartProductId()}">
 								<img th:src="${cartProduct.getMainImage()}" alt="IMG-PRODUCT">
 							</div>
 						</td>

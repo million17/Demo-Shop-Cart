@@ -91,24 +91,25 @@ public class CartController extends BaseController {
 
 
                 }
+                if (productAmount > 0) {
+                    vm.setProductAmount(productAmount);
+                    vm.setTotalPrice(totalPrice);
+                    vm.setCartProductVMList(cartProductVMList);
+                    if (totalPrice > 3000) {
+                        vm.setShipPrice(0);
+                        vm.setTotal(vm.getShipPrice() + vm.getTotalPrice());
+                    } else {
+                        vm.setShipPrice(SHIP_PRICE);
+                        vm.setTotal(vm.getShipPrice() + vm.getTotalPrice());
+                    }
+                }
             }
 
         }
-        vm.setProductAmount(productAmount);
-        vm.setTotalPrice(totalPrice);
-        vm.setCartProductVMList(cartProductVMList);
+
+
         vm.setLayoutHeaderVM(this.getLayoutHeaderVM());
-        if (totalPrice > 3000) {
-            vm.setShipPrice(0);
-            vm.setTotal(vm.getShipPrice() + vm.getTotalPrice());
-        } else {
-            vm.setShipPrice(SHIP_PRICE);
-
-            vm.setTotal(vm.getShipPrice() + vm.getTotalPrice());
-        }
-
         model.addAttribute("vm", vm);
-
 
         return "/cart";
     }
