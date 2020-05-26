@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Date;
 
@@ -34,7 +35,7 @@ public class UserController extends BaseController {
 
 
     @GetMapping("/detail")
-    public String userDetail(Model model) {
+    public String userDetail(Model model, HttpServletRequest request) {
 
         UserDetailVM vm = new UserDetailVM();
 
@@ -61,7 +62,7 @@ public class UserController extends BaseController {
             logger.error(ex.getMessage());
         }
 
-        vm.setLayoutHeaderVM(this.getLayoutHeaderVM());
+        vm.setLayoutHeaderVM(this.getLayoutHeaderVM(request));
 
         model.addAttribute("vm", vm);
 
@@ -95,10 +96,10 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("/change-password")
-    public String changePassword(Model model) {
+    public String changePassword(Model model, HttpServletRequest request) {
         ChangePasswordVM changePasswordVM = new ChangePasswordVM();
 
-        changePasswordVM.setLayoutHeaderVM(this.getLayoutHeaderVM());
+        changePasswordVM.setLayoutHeaderVM(this.getLayoutHeaderVM(request));
 
 
         model.addAttribute("changePassword", changePasswordVM);
