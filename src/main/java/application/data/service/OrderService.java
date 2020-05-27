@@ -15,4 +15,8 @@ public class OrderService {
     public List<Order> findOrderByGuidOrUserName(String guid, String userName) {
         return orderRepository.findOrderByGuidOrUserName(guid, userName);
     }
+
+    public Order addNewOrder(Order order) {
+        return orderRepository.save(order);
+    }
 }

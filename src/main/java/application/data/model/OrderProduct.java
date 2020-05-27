@@ -19,6 +19,28 @@ public class OrderProduct {
     @JoinColumn(name = "product_entity_id")//foreign key của Product
     private ProductEntity productEntity;
 
+    @Column(name = "amount")
+    private int amount;
+
+    @Column(name = "price")
+    private double price;
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public int getOrderProductId() {
         return orderProductId;
     }

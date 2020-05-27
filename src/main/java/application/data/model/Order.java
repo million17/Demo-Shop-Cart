@@ -24,7 +24,7 @@ public class Order {
     private String customerName;
 
     @Column(name = "phone_number")
-    private int phoneNumber;
+    private String phoneNumber;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
     List<OrderProduct> orderProductList = new ArrayList<>();
@@ -77,11 +77,11 @@ public class Order {
         this.customerName = customerName;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
