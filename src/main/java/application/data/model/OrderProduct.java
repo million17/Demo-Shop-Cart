@@ -16,8 +16,8 @@ public class OrderProduct {
     private Order order;
 
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")//foreign key của Product
-    private Product product;
+    @JoinColumn(name = "product_entity_id")//foreign key của Product
+    private ProductEntity productEntity;
 
     public int getOrderProductId() {
         return orderProductId;
@@ -35,11 +35,11 @@ public class OrderProduct {
         this.order = order;
     }
 
-    public Product getProduct() {
-        return product;
+    public ProductEntity getProductEntity() {
+        return productEntity;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductEntity(ProductEntity productEntity) {
+        this.productEntity = productEntity;
     }
 }
