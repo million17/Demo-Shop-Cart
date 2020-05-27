@@ -10,6 +10,15 @@ public class ShopProductVM {
     private List<ColorVM> colorVMList;
     private List<CategoryVM> categoryVMList;
     private LayoutHeaderVM layoutHeaderVM;
+    private long totalProduct;
+
+    public long getTotalProduct() {
+        return totalProduct;
+    }
+
+    public void setTotalProduct(long totalProduct) {
+        this.totalProduct = totalProduct;
+    }
 
     public LayoutHeaderVM getLayoutHeaderVM() {
         return layoutHeaderVM;

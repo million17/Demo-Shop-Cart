@@ -95,7 +95,8 @@ $(document).ready(function () {
 
         let dataCart = {};
 
-        let pdInfo = $(this).data("product");
+        /*let pdInfo = $(this).data("product");*/
+        let pdName = $(this).data("product_name");
 
         dataCart.amount = $('.num-product').val();
         if (dataCart.amount > state.amount) {
@@ -115,19 +116,19 @@ $(document).ready(function () {
             NProgress.done();
             if (res.data.success) {
                 swal('Success',
-                    'Add to cart success !',
+                    'Add ' + pdName + ' to cart success !',
                     'success').then(function () {
                     location.reload();
                 });
             } else {
                 swal('Fail',
-                    'Add to cart fail',
+                    'Add' + pdName + 'to cart fail',
                     'error');
             }
         }, function (err) {
             NProgress.done();
             swal('Fail',
-                'Add to cart fail',
+                'Add ' + pdName + ' to cart fail',
                 'error');
         });
 

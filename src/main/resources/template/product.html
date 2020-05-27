@@ -10,7 +10,8 @@
 
 
 <!-- Title Page -->
-<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(/user/images/heading-pages-02.jpg); ">
+<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m"
+         style="background-image: url(/user/images/heading-pages-02.jpg); ">
     <h2 class="l-text2 t-center">
         Women
     </h2>
@@ -33,7 +34,8 @@
 
                     <ul class="p-b-54">
                         <li class="p-t-4" th:each="category : ${vm.getCategoryVMList()}">
-                            <a class="s-text13 active1" th:text="${category.getName()}">
+                            <a class="s-text13 active1" th:href="${'?categoryId=' + category.getId()}"
+                               th:text="${category.getName()}">
                             </a>
                         </li>
                     </ul>
@@ -73,48 +75,59 @@
 
                         <ul class="flex-w">
                             <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter1" type="checkbox" name="color-filter1">
+                                <input class="checkbox-color-filter" id="color-filter1" type="checkbox"
+                                       name="color-filter1">
                                 <label class="color-filter color-filter1" for="color-filter1"></label>
                             </li>
 
                             <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter2" type="checkbox" name="color-filter2">
+                                <input class="checkbox-color-filter" id="color-filter2" type="checkbox"
+                                       name="color-filter2">
                                 <label class="color-filter color-filter2" for="color-filter2"></label>
                             </li>
 
                             <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter3" type="checkbox" name="color-filter3">
+                                <input class="checkbox-color-filter" id="color-filter3" type="checkbox"
+                                       name="color-filter3">
                                 <label class="color-filter color-filter3" for="color-filter3"></label>
                             </li>
 
                             <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter4" type="checkbox" name="color-filter4">
+                                <input class="checkbox-color-filter" id="color-filter4" type="checkbox"
+                                       name="color-filter4">
                                 <label class="color-filter color-filter4" for="color-filter4"></label>
                             </li>
 
                             <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter5" type="checkbox" name="color-filter5">
+                                <input class="checkbox-color-filter" id="color-filter5" type="checkbox"
+                                       name="color-filter5">
                                 <label class="color-filter color-filter5" for="color-filter5"></label>
                             </li>
 
                             <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter6" type="checkbox" name="color-filter6">
+                                <input class="checkbox-color-filter" id="color-filter6" type="checkbox"
+                                       name="color-filter6">
                                 <label class="color-filter color-filter6" for="color-filter6"></label>
                             </li>
 
                             <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter7" type="checkbox" name="color-filter7">
+                                <input class="checkbox-color-filter" id="color-filter7" type="checkbox"
+                                       name="color-filter7">
                                 <label class="color-filter color-filter7" for="color-filter7"></label>
                             </li>
                         </ul>
                     </div>
 
                     <div class="search-product pos-relative bo4 of-hidden">
-                        <input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
+                        <form th:action="@{/product/}" th:object="${productName}" method="get">
+                            <input class="s-text7 size6 p-l-23 p-r-50" type="text" th:field="*{productName}"
+                                   placeholder="Search Products...">
 
-                        <button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
-                            <i class="fs-12 fa fa-search" aria-hidden="true"></i>
-                        </button>
+                            <button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
+                                <i class="fs-12 fa fa-search" aria-hidden="true"></i>
+                            </button>
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -126,7 +139,8 @@
                         <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
                             <select class="selection-2" name="sorting">
                                 <option>Default Sorting</option>
-                                <option>Popularity</option>
+                                <option>
+                                    <a href="" type="button">Popularity</a></option>
                                 <option>Price: low to high</option>
                                 <option>Price: high to low</option>
                             </select>
@@ -146,7 +160,8 @@
                     </div>
 
                     <span class="s-text8 p-t-5 p-b-5">
-							Showing 1–12 of 16 results
+							Page <span th:text="${#httpServletRequest.getParameter('page')}"></span> in <span
+                            th:text="${vm.getTotalProduct()}"></span> results
 						</span>
                 </div>
 
@@ -179,9 +194,21 @@
                 </div>
 
                 <!-- Pagination -->
-                <div class="pagination flex-m flex-w p-t-26">
-                    <a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>
-                    <a href="#" class="item-pagination flex-c-m trans-0-4">2</a>
+                <div class="pagination flex-m flex-w p-t-26" th:if="${vm.getProductVMList().size() > 0 }">
+                    <th:block th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}">
+                        <th:block th:if="${page.number == i}">
+                            <a class="item-pagination flex-c-m trans-0-4 active-pagination" th:href="${''}"
+                               th:text="${i+1}"></a>
+                        </th:block>
+                        <th:block th:unless="${page.number == i}">
+                            <a class="item-pagination flex-c-m trans-0-4" th:text="${i+1}"
+                               th:href="${'?'+(#httpServletRequest.getParameter('categoryId')==null?'':('&categoryId='+#httpServletRequest.getParameter('categoryId')))
+                                                                                       +('&page='+i)
+                                                                                       +(#httpServletRequest.getParameter('maxSize')==null?'':('&maxSize='+#httpServletRequest.getParameter('maxSize')))
+                                                                                       +(#httpServletRequest.getParameter('sortByPrice')==null?'':('&sortByPrice='+#httpServletRequest.getParameter('sortByPrice')))
+                                                                                       +(#httpServletRequest.getParameter('name')==null?'':('&name='+#httpServletRequest.getParameter('name')))}"></a>
+                        </th:block>
+                    </th:block>
                 </div>
             </div>
         </div>
@@ -246,7 +273,7 @@
     var filterBar = document.getElementById('filter-bar');
 
     noUiSlider.create(filterBar, {
-        start: [ 50, 200 ],
+        start: [50, 200],
         connect: true,
         range: {
             'min': 50,
@@ -259,8 +286,8 @@
         document.getElementById('value-upper')
     ];
 
-    filterBar.noUiSlider.on('update', function( values, handle ) {
-        skipValues[handle].innerHTML = Math.round(values[handle]) ;
+    filterBar.noUiSlider.on('update', function (values, handle) {
+        skipValues[handle].innerHTML = Math.round(values[handle]);
     });
 </script>
 <!--===============================================================================================-->

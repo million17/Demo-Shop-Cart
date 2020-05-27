@@ -94,7 +94,8 @@
 
                         <div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
                             <!-- Button -->
-                            <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 add-to-cart" th:attr="data-product=${vm.getProductVM().getId()}" >
+                            <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 add-to-cart"
+                                    th:attr="data-product_name=${vm.getProductVM().getProductName()}">
                                 Add to Cart
                             </button>
                         </div>
