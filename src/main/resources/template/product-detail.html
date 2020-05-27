@@ -27,14 +27,14 @@
                 <div class="wrap-slick3-dots"></div>
 
                 <div class="slick3">
-                    <div class="item-slick3" th:attr="data-thumb='/user/images' + ${vm.getProductVM().getMainImage()}" >
+                    <div class="item-slick3" th:attr="data-thumb=${vm.getProductVM().getMainImage()}" >
                         <div class="wrap-pic-w">
-                            <img th:src="'/user/images' + ${vm.getProductVM().getMainImage()}" alt="IMG-PRODUCT">
+                            <img th:src="${vm.getProductVM().getMainImage()}" alt="IMG-PRODUCT">
                         </div>
                     </div>
-                    <div class="item-slick3" th:each="productimage : ${vm.getProductImageVMList()}" th:attr="data-thumb='/user/images' + ${productimage.getLink()}" >
+                    <div class="item-slick3" th:each="productimage : ${vm.getProductImageVMList()}" th:attr="data-thumb=${productimage.getLink()}" >
                         <div class="wrap-pic-w">
-                            <img th:src="'/user/images' + ${productimage.getLink()}" alt="IMG-PRODUCT">
+                            <img th:src="${productimage.getLink()}" alt="IMG-PRODUCT">
                         </div>
                     </div>
                 </div>
@@ -526,6 +526,7 @@
     console.log("vm: ", vm);
 </script>
 <script th:src="@{/user/js/add-to-cart.js}"></script>
+<script th:src="@{/user/js/cart.js}"></script>
 
 </body>
 </html>

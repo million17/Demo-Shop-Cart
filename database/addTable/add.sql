@@ -43,3 +43,8 @@ INSERT INTO `dbo_blog` (`blog_id`, `title`, `image_blog`, `content`, `user_id`, 
 
 ALTER TABLE dbo_product_entity
  ADD amount long;
+
+
+/*change column*/
+ ALTER TABLE db_demo_t3h.dbo_user
+MODIFY phone_number varchar(255);

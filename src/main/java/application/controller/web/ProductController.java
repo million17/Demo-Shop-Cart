@@ -135,8 +135,8 @@ public class ProductController extends BaseController {
         vm.setSizeVMList(sizeVMList);
         vm.setColorVMList(colorVMList);
         vm.setCategoryVMList(categoryVMList);
+        vm.setLayoutHeaderVM(this.getLayoutHeaderVM(request));
         vm.setTotalProduct(totalProduct);
-        vm.setLayoutHeaderVM(this.getLayoutHeaderVM());
 
 
         model.addAttribute("vm", vm);
