@@ -139,6 +139,8 @@ public class BaseController {
                 for (CartProduct cartProduct : cartEntity.getCartProductList()) {
                     CartProductVM cartProductVM = new CartProductVM();
 
+                    cartProductVM.setSizeName(cartProduct.getProductEntity().getSize().getName());
+                    cartProductVM.setColorName(cartProduct.getProductEntity().getColor().getName());
                     cartProductVM.setCartProductId(cartProduct.getCartProductId());
                     cartProductVM.setProductName(cartProduct.getProductEntity().getProduct().getProductName());
                     cartProductVM.setAmount(cartProduct.getAmount());

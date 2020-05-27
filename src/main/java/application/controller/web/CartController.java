@@ -82,7 +82,8 @@ public class CartController extends BaseController {
                     cartProductVM.setPrice(cartProduct.getProductEntity().getProduct().getPrice());
                     cartProductVM.setAmount(cartProduct.getAmount());
                     double price = cartProduct.getAmount() * cartProduct.getProductEntity().getProduct().getPrice();
-                    cartProductVM.setTotalProductPrice(price);
+                    cartProductVM.setTotalProductPrice(Double.parseDouble(df.format(price)));
+
                     totalPrice += price;
 
 

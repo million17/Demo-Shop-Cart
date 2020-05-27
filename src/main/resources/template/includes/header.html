@@ -74,6 +74,10 @@
                                     <span th:text="${cartProducts.getAmount()}"></span> x
                                     <span th:text="'$' + ${cartProducts.getPrice()} "></span>
                                 </span>
+                                <span class="header-cart-item-info">
+                                    <span th:text="'Size : ' + ${cartProducts.getSizeName()}"></span>
+                                    <span th:text="'Color : ' + ${cartProducts.getColorName()}"></span>
+                                </span>
                             </div>
                         </li>
                     </ul>
@@ -188,9 +192,13 @@
                                     </a>
 
                                     <span class="header-cart-item-info" >
-                                    <span th:text="${cartProducts.getAmount()}"></span> x
-                                    <span th:text="'$' + ${cartProducts.getPrice()} "></span>
-                                </span>
+                                        <span th:text="${cartProducts.getAmount()}"></span> x
+                                        <span th:text="'$' + ${cartProducts.getPrice()} "></span>
+                                    </span>
+                                    <span class="header-cart-item-info">
+                                        <span th:text="'Size : ' + ${cartProducts.getSizeName()}"></span>
+                                        <span th:text="'Color : ' + ${cartProducts.getColorName()}"></span>
+                                    </span>
                                 </div>
                             </li>
                         </ul>
@@ -280,9 +288,13 @@
                                     </a>
 
                                     <span class="header-cart-item-info" >
-                                    <span th:text="${cartProducts.getAmount()}"></span> x
-                                    <span th:text="'$' + ${cartProducts.getPrice()} "></span>
-                                </span>
+                                        <span th:text="${cartProducts.getAmount()}"></span> x
+                                        <span th:text="'$' + ${cartProducts.getPrice()} "></span>
+                                    </span>
+                                    <span class="header-cart-item-info">
+                                        <span th:text="'Size : ' + ${cartProducts.getSizeName()}"></span>
+                                        <span th:text="'Color : ' + ${cartProducts.getColorName()}"></span>
+                                    </span>
                                 </div>
                             </li>
                         </ul>
