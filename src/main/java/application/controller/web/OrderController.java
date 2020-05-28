@@ -6,6 +6,7 @@ import application.data.service.OrderService;
 import application.data.service.UserService;
 import application.model.viewmodel.cart.CartProductVM;
 import application.model.viewmodel.order.OrderDetailVM;
+import application.model.viewmodel.order.OrderHistoryVM;
 import application.model.viewmodel.order.OrderVM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -89,6 +90,9 @@ public class OrderController extends BaseController {
                 OrderProduct orderProduct = new OrderProduct();
                 orderProduct.setOrder(order);
                 orderProduct.setAmount(cartProduct.getAmount());
+                orderProduct.setProductEntity(cartProduct.getProductEntity());
+
+
 
                 double price = cartProduct.getAmount() * cartProduct.getProductEntity().getProduct().getPrice();
 
@@ -105,11 +109,53 @@ public class OrderController extends BaseController {
 
             orderService.addNewOrder(order);
 
+            cartService.deleteCart(cartEntity.getCartId());
 
 
         }
 
         return "redirect:/order/history";
+    }
+
+    @GetMapping("/history")
+    public String history(Model model, HttpServletRequest request,
+                          final Principal principal) {
+        OrderHistoryVM vm = new OrderHistoryVM();
+
+        List<OrderVM> orderVMS = new ArrayList<>();
+
+        List<Order> orderEntityList = null;
+
+        String guid = this.getGuid(request);
+
+        if (principal != null) {
+            String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+            orderEntityList = orderService.findOrderByGuidOrUserName(null, userName);
+        } else if (guid != null) {
+            orderEntityList = orderService.findOrderByGuidOrUserName(guid, null);
+        }
+        for (Order order : orderEntityList) {
+            OrderVM orderVM = new OrderVM();
+
+            orderVM.setAddress(order.getAddress());
+            orderVM.setCreatedDate(order.getCreatedDate());
+            orderVM.setCustomerName(order.getCustomerName());
+            orderVM.setEmail(order.getEmail());
+            orderVM.setPhoneNumber(order.getPhoneNumber());
+            orderVM.setPrice(order.getPrice());
+            orderVM.setShip(order.getShip());
+
+            orderVMS.add(orderVM);
+        }
+
+
+        vm.setOrderVMList(orderVMS);
+        vm.setLayoutHeaderVM(this.getLayoutHeaderVM(request));
+
+        model.addAttribute("vm", vm);
+
+
+        return "/order-history";
 
     }
 }

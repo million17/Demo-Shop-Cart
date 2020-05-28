@@ -1,10 +1,110 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<head th:replace="includes/head :: head">
+    <title>Checkout</title>
 </head>
-<body>
+<body class="animsition">
+<!--header-->
+<div th:replace="includes/header :: header (vm=${vm.getLayoutHeaderVM()})"></div>
+<!--end header-->
+<!-- Title Page -->
+<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m"
+         style="background-image: url('/user/images/heading-pages-06.jpg');">
+    <h2 class="l-text2 t-center">
+        Checkout
+    </h2>
+</section>
 
+<!-- content page -->
+<section class="bgwhite p-t-66 p-b-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 p-b-30">
+                <form class="leave-comment" th:action="@{/order/checkout}" th:object="${order}" method="post">
+                    <h4 class="m-text26 p-b-36 p-t-15">
+                        Checkout
+                    </h4>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="s-text20 w-size15 t-left m-b-20">
+                                Customer Name
+                            </div>
+                            <div class="bo4 of-hidden size15 m-b-20">
+                                <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="customerName"
+                                       th:field="*{customerName}" placeholder="Customer Name">
+                            </div>
+
+                            <div class="s-text20 w-size15 t-left m-b-20">
+                                Email
+                            </div>
+                            <div class="bo4 of-hidden size15 m-b-20">
+                                <input class="sizefull s-text7 p-l-22 p-r-22" type="email" name="email" th:field="*{email}"
+                                       placeholder="Email">
+                            </div>
+
+                            <div class="s-text20 w-size15 t-left m-b-20">
+                                Phone Number
+                            </div>
+                            <div class="bo4 of-hidden size15 m-b-20">
+                                <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="phoneNumber"
+                                       th:field="*{phoneNumber}" placeholder="Phone Number">
+                            </div>
+
+                            <div class="s-text20 w-size15 t-left m-b-20">
+                                Address
+                            </div>
+                            <div class="bo4 of-hidden size15 m-b-20">
+                                <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="address"
+                                       th:field="*{address}" placeholder="Address">
+                            </div>
+
+                            <div class="w-size25 m-b-30">
+                                <!-- Button -->
+                                <button class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
+                                    Checkout
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--include footer-->
+<div th:replace="includes/footer :: footer"></div>
+<!--end footer-->
+<!-- Container Selection -->
+<div id="dropDownSelect1"></div>
+<div id="dropDownSelect2"></div>
+<!--===============================================================================================-->
+<script type="text/javascript" th:src="@{/user/vendor/jquery/jquery-3.2.1.min.js}"></script>
+<!--===============================================================================================-->
+<script type="text/javascript" th:src="@{/user/vendor/animsition/js/animsition.min.js}"></script>
+<!--===============================================================================================-->
+<script type="text/javascript" th:src="@{/user/vendor/bootstrap/js/popper.js}"></script>
+<script type="text/javascript" th:src="@{/user/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<!--===============================================================================================-->
+<!--===============================================================================================-->
+<script type="text/javascript" th:src="@{/user/vendor/select2/select2.min.js}"></script>
+<script type="text/javascript">
+    $(".selection-1").select2({
+        minimumResultsForSearch: 20,
+        dropdownParent: $('#dropDownSelect1')
+    });
+
+    $(".selection-2").select2({
+        minimumResultsForSearch: 20,
+        dropdownParent: $('#dropDownSelect2')
+    });
+</script>
+<!--===============================================================================================-->
+<script th:src="@{/user/js/map-custom.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/user/js/main.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/user/js/upload.js}"></script>
+<script th:src="@{/user/js/cart.js}"></script>
 </body>
 </html>
