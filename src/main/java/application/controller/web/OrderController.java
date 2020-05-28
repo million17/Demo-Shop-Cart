@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,6 +43,11 @@ public class OrderController extends BaseController {
         OrderDetailVM vm = new OrderDetailVM();
         OrderVM order = new OrderVM();
 
+        DecimalFormat df = new DecimalFormat("####0.00");
+
+        int productAmount = 0;
+        double totalPrice = 0L;
+
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 
         User userEntity = userService.findUserByUsername(userName);
@@ -51,7 +57,35 @@ public class OrderController extends BaseController {
             order.setPhoneNumber(userEntity.getPhoneNumber());
             order.setAddress(userEntity.getAddress());
         }
+        String guid = this.getGuid(request);
+        if (guid != null) {
+            Cart cartEntity;
+            if (userEntity != null) {
+                cartEntity = cartService.findByUserName(userName);
+            } else {
+                cartEntity = cartService.findFirstCartByGuid(guid);
+            }
+            List<CartProductVM> cartProductVMS = new ArrayList<>();
+            productAmount = cartEntity.getCartProductList().size();
+            for (CartProduct cartProduct : cartEntity.getCartProductList()) {
+                CartProductVM cartProductVM = new CartProductVM();
+                cartProductVM.setCartProductId(cartProduct.getCartProductId());
+                cartProductVM.setProductName(cartProduct.getProductEntity().getProduct().getProductName());
+                cartProductVM.setMainImage(cartProduct.getProductEntity().getProduct().getMainImage());
+                cartProductVM.setColorName(cartProduct.getProductEntity().getColor().getName());
+                cartProductVM.setSizeName(cartProduct.getProductEntity().getSize().getName());
+                cartProductVM.setPrice(cartProduct.getProductEntity().getProduct().getPrice());
+                cartProductVM.setAmount(cartProduct.getAmount());
+                double price = cartProduct.getAmount() * cartProduct.getProductEntity().getProduct().getPrice();
+                cartProductVM.setTotalProductPrice(Double.parseDouble(df.format(price)));
 
+                totalPrice += price;
+
+
+                cartProductVMS.add(cartProductVM);
+            }
+            vm.setCartProductVMS(cartProductVMS);
+        }
         vm.setLayoutHeaderVM(this.getLayoutHeaderVM(request));
 
         model.addAttribute("vm", vm);
@@ -91,7 +125,6 @@ public class OrderController extends BaseController {
                 orderProduct.setOrder(order);
                 orderProduct.setAmount(cartProduct.getAmount());
                 orderProduct.setProductEntity(cartProduct.getProductEntity());
-
 
 
                 double price = cartProduct.getAmount() * cartProduct.getProductEntity().getProduct().getPrice();

@@ -11,11 +11,11 @@ public class OrderProduct {
     @Column(name = "order_product_id")
     private int orderProductId;
 
-    @ManyToOne(optional = true,fetch = FetchType.LAZY)
+    @ManyToOne(optional = true,fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")//foreign key của Order
     private Order order;
 
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @ManyToOne(optional = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "product_entity_id")//foreign key của Product
     private ProductEntity productEntity;
 
