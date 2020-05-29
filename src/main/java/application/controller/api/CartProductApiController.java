@@ -50,7 +50,7 @@ public class CartProductApiController {
                     cartEntity = cartService.findByUserName(userEntity.getUserName());
                 ProductEntity productEntity = productEntityService.findOne(dto.getProductEntityId());
                 if (cartEntity != null && productEntity != null) {
-                    CartProduct cartProductEntity = cartProductService.findFirstCartProductByCartIdAndProductEntityId(cartEntity.getCartId(), dto.getProductEntityId());
+                    CartProduct cartProductEntity = cartProductService.findFirstCartProductByCartIdAndProductEntityId(cartEntity.getCartId(), productEntity.getProductEntityId());
                     if (cartProductEntity != null) {
                         if (cartProductEntity.getAmount() < dto.getAmount()) {
 
@@ -72,7 +72,7 @@ public class CartProductApiController {
                     cartEntity.setUserName(userEntity.getUserName());
                     cartEntity.setGuid(dto.getGuid());
                     cartService.addNewCart(cartEntity);
-                    CartProduct cartProductEntity = cartProductService.findFirstCartProductByCartIdAndProductEntityId(cartEntity.getCartId(), dto.getProductEntityId());
+                    CartProduct cartProductEntity = cartProductService.findFirstCartProductByCartIdAndProductEntityId(cartEntity.getCartId(), productEntity.getProductEntityId());
                     if (cartProductEntity != null) {
                         cartProductEntity.setAmount(dto.getAmount() + cartProductEntity.getAmount());
                         cartProductService.updateCartProduct(cartProductEntity);
