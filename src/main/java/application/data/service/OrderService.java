@@ -16,7 +16,14 @@ public class OrderService {
         return orderRepository.findOrderByGuidOrUserName(guid, userName);
     }
 
-    public Order addNewOrder(Order order) {
-        return orderRepository.save(order);
+    public boolean addNewOrder(Order order) {
+        try {
+            orderRepository.save(order);
+            return true;
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+        return false;
+
     }
 }
