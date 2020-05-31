@@ -26,7 +26,7 @@ public class Order {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     List<OrderProduct> orderProductList = new ArrayList<>();
 
     @Column(name = "address")

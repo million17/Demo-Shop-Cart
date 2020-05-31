@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/head :: head">
+    <title>Checkout</title>
+</head>
+<body class="animsition">
+<!--header-->
+<div th:replace="includes/header :: header (vm=${vm.getLayoutHeaderVM()})"></div>
+<!--end header-->
+<!-- content page -->
+<section class="bgwhite p-t-66 p-b-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 p-b-30">
+                <div class="container-table-cart pos-relative">
+                    <div class="wrap-table-shopping-cart bgwhite">
+                        <table class="table-shopping-cart">
+                            <tr class="table-head">
+                                <th class="column-1"></th>
+                                <th class="column-3">Customer Name</th>
+                                <th class="column-2">Phone Number</th>
+                                <th class="column-2">Address</th>
+                                <th class="column-2">Email</th>
+                                <th class="column-4 p-l-70">Price</th>
+                                <th class="column-5">Ship</th>
+                                <th class="column-5"></th>
+                            </tr>
+
+                            <tr class="table-row" th:each="order,iter : ${vm.getOrderVMList()}">
+                                <td class="column-1" th:text="${iter.index+1}">
+                                </td>
+                                <th class="column-3" th:text="${order.getCustomerName()}"></th>
+                                <th class="column-2" th:text="${order.getPhoneNumber()}"></th>
+                                <th class="column-2" th:text="${order.getAddress()}"></th>
+                                <th class="column-2" th:text="${order.getEmail()}"></th>
+                                <th class="column-4 p-l-70" th:text="${order.getPrice()}"></th>
+                                <th class="column-5" th:text="${order.getShip()}"></th>
+                                <th class="column-5">
+                                    <a class="p-2 flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" th:href="@{'/order/history/' + ${order.getOrderId()} }">Details</a>
+                                </th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--include footer-->
+<div th:replace="includes/footer :: footer"></div>
+<!--end footer-->
+<!-- Container Selection -->
+<div id="dropDownSelect1"></div>
+<div id="dropDownSelect2"></div>
+<!--===============================================================================================-->
+<script type="text/javascript" th:src="@{/user/vendor/jquery/jquery-3.2.1.min.js}"></script>
+<!--===============================================================================================-->
+<script type="text/javascript" th:src="@{/user/vendor/animsition/js/animsition.min.js}"></script>
+<!--===============================================================================================-->
+<script type="text/javascript" th:src="@{/user/vendor/bootstrap/js/popper.js}"></script>
+<script type="text/javascript" th:src="@{/user/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<!--===============================================================================================-->
+<!--===============================================================================================-->
+<script type="text/javascript" th:src="@{/user/vendor/select2/select2.min.js}"></script>
+<script type="text/javascript">
+    $(".selection-1").select2({
+        minimumResultsForSearch: 20,
+        dropdownParent: $('#dropDownSelect1')
+    });
+
+    $(".selection-2").select2({
+        minimumResultsForSearch: 20,
+        dropdownParent: $('#dropDownSelect2')
+    });
+</script>
+<!--===============================================================================================-->
+<script th:src="@{/user/js/map-custom.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/user/js/main.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/user/js/upload.js}"></script>
+<script th:src="@{/user/js/cart.js}"></script>
+</body>
+</html>

@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static application.constant.Constant.SHIP_PRICE;
+
 @Controller
 @RequestMapping(path = "/order")
 public class OrderController extends BaseController {
@@ -99,26 +101,27 @@ public class OrderController extends BaseController {
 
 
                 double price = cartProduct.getAmount() * cartProduct.getProductEntity().getProduct().getPrice();
-
                 totalPrice += price;
-
                 orderProduct.setPrice(price);
-
 
                 orderProductList.add(orderProduct);
 
-
-
             }
 
-
-
-            order.setOrderProductList(orderProductList);
+            if (totalPrice > 3000) {
+                order.setShip((double) 0);
+            } else {
+                order.setShip((double) SHIP_PRICE);
+            }
             order.setPrice(totalPrice);
+            order.setOrderProductList(orderProductList);
+
+
+
+
 
 
             orderService.addNewOrder(order);
-
             cartService.deleteCart(cartEntity.getCartId());
 
 
@@ -153,6 +156,7 @@ public class OrderController extends BaseController {
             orderVM.setEmail(order.getEmail());
             orderVM.setPhoneNumber(order.getPhoneNumber());
             orderVM.setPrice(order.getPrice());
+            orderVM.setOrderId(order.getOrderId());
             orderVM.setShip(order.getShip());
 
             orderVMS.add(orderVM);
