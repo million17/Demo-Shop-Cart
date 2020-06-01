@@ -89,10 +89,10 @@ CREATE TABLE IF NOT EXISTS `dbo_order` (
 -- Dumping structure for table db_demo_t3h.dbo_order_product
 DROP TABLE IF EXISTS `dbo_order_product`;
 CREATE TABLE IF NOT EXISTS `dbo_order_product` (
-  `oder_product_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_product_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) DEFAULT NULL,
   `order_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`oder_product_id`),
+  PRIMARY KEY (`order_product_id`),
   KEY `fk_order_id` (`order_id`),
   KEY `fk_order_product_id` (`product_id`),
   CONSTRAINT `fk_order_id` FOREIGN KEY (`order_id`) REFERENCES `dbo_order` (`order_id`),

@@ -38,4 +38,14 @@ public class CartService {
         return cartRepository.save(cart);
     }
 
+    public boolean deleteCart(Integer cartId) {
+        try {
+            cartRepository.delete(cartId);
+            return true;
+        } catch (Exception ex) {
+            logger.error(ex.getMessage());
+        }
+        return false;
+    }
+
 }

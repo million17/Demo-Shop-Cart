@@ -1,9 +1,7 @@
 package application.model.viewmodel;
 
-import application.data.model.Color;
 import application.model.viewmodel.common.LayoutHeaderVM;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDetailVM {

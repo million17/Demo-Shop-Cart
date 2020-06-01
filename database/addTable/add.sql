@@ -48,3 +48,14 @@ ALTER TABLE dbo_product_entity
 /*change column*/
  ALTER TABLE db_demo_t3h.dbo_user
 MODIFY phone_number varchar(255);
+
+/*change column*/
+ ALTER TABLE db_demo_t3h.dbo_order
+MODIFY phone_number varchar(255);
+
+
+ALTER TABLE dbo_order_product
+ ADD amount int;
+
+ALTER TABLE dbo_order_product
+ ADD price decimal(10,2);

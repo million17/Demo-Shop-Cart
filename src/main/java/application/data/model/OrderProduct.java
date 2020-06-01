@@ -9,22 +9,44 @@ public class OrderProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "order_product_id")
-    private int orderProductId;
+    private int id;
 
     @ManyToOne(optional = true,fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")//foreign key của Order
     private Order order;
 
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")//foreign key của Product
-    private Product product;
+    @JoinColumn(name = "product_entity_id")//foreign key của Product
+    private ProductEntity productEntity;
 
-    public int getOrderProductId() {
-        return orderProductId;
+    @Column(name = "amount")
+    private int amount;
+
+    @Column(name = "price")
+    private double price;
+
+    public int getAmount() {
+        return amount;
     }
 
-    public void setOrderProductId(int orderProductId) {
-        this.orderProductId = orderProductId;
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Order getOrder() {
@@ -35,11 +57,12 @@ public class OrderProduct {
         this.order = order;
     }
 
-    public Product getProduct() {
-        return product;
+    public ProductEntity getProductEntity() {
+        return productEntity;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductEntity(ProductEntity productEntity) {
+        this.productEntity = productEntity;
     }
+
 }
