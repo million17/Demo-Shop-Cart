@@ -1,10 +1,81 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<head th:replace="includes/head :: head">
+    <title>Details</title>
 </head>
-<body>
+<body class="animsition">
+<!--header-->
+<div th:replace="includes/header :: header (vm=${vm.getLayoutHeaderVM()})"></div>
+<!--end header-->
+<!-- content page -->
+<section class="bgwhite p-t-66 p-b-60 m-3">
+    <div class="container-table-cart pos-relative">
+        <div class="wrap-table-shopping-cart bgwhite p-3">
+            <table class="table-shopping-cart">
+                <tr class="table-head">
+                    <th class="column-3"></th>
+                    <th class="column-2">Main Image</th>
+                    <th class="column-2">Name</th>
+                    <th class="column-2">Color</th>
+                    <th class="column-2">Size</th>
+                    <th class="column-3">Amount</th>
+                    <th class="column-3">Price</th>
+                    <th class="column-2"></th>
+                </tr>
 
+                <tr class="table-row" th:each="orderProduct,iter : ${vm.getOrderProductVMS()}">
+                    <td class="column-3" th:text="${iter.index+1}">
+                    </td>
+                    <th class="column-2">
+                        <img class="cart-img-product b-rad-4 o-f-hidden delete-cart-product my-2" th:src="${orderProduct.getMainImage()}" alt="">
+                    </th>
+                    <th class="column-2" th:text="${orderProduct.getProductName()}"></th>
+                    <th class="column-2" th:text="${orderProduct.getColorName()}"></th>
+                    <th class="column-2" th:text="${orderProduct.getSizeName()}"></th>
+                    <th class="column-3" th:text="${orderProduct.getAmount()}"></th>
+                    <th class="column-3" th:text="${orderProduct.getPrice()}"></th>
+                    <th class="column-2">
+                        <a class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 py-2" href="#">Cancels</a>
+                    </th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!--include footer-->
+<div th:replace="includes/footer :: footer"></div>
+<!--end footer-->
+<!-- Container Selection -->
+<div id="dropDownSelect1"></div>
+<div id="dropDownSelect2"></div>
+<!--===============================================================================================-->
+<script type="text/javascript" th:src="@{/user/vendor/jquery/jquery-3.2.1.min.js}"></script>
+<!--===============================================================================================-->
+<script type="text/javascript" th:src="@{/user/vendor/animsition/js/animsition.min.js}"></script>
+<!--===============================================================================================-->
+<script type="text/javascript" th:src="@{/user/vendor/bootstrap/js/popper.js}"></script>
+<script type="text/javascript" th:src="@{/user/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<!--===============================================================================================-->
+<!--===============================================================================================-->
+<script type="text/javascript" th:src="@{/user/vendor/select2/select2.min.js}"></script>
+<script type="text/javascript">
+    $(".selection-1").select2({
+        minimumResultsForSearch: 20,
+        dropdownParent: $('#dropDownSelect1')
+    });
+
+    $(".selection-2").select2({
+        minimumResultsForSearch: 20,
+        dropdownParent: $('#dropDownSelect2')
+    });
+</script>
+<!--===============================================================================================-->
+<script th:src="@{/user/js/map-custom.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/user/js/main.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/user/js/upload.js}"></script>
+<script th:src="@{/user/js/cart.js}"></script>
 </body>
 </html>
