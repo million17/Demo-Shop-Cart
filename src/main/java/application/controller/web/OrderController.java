@@ -6,29 +6,29 @@ import application.data.service.OrderService;
 import application.data.service.UserService;
 import application.model.viewmodel.order.OrderDetailVM;
 import application.model.viewmodel.order.OrderHistoryVM;
+import application.model.viewmodel.order.OrderProductVM;
 import application.model.viewmodel.order.OrderVM;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static application.constant.Constant.SHIP_PRICE;
 
 @Controller
 @RequestMapping(path = "/order")
 public class OrderController extends BaseController {
+
+    private static final Logger logger = LogManager.getLogger(OrderController.class);
 
     @Autowired
     private UserService userService;
@@ -91,43 +91,41 @@ public class OrderController extends BaseController {
 
             Cart cartEntity = cartService.findFirstCartByGuid(guid);
 
-            List<OrderProduct> orderProductList = new ArrayList<>();
-
-            for (CartProduct cartProduct : cartEntity.getCartProductList()) {
-                OrderProduct orderProduct = new OrderProduct();
-                orderProduct.setOrder(order);
-                orderProduct.setAmount(cartProduct.getAmount());
-                orderProduct.setProductEntity(cartProduct.getProductEntity());
+            if (cartEntity != null) {
+                List<OrderProduct> orderProductList = new ArrayList<>();
 
 
-                double price = cartProduct.getAmount() * cartProduct.getProductEntity().getProduct().getPrice();
-                totalPrice += price;
-                orderProduct.setPrice(price);
+                for (CartProduct cartProduct : cartEntity.getCartProductList()) {
+                    OrderProduct orderProduct = new OrderProduct();
+                    orderProduct.setOrder(order);
+                    orderProduct.setAmount(cartProduct.getAmount());
+                    orderProduct.setProductEntity(cartProduct.getProductEntity());
 
-                orderProductList.add(orderProduct);
 
+                    double price = cartProduct.getAmount() * cartProduct.getProductEntity().getProduct().getPrice();
+                    totalPrice += price;
+                    orderProduct.setPrice(price);
+
+                    orderProductList.add(orderProduct);
+
+                }
+
+                if (totalPrice > 3000) {
+                    order.setShip((double) 0);
+                } else {
+                    order.setShip((double) SHIP_PRICE);
+                }
+                order.setPrice(totalPrice);
+                order.setOrderProductList(orderProductList);
+                orderService.addNewOrder(order);
+                cartService.deleteCart(cartEntity.getCartId());
+                return "redirect:/order/history";
             }
-
-            if (totalPrice > 3000) {
-                order.setShip((double) 0);
-            } else {
-                order.setShip((double) SHIP_PRICE);
-            }
-            order.setPrice(totalPrice);
-            order.setOrderProductList(orderProductList);
-
-
-
-
-
-
-            orderService.addNewOrder(order);
-            cartService.deleteCart(cartEntity.getCartId());
 
 
         }
 
-        return "redirect:/order/history";
+        return "redirect:/product";
     }
 
     @GetMapping("/history")
@@ -171,5 +169,40 @@ public class OrderController extends BaseController {
 
         return "/order-history";
 
+    }
+
+    @GetMapping("/history/{orderId}")
+    public String details(Model model, HttpServletRequest request,
+                          @PathVariable int orderId,
+                          final Principal principal) {
+        OrderDetailVM orderDetailVM = new OrderDetailVM();
+        List<OrderProductVM> orderProductVMS = new ArrayList<>();
+        try {
+            Order orderEntity = orderService.findOne(orderId);
+            if (orderEntity != null) {
+                for (OrderProduct orderProduct : orderEntity.getOrderProductList()) {
+                    OrderProductVM orderProductVM = new OrderProductVM();
+                    orderProductVM.setMainImage(orderProduct.getProductEntity().getProduct().getMainImage());
+                    orderProductVM.setAmount(orderProduct.getAmount());
+                    orderProductVM.setColorName(orderProduct.getProductEntity().getColor().getName());
+                    orderProductVM.setSizeName(orderProduct.getProductEntity().getSize().getName());
+                    orderProductVM.setPrice(orderProduct.getPrice());
+                    orderProductVM.setProductName(orderProduct.getProductEntity().getProduct().getProductName());
+
+                    orderProductVMS.add(orderProductVM);
+                }
+                orderDetailVM.setOrderProductVMS(orderProductVMS);
+
+            }
+
+        } catch (Exception ex) {
+            logger.error(ex.getMessage());
+        }
+
+        orderDetailVM.setLayoutHeaderVM(this.getLayoutHeaderVM(request));
+        model.addAttribute("vm", orderDetailVM);
+
+
+        return "order-detail";
     }
 }

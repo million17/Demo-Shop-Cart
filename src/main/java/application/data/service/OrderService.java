@@ -16,6 +16,10 @@ public class OrderService {
         return orderRepository.findOrderByGuidOrUserName(guid, userName);
     }
 
+    public Order findOne(int orderId) {
+        return orderRepository.findOne(orderId);
+    }
+
     public boolean addNewOrder(Order order) {
         try {
             orderRepository.save(order);

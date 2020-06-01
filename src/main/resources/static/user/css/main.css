@@ -2042,29 +2042,6 @@ li.sale-noti > a {
 .wrap-table-shopping-cart {
   overflow: auto;
 }
-
-.container-table-cart::before {
-  content: '';
-  display: block;
-  position: absolute;
-  width: 1px;
-  height: calc(100% - 51px);
-  background-color: #e6e6e6;
-  top: 51px;
-  left: 0;
-}
-
-.container-table-cart::after {
-  content: '';
-  display: block;
-  position: absolute;
-  width: 1px;
-  height: calc(100% - 51px);
-  background-color: #e6e6e6;
-  top: 51px;
-  right: 0;
-}
-
 .table-shopping-cart {
   border-collapse: collapse;
   width: 100%;

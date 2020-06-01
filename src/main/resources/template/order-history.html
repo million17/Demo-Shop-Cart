@@ -8,41 +8,36 @@
 <div th:replace="includes/header :: header (vm=${vm.getLayoutHeaderVM()})"></div>
 <!--end header-->
 <!-- content page -->
-<section class="bgwhite p-t-66 p-b-60">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 p-b-30">
-                <div class="container-table-cart pos-relative">
-                    <div class="wrap-table-shopping-cart bgwhite">
-                        <table class="table-shopping-cart">
-                            <tr class="table-head">
-                                <th class="column-1"></th>
-                                <th class="column-3">Customer Name</th>
-                                <th class="column-2">Phone Number</th>
-                                <th class="column-2">Address</th>
-                                <th class="column-2">Email</th>
-                                <th class="column-4 p-l-70">Price</th>
-                                <th class="column-5">Ship</th>
-                                <th class="column-5"></th>
-                            </tr>
+<section class="bgwhite p-t-66 p-b-60 m-3">
+    <div class="container-table-cart pos-relative">
+        <div class="wrap-table-shopping-cart bgwhite p-3">
+            <table class="table-shopping-cart">
+                <tr class="table-head">
+                    <th class="column-3"></th>
+                    <th class="column-2">Customer Name</th>
+                    <th class="column-2">Phone Number</th>
+                    <th class="column-2">Address</th>
+                    <th class="column-2">Email</th>
+                    <th class="column-3">Price</th>
+                    <th class="column-3">Ship</th>
+                    <th class="column-2"></th>
+                </tr>
 
-                            <tr class="table-row" th:each="order,iter : ${vm.getOrderVMList()}">
-                                <td class="column-1" th:text="${iter.index+1}">
-                                </td>
-                                <th class="column-3" th:text="${order.getCustomerName()}"></th>
-                                <th class="column-2" th:text="${order.getPhoneNumber()}"></th>
-                                <th class="column-2" th:text="${order.getAddress()}"></th>
-                                <th class="column-2" th:text="${order.getEmail()}"></th>
-                                <th class="column-4 p-l-70" th:text="${order.getPrice()}"></th>
-                                <th class="column-5" th:text="${order.getShip()}"></th>
-                                <th class="column-5">
-                                    <a class="p-2 flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" th:href="@{'/order/history/' + ${order.getOrderId()} }">Details</a>
-                                </th>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
+                <tr class="table-row" th:each="order,iter : ${vm.getOrderVMList()}">
+                    <td class="column-3" th:text="${iter.index+1}">
+                    </td>
+                    <th class="column-2" th:text="${order.getCustomerName()}"></th>
+                    <th class="column-2" th:text="${order.getPhoneNumber()}"></th>
+                    <th class="column-2" th:text="${order.getAddress()}"></th>
+                    <th class="column-2" th:text="${order.getEmail()}"></th>
+                    <th class="column-3" th:text="${order.getPrice()}"></th>
+                    <th class="column-3" th:text="${order.getShip()}"></th>
+                    <th class="column-2">
+                        <a class="p-2 flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4"
+                           th:href="@{'/order/history/' + ${order.getOrderId()} }">Details</a>
+                    </th>
+                </tr>
+            </table>
         </div>
     </div>
 </section>

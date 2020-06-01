@@ -9,13 +9,13 @@ public class OrderProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "order_product_id")
-    private int orderProductId;
+    private int id;
 
-    @ManyToOne(optional = true,fetch = FetchType.EAGER)
+    @ManyToOne(optional = true,fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")//foreign key của Order
     private Order order;
 
-    @ManyToOne(optional = true, fetch = FetchType.EAGER)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "product_entity_id")//foreign key của Product
     private ProductEntity productEntity;
 
@@ -41,12 +41,12 @@ public class OrderProduct {
         this.price = price;
     }
 
-    public int getOrderProductId() {
-        return orderProductId;
+    public int getId() {
+        return id;
     }
 
-    public void setOrderProductId(int orderProductId) {
-        this.orderProductId = orderProductId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Order getOrder() {
@@ -64,4 +64,5 @@ public class OrderProduct {
     public void setProductEntity(ProductEntity productEntity) {
         this.productEntity = productEntity;
     }
+
 }
