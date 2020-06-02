@@ -78,4 +78,39 @@ $(document).ready(function () {
             )
         });
     });
+
+    $('.btn-cancel').on('click', function () {
+        var id = $(this).data("id");
+
+        NProgress.start();
+
+        let linkPost = '/order/cancel/' + id;
+
+        axios.post(linkPost, id).then(function (res) {
+            NProgress.done();
+            if (res.data.success) {
+                swal(
+                    'Cancel Order',
+                    res.data.message,
+                    'success'
+                ).then(function () {
+                    location.reload();
+                });
+            } else {
+                swal(
+                    'Fails',
+                    'Cancel Fails',
+                    'error'
+                )
+            }
+        }, function (err) {
+            NProgress.done();
+            swal(
+                'Fails',
+                'Cancel Fails',
+                'error'
+            )
+        });
+
+    });
 });

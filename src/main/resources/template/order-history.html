@@ -76,8 +76,10 @@
                         </div>
                     </th>
                     <th class="column-2">
-                        <a class="p-2 flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4"
+                        <a class="p-2 bg1 bo-rad-23 hov1 s-text1 trans-0-4"
                            th:href="@{'/order/history/' + ${order.getOrderId()} }">Details</a>
+
+                        <button class="p-2 bg1 bo-rad-23 hov1 s-text1 trans-0-4 btn-cancel" th:attr="data-id=${order.getOrderId()}">Cancel</button>
                     </th>
                 </tr>
             </table>
@@ -100,7 +102,13 @@
 <script type="text/javascript" th:src="@{/user/vendor/bootstrap/js/bootstrap.min.js}"></script>
 <!--===============================================================================================-->
 <!--===============================================================================================-->
+<script type="text/javascript" th:src="@{/user/vendor/sweetalert/sweetalert.min.js}"></script>
+<!--===============================================================================================-->
 <script type="text/javascript" th:src="@{/user/vendor/select2/select2.min.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<!--===============================================================================================-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+<!--===============================================================================================-->
 <script type="text/javascript">
     $(".selection-1").select2({
         minimumResultsForSearch: 20,

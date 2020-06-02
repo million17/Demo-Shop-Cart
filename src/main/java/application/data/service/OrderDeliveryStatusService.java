@@ -11,7 +11,11 @@ public class OrderDeliveryStatusService {
     @Autowired
     private OrderDeliveryStatusRepository orderDeliveryStatusRepository;
 
-    public void addNewOrderDeliveryStatus (OrderDeliveryStatus orderDeliveryStatus) {
+    public void addNewOrderDeliveryStatus(OrderDeliveryStatus orderDeliveryStatus) {
+        orderDeliveryStatusRepository.save(orderDeliveryStatus);
+    }
+
+    public void updateOrderDeliveryStatus(OrderDeliveryStatus orderDeliveryStatus) {
         orderDeliveryStatusRepository.save(orderDeliveryStatus);
     }
 }
