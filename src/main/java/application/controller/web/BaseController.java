@@ -108,7 +108,7 @@ public class BaseController {
         headerMenuVMArrayList.add(new HeaderMenuVM("Home", "/"));
         headerMenuVMArrayList.add(new HeaderMenuVM("Product", "/product"));
         headerMenuVMArrayList.add(new HeaderMenuVM("Blog", "#"));
-        headerMenuVMArrayList.add(new HeaderMenuVM("About", "#"));
+        headerMenuVMArrayList.add(new HeaderMenuVM("History", "/order/history"));
         headerMenuVMArrayList.add(new HeaderMenuVM("Contact", "#"));
 
         /*set User Login*/

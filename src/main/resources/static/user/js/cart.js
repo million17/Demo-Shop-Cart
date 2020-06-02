@@ -1,12 +1,12 @@
 $(document).ready(function () {
     $('.update-cart').on('click', function () {
-        console.log("click");
+
         dataCartProduct = {};
 
         var cartProductId = $(this).data("id");
 
         dataCartProduct.cartProductId = cartProductId;
-        dataCartProduct.amount = $('.num-product').val();
+        dataCartProduct.amount = $(this).parents('tr.table-row').find('.num-product').val();
 
         NProgress.start();
 
