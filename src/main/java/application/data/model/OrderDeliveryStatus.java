@@ -12,14 +12,32 @@ public class OrderDeliveryStatus {
     @Column(name = "order_delivery_status_id")
     private int orderDeliveryStatusId;
 
-    @ManyToMany
-    @JoinTable(name = "dbo_order_product",
-            joinColumns = @JoinColumn(name = "delivery_status_id"),
-            inverseJoinColumns = @JoinColumn(name = "order_id"))
-    private List<Order> orderList;
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private Order order;
+
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "delivery_status_id")
+    private DeliveryStatus deliveryStatus;
 
     @Column(name = "created_date")
     private Date createdDate;
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public DeliveryStatus getDeliveryStatus() {
+        return deliveryStatus;
+    }
+
+    public void setDeliveryStatus(DeliveryStatus deliveryStatus) {
+        this.deliveryStatus = deliveryStatus;
+    }
 
     public int getOrderDeliveryStatusId() {
         return orderDeliveryStatusId;
@@ -29,13 +47,6 @@ public class OrderDeliveryStatus {
         this.orderDeliveryStatusId = orderDeliveryStatusId;
     }
 
-    public List<Order> getOrderList() {
-        return orderList;
-    }
-
-    public void setOrderList(List<Order> orderList) {
-        this.orderList = orderList;
-    }
 
     public Date getCreatedDate() {
         return createdDate;
