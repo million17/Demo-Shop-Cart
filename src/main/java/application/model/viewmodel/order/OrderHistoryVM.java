@@ -2,7 +2,7 @@ package application.model.viewmodel.order;
 
 import application.model.viewmodel.common.LayoutHeaderVM;
 
-import java.util.*;
+import java.util.List;
 
 public class OrderHistoryVM {
     private List<OrderVM> orderVMList;

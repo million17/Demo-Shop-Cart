@@ -8,6 +8,15 @@ public class OrderDetailVM {
     private LayoutHeaderVM layoutHeaderVM;
     private List<OrderProductVM> orderProductVMS;
     private OrderVM orderVM;
+    private int deliveryStatusId;
+
+    public int getDeliveryStatusId() {
+        return deliveryStatusId;
+    }
+
+    public void setDeliveryStatusId(int deliveryStatusId) {
+        this.deliveryStatusId = deliveryStatusId;
+    }
 
     public OrderVM getOrderVM() {
         return orderVM;

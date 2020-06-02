@@ -26,8 +26,16 @@ public class Order {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @Column(name = "delivery_status_id")
+    private int deliveryStatusId;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+    List<OrderDeliveryStatus> orderDeliveryStatusList = new ArrayList<>();
+
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     List<OrderProduct> orderProductList = new ArrayList<>();
+
 
     @Column(name = "address")
     private String address;
@@ -44,6 +52,22 @@ public class Order {
 
     @Column(name = "ship")
     private Double ship;
+
+    public int getDeliveryStatusId() {
+        return deliveryStatusId;
+    }
+
+    public void setDeliveryStatusId(int deliveryStatusId) {
+        this.deliveryStatusId = deliveryStatusId;
+    }
+
+    public List<OrderDeliveryStatus> getOrderDeliveryStatusList() {
+        return orderDeliveryStatusList;
+    }
+
+    public void setOrderDeliveryStatusList(List<OrderDeliveryStatus> orderDeliveryStatusList) {
+        this.orderDeliveryStatusList = orderDeliveryStatusList;
+    }
 
     public int getOrderId() {
         return orderId;

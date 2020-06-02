@@ -1,9 +1,8 @@
 package application.controller.web;
 
+import application.constant.DELIVERYSTATUS;
 import application.data.model.*;
-import application.data.service.CartService;
-import application.data.service.OrderService;
-import application.data.service.UserService;
+import application.data.service.*;
 import application.model.viewmodel.order.OrderDetailVM;
 import application.model.viewmodel.order.OrderHistoryVM;
 import application.model.viewmodel.order.OrderProductVM;
@@ -38,6 +37,12 @@ public class OrderController extends BaseController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private DeliveryStatusService deliveryStatusService;
+
+    @Autowired
+    private OrderDeliveryStatusService orderDeliveryStatusService;
 
     @GetMapping("/checkout")
     public String checkout(Model model, HttpServletRequest request) {
@@ -88,6 +93,7 @@ public class OrderController extends BaseController {
             order.setCustomerName(orderVM.getCustomerName());
             order.setEmail(orderVM.getEmail());
             order.setCreatedDate(new Date());
+            order.setDeliveryStatusId(DELIVERYSTATUS.CHO_THANH_TOAN);
 
             Cart cartEntity = cartService.findFirstCartByGuid(guid);
 
@@ -118,6 +124,15 @@ public class OrderController extends BaseController {
                 order.setPrice(totalPrice);
                 order.setOrderProductList(orderProductList);
                 orderService.addNewOrder(order);
+
+
+                OrderDeliveryStatus orderDeliveryStatus = new OrderDeliveryStatus();
+                orderDeliveryStatus.setOrder(order);
+                orderDeliveryStatus.setCreatedDate(new Date());
+                orderDeliveryStatus.setDeliveryStatus(deliveryStatusService.findOne(DELIVERYSTATUS.CHO_THANH_TOAN));
+
+                orderDeliveryStatusService.addNewOrderDeliveryStatus(orderDeliveryStatus);
+
                 cartService.deleteCart(cartEntity.getCartId());
                 return "redirect:/order/history";
             }
@@ -156,6 +171,7 @@ public class OrderController extends BaseController {
             orderVM.setPrice(order.getPrice());
             orderVM.setOrderId(order.getOrderId());
             orderVM.setShip(order.getShip());
+            orderVM.setDeliveryStatus(order.getDeliveryStatusId());
 
             orderVMS.add(orderVM);
         }
@@ -180,6 +196,7 @@ public class OrderController extends BaseController {
         try {
             Order orderEntity = orderService.findOne(orderId);
             if (orderEntity != null) {
+                orderDetailVM.setDeliveryStatusId(orderEntity.getDeliveryStatusId());
                 for (OrderProduct orderProduct : orderEntity.getOrderProductList()) {
                     OrderProductVM orderProductVM = new OrderProductVM();
                     orderProductVM.setMainImage(orderProduct.getProductEntity().getProduct().getMainImage());

@@ -12,6 +12,15 @@ public class OrderVM {
     private double price;
     private Date createdDate;
     private double ship;
+    private int deliveryStatus;
+
+    public int getDeliveryStatus() {
+        return deliveryStatus;
+    }
+
+    public void setDeliveryStatus(int deliveryStatus) {
+        this.deliveryStatus = deliveryStatus;
+    }
 
     public String getEmail() {
         return email;
