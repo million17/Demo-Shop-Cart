@@ -43,4 +43,88 @@ public class AdminController {
 
         return "admin/home";
     }
+
+    @GetMapping("/product")
+    public String product(Model model) {
+
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        User userEntity = userService.findUserByUsername(userName);
+        if (userEntity != null) {
+            Role role = roleService.getRoleByUser(userEntity.getId());
+            role.getRoleId();
+            if (role.getRoleId() != RoleIdConstant.Role_Admin) {
+                return "redirect:/login";
+            }
+        } else {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("vm","Test");
+
+
+        return "admin/product";
+    }
+
+    @GetMapping("/category")
+    public String category(Model model) {
+
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        User userEntity = userService.findUserByUsername(userName);
+        if (userEntity != null) {
+            Role role = roleService.getRoleByUser(userEntity.getId());
+            role.getRoleId();
+            if (role.getRoleId() != RoleIdConstant.Role_Admin) {
+                return "redirect:/login";
+            }
+        } else {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("vm","Test");
+
+
+        return "admin/category";
+    }
+
+    @GetMapping("/order")
+    public String order(Model model) {
+
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        User userEntity = userService.findUserByUsername(userName);
+        if (userEntity != null) {
+            Role role = roleService.getRoleByUser(userEntity.getId());
+            role.getRoleId();
+            if (role.getRoleId() != RoleIdConstant.Role_Admin) {
+                return "redirect:/login";
+            }
+        } else {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("vm","Test");
+
+
+        return "admin/order";
+    }
+
+    @GetMapping("/user")
+    public String user(Model model) {
+
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        User userEntity = userService.findUserByUsername(userName);
+        if (userEntity != null) {
+            Role role = roleService.getRoleByUser(userEntity.getId());
+            role.getRoleId();
+            if (role.getRoleId() != RoleIdConstant.Role_Admin) {
+                return "redirect:/login";
+            }
+        } else {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("vm","Test");
+
+
+        return "admin/user";
+    }
 }
