@@ -136,6 +136,8 @@ public class OrderController extends BaseController {
 
                 cartService.deleteCart(cartEntity.getCartId());
                 return "redirect:/order/history";
+            } else {
+                return "redirect:/product";
             }
 
 
@@ -225,7 +227,8 @@ public class OrderController extends BaseController {
     }
 
     @PostMapping("/cancel/{orderId}")
-    public BaseApiResult cancelOrder(@PathVariable Integer orderId) {
+    public @ResponseBody
+    BaseApiResult cancelOrder(@PathVariable Integer orderId) {
         BaseApiResult result = new BaseApiResult();
 
         Order order = orderService.findOne(orderId);
@@ -235,8 +238,9 @@ public class OrderController extends BaseController {
                 orderService.updateOrder(order);
 
                 OrderDeliveryStatus orderDeliveryStatus = new OrderDeliveryStatus();
+                DeliveryStatus deliveryStatus = deliveryStatusService.findOne(DELIVERYSTATUS.DA_HUY);
                 orderDeliveryStatus.setOrder(order);
-                orderDeliveryStatus.setDeliveryStatus(deliveryStatusService.findOne(DELIVERYSTATUS.DA_HUY));
+                orderDeliveryStatus.setDeliveryStatus(deliveryStatus);
                 orderDeliveryStatus.setCreatedDate(new Date());
 
                 orderDeliveryStatusService.updateOrderDeliveryStatus(orderDeliveryStatus);

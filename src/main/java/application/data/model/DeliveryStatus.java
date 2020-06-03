@@ -1,7 +1,7 @@
 package application.data.model;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Table
 @Entity(name = "dbo_delivery_status")
@@ -12,19 +12,19 @@ public class DeliveryStatus {
     private int deliveryStatusId;
 
     @ManyToMany
-    @JoinTable(name = "dbo_order_product",
+    @JoinTable(name = "dbo_order_delivery_status",
             joinColumns = @JoinColumn(name = "delivery_status_id"),
             inverseJoinColumns = @JoinColumn(name = "order_id"))
-    private List<Order> orderList;
+    private Set<Order> orderList;
 
     @Column(name = "name")
     private String name;
 
-    public List<Order> getOrderList() {
+    public Set<Order> getOrderList() {
         return orderList;
     }
 
-    public void setOrderList(List<Order> orderList) {
+    public void setOrderList(Set<Order> orderList) {
         this.orderList = orderList;
     }
 

@@ -80,22 +80,29 @@ $(document).ready(function () {
     });
 
     $('.btn-cancel').on('click', function () {
-        var id = $(this).data("id");
+
+        dataOrder = {};
+
+
+        var orderId = $(this).data("id");
+
+        dataOrder.orderId = orderId;
 
         NProgress.start();
 
-        let linkPost = '/order/cancel/' + id;
+        let linkPost = '/order/cancel/' + orderId;
 
-        axios.post(linkPost, id).then(function (res) {
+        axios.post(linkPost, dataOrder).then(function (res) {
             NProgress.done();
             if (res.data.success) {
                 swal(
                     'Cancel Order',
                     res.data.message,
                     'success'
-                ).then(function () {
+                ).then()
+                {
                     location.reload();
-                });
+                }
             } else {
                 swal(
                     'Fails',
