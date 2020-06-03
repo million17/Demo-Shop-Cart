@@ -106,14 +106,20 @@ public class CartProductApiController {
             if (dto.getCartProductId() > 0 && dto.getAmount() > 0) {
                 CartProduct cartProductEntity = cartProductService.findOne(dto.getCartProductId());
                 if (cartProductEntity != null) {
-                    cartProductEntity.setAmount(dto.getAmount());
-                    cartProductService.updateCartProduct(cartProductEntity);
+                    if (dto.getAmount() < cartProductEntity.getAmount()) {
+                        cartProductEntity.setAmount(dto.getAmount());
+                        cartProductService.updateCartProduct(cartProductEntity);
 
-                    result.setMessage("Update Success ! ");
-                    result.setSuccess(true);
+                        result.setMessage("Update Success ! ");
+                        result.setSuccess(true);
 
-                    return result;
+                        return result;
+                    } else {
+                        result.setMessage("Fail to Amount ! ");
+                        result.setSuccess(false);
 
+                        return result;
+                    }
                 }
                 result.setSuccess(false);
                 result.setMessage("Can't not find to Cart Product ");

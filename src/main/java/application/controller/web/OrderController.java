@@ -3,6 +3,7 @@ package application.controller.web;
 import application.constant.DELIVERYSTATUS;
 import application.data.model.*;
 import application.data.service.*;
+import application.model.api.BaseApiResult;
 import application.model.viewmodel.order.OrderDetailVM;
 import application.model.viewmodel.order.OrderHistoryVM;
 import application.model.viewmodel.order.OrderProductVM;
@@ -135,6 +136,8 @@ public class OrderController extends BaseController {
 
                 cartService.deleteCart(cartEntity.getCartId());
                 return "redirect:/order/history";
+            } else {
+                return "redirect:/product";
             }
 
 
@@ -221,5 +224,41 @@ public class OrderController extends BaseController {
 
 
         return "order-detail";
+    }
+
+    @PostMapping("/cancel/{orderId}")
+    public @ResponseBody
+    BaseApiResult cancelOrder(@PathVariable Integer orderId) {
+        BaseApiResult result = new BaseApiResult();
+
+        Order order = orderService.findOne(orderId);
+        try {
+            if (order != null) {
+                order.setDeliveryStatusId(DELIVERYSTATUS.DA_HUY);
+                orderService.updateOrder(order);
+
+                OrderDeliveryStatus orderDeliveryStatus = new OrderDeliveryStatus();
+                DeliveryStatus deliveryStatus = deliveryStatusService.findOne(DELIVERYSTATUS.DA_HUY);
+                orderDeliveryStatus.setOrder(order);
+                orderDeliveryStatus.setDeliveryStatus(deliveryStatus);
+                orderDeliveryStatus.setCreatedDate(new Date());
+
+                orderDeliveryStatusService.updateOrderDeliveryStatus(orderDeliveryStatus);
+
+                result.setSuccess(true);
+                result.setMessage("Cancel Success ! ");
+
+                return result;
+
+            }
+        } catch (Exception ex) {
+            logger.error(ex.getMessage());
+            result.setMessage("Cancel fails !");
+            result.setSuccess(false);
+        }
+
+        result.setMessage("Cancel fails !");
+        result.setSuccess(false);
+        return result;
     }
 }

@@ -30,4 +30,14 @@ public class OrderService {
         return false;
 
     }
+
+    public boolean updateOrder(Order order) {
+        try {
+            orderRepository.save(order);
+            return true;
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+        return false;
+    }
 }

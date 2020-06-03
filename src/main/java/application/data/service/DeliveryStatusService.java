@@ -11,8 +11,6 @@ public class DeliveryStatusService {
     private DeliveryStatusRepository deliveryStatusRepository;
 
     public DeliveryStatus findOne(int deliveryStatusId) {
-
-
         return deliveryStatusRepository.findOne(deliveryStatusId);
     }
 }

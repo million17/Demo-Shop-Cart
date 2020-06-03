@@ -78,4 +78,46 @@ $(document).ready(function () {
             )
         });
     });
+
+    $('.btn-cancel').on('click', function () {
+
+        dataOrder = {};
+
+
+        var orderId = $(this).data("id");
+
+        dataOrder.orderId = orderId;
+
+        NProgress.start();
+
+        let linkPost = '/order/cancel/' + orderId;
+
+        axios.post(linkPost, dataOrder).then(function (res) {
+            NProgress.done();
+            if (res.data.success) {
+                swal(
+                    'Cancel Order',
+                    res.data.message,
+                    'success'
+                ).then()
+                {
+                    location.reload();
+                }
+            } else {
+                swal(
+                    'Fails',
+                    'Cancel Fails',
+                    'error'
+                )
+            }
+        }, function (err) {
+            NProgress.done();
+            swal(
+                'Fails',
+                'Cancel Fails',
+                'error'
+            )
+        });
+
+    });
 });
