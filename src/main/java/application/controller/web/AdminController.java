@@ -25,7 +25,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -72,7 +75,10 @@ public class AdminController {
                           @Valid @ModelAttribute("productName") ProductVM productName,
                           @RequestParam(name = "categoryId", required = false) Integer categoryId,
                           @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
-                          @RequestParam(name = "maxSize", required = false, defaultValue = "5") Integer maxSize) {
+                          @RequestParam(name = "maxSize", required = false, defaultValue = "2") Integer maxSize,
+                          HttpServletRequest request,
+                          HttpServletResponse response,
+                          final Principal principal) {
 
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
         User userEntity = userService.findUserByUsername(userName);
@@ -123,6 +129,7 @@ public class AdminController {
             vm.setProductVMList(productVMList);
 
             model.addAttribute("vm", vm);
+            model.addAttribute("page", productPage);
 
         } catch (Exception ex) {
             logger.error(ex.getMessage());

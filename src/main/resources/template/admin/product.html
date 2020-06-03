@@ -11,7 +11,70 @@
         <div class="main-panel">
             <div class="content-wrapper">
                 <div class="row">
-                    Product
+                    <div class="col-lg-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Product Table</h4>
+                                <button type="button" class="btn btn-outline-info btn-fw">
+                                    <i class="mdi mdi-upload"></i>Add Product
+                                </button>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Product</th>
+                                        <th>Image</th>
+                                        <th>Short Description</th>
+                                        <th>Category</th>
+                                        <th>Price</th>
+                                        <th>Brand</th>
+                                        <th>Created Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="product, iter : ${vm.getProductVMList()}">
+                                        <td th:text="${iter.index+1}"></td>
+                                        <td th:text="${product.getProductName()}"></td>
+                                        <td><img th:src="${product.getMainImage()}" alt=""></td>
+                                        <td th:text="${product.getShortDesc()}"></td>
+                                        <td th:text="${product.getCategoryName()}"></td>
+                                        <td th:text="${product.getPrice()} + ' $'"></td>
+                                        <td th:text="${product.getBrand()}"></td>
+                                        <td th:text="${product.getCreatedDate()}"></td>
+                                        <td>
+                                            <button type="button" class="btn btn-dark edit-product">
+                                                <i class="mdi mdi-cloud-download"></i>Edit
+                                            </button>
+
+                                            <button type="button" class="btn btn-danger">
+                                                <i class="mdi mdi-delete"></i></button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="pagination flex-m flex-w p-t-26" th:if="${vm.getProductVMList().size() > 0 }">
+                        <th:block th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}">
+                            <th:block th:if="${page.number == i}">
+                                <a class="item-pagination flex-c-m trans-0-4 active-pagination" th:href="${''}"
+                                   th:text="${i+1}"></a>
+                            </th:block>
+                            <th:block th:unless="${page.number == i}">
+                                <a class="item-pagination flex-c-m trans-0-4" th:text="${i+1}"
+                                   th:href="${'?'+(#httpServletRequest.getParameter('categoryId')==null?'':('&categoryId='+#httpServletRequest.getParameter('categoryId')))
+                                                                                       +('&page='+i)
+                                                                                       +(#httpServletRequest.getParameter('maxSize')==null?'':('&maxSize='+#httpServletRequest.getParameter('maxSize')))
+                                                                                       +(#httpServletRequest.getParameter('name')==null?'':('&name='+#httpServletRequest.getParameter('name')))}"></a>
+                            </th:block>
+                        </th:block>
+                    </div>
+
+
                 </div>
             </div>
         </div>
