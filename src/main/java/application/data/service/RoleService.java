@@ -56,4 +56,13 @@ public class RoleService {
             return new ArrayList<>();
         }
     }
+
+    public Role getRoleByUser(Integer userId) {
+        try {
+            return roleRepository.getRoleByUser(userId);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }
