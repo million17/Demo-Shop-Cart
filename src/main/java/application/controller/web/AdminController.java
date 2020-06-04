@@ -1,13 +1,12 @@
 package application.controller.web;
 
 import application.constant.RoleIdConstant;
-import application.data.model.Product;
-import application.data.model.ProductImage;
-import application.data.model.Role;
-import application.data.model.User;
+import application.data.model.*;
+import application.data.service.CategoryService;
 import application.data.service.ProductService;
 import application.data.service.RoleService;
 import application.data.service.UserService;
+import application.model.viewmodel.CategoryVM;
 import application.model.viewmodel.ProductImageVM;
 import application.model.viewmodel.ProductVM;
 import application.model.viewmodel.admin.AdminProductVM;
@@ -48,6 +47,9 @@ public class AdminController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private CategoryService categoryService;
+
 
     @GetMapping("")
     public String home(Model model) {
@@ -75,7 +77,7 @@ public class AdminController {
                           @Valid @ModelAttribute("productName") ProductVM productName,
                           @RequestParam(name = "categoryId", required = false) Integer categoryId,
                           @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
-                          @RequestParam(name = "maxSize", required = false, defaultValue = "2") Integer maxSize,
+                          @RequestParam(name = "maxSize", required = false, defaultValue = "5") Integer maxSize,
                           HttpServletRequest request,
                           HttpServletResponse response,
                           final Principal principal) {
@@ -92,27 +94,37 @@ public class AdminController {
             return "redirect:/login";
         }
         AdminProductVM vm = new AdminProductVM();
-        try {
-            Pageable pageable = new PageRequest(page, maxSize, null);
-            Page<Product> productPage = null;
 
-            if (categoryId != null) {
-                productPage = productService.getListProductByCategoryOrProductNameContaining(pageable, categoryId, null);
-            } else if (productName.getProductName() != null && !productName.getProductName().isEmpty()) {
-                productPage = productService.getListProductByCategoryOrProductNameContaining(pageable, null, productName.getProductName().trim());
-            } else {
-                productPage = productService.getListProductByCategoryOrProductNameContaining(pageable, null, null);
-            }
-            List<ProductVM> productVMList = new ArrayList<>();
-            for (Product product : productPage.getContent()) {
-                ProductVM productVM = new ProductVM();
-                productVM.setProductName(product.getProductName());
-                productVM.setCategoryName(product.getCategory().getName());
-                productVM.setShortDesc(product.getShortDesc());
-                productVM.setPrice(product.getPrice());
-                productVM.setBrand(product.getBrand());
-                productVM.setCreatedDate(product.getCreatedDate());
-                productVM.setMainImage(product.getMainImage());
+        List<CategoryVM> categoryVMList = new ArrayList<>();
+        for (Category category : categoryService.getListAllCategories()) {
+            CategoryVM categoryVM = new CategoryVM();
+            categoryVM.setId(category.getCategoryId());
+            categoryVM.setName(category.getName());
+
+            categoryVMList.add(categoryVM);
+        }
+
+        Pageable pageable = new PageRequest(page, maxSize, null);
+        Page<Product> productPage = null;
+
+        if (categoryId != null) {
+            productPage = productService.getListProductByCategoryOrProductNameContaining(pageable, categoryId, null);
+        } else if (productName.getProductName() != null && !productName.getProductName().isEmpty()) {
+            productPage = productService.getListProductByCategoryOrProductNameContaining(pageable, null, productName.getProductName().trim());
+        } else {
+            productPage = productService.getListProductByCategoryOrProductNameContaining(pageable, null, null);
+        }
+        List<ProductVM> productVMList = new ArrayList<>();
+        for (Product product : productPage.getContent()) {
+            ProductVM productVM = new ProductVM();
+            productVM.setId(product.getProductId());
+            productVM.setProductName(product.getProductName());
+            productVM.setCategoryName(product.getCategory().getName());
+            productVM.setShortDesc(product.getShortDesc());
+            productVM.setPrice(product.getPrice());
+            productVM.setBrand(product.getBrand());
+            productVM.setCreatedDate(product.getCreatedDate());
+            productVM.setMainImage(product.getMainImage());
 
                 /*List<ProductImageVM> productImageVMList = new ArrayList<>();
                 for (ProductImage productImage : product.getProductImageList()) {
@@ -123,17 +135,14 @@ public class AdminController {
                     productImageVMList.add(productImageVM);
                 }*/
 
-                productVMList.add(productVM);
-            }
-
-            vm.setProductVMList(productVMList);
-
-            model.addAttribute("vm", vm);
-            model.addAttribute("page", productPage);
-
-        } catch (Exception ex) {
-            logger.error(ex.getMessage());
+            productVMList.add(productVM);
         }
+
+        vm.setProductVMList(productVMList);
+        vm.setCategoryVMList(categoryVMList);
+
+        model.addAttribute("vm", vm);
+        model.addAttribute("page", productPage);
 
 
         return "admin/product";

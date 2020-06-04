@@ -43,11 +43,83 @@
                                         <td th:text="${product.getBrand()}"></td>
                                         <td th:text="${product.getCreatedDate()}"></td>
                                         <td>
-                                            <button type="button" class="btn btn-dark edit-product">
+                                            <button type="button" class="btn btn-dark edit-product" data-toggle="modal"
+                                                    th:attr="data-id=${product.getId()}" data-target="#exampleModal">
                                                 <i class="mdi mdi-cloud-download"></i>Edit
                                             </button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Modal
+                                                                title</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
 
-                                            <button type="button" class="btn btn-danger">
+                                                            <div class="form-group text-center">
+                                                                <img src="" alt="" id="product-mainImage" style="width: 200px; height: 200px; margin: 0 auto">
+                                                                <div class="col-sm-9 my-3">
+                                                                    <input type='file' id="change-product-mainImage"/>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label class="d-block">Name</label>
+                                                                <input type="text" id="input-product-name"
+                                                                       class="form-control form-control-lg"
+                                                                       placeholder="Name">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label class="d-block">Category</label>
+                                                                <select class="form-control" id="input-product-category"
+                                                                        placeholder="Choose Category">
+                                                                    <option th:each="category : ${vm.getCategoryVMList()}"
+                                                                            th:value="${category.getId()}"
+                                                                            th:text="${category.getName()}"></option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label class="d-block">Short Description</label>
+                                                                <input type="text" id="input-product-shortDesc"
+                                                                       class="form-control form-control-lg"
+                                                                       placeholder="Short Description">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label class="d-block">Price</label>
+                                                                <input type="text" id="input-product-price"
+                                                                       class="form-control form-control-lg"
+                                                                       placeholder="Price">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label class="d-block">Brand</label>
+                                                                <input type="text" id="input-product-brand"
+                                                                       class="form-control form-control-lg"
+                                                                       placeholder="Brand">
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close
+                                                            </button>
+                                                            <button type="button" class="btn btn-primary btn-save-product">Save changes
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <button type="button" class="btn btn-danger delete-product"
+                                                    th:attr="data-id=${product.getId()}">
                                                 <i class="mdi mdi-delete"></i></button>
                                         </td>
                                     </tr>
@@ -58,20 +130,22 @@
 
                     </div>
 
-                    <div class="pagination flex-m flex-w p-t-26" th:if="${vm.getProductVMList().size() > 0 }">
-                        <th:block th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}">
-                            <th:block th:if="${page.number == i}">
-                                <a class="item-pagination flex-c-m trans-0-4 active-pagination" th:href="${''}"
-                                   th:text="${i+1}"></a>
-                            </th:block>
-                            <th:block th:unless="${page.number == i}">
-                                <a class="item-pagination flex-c-m trans-0-4" th:text="${i+1}"
-                                   th:href="${'?'+(#httpServletRequest.getParameter('categoryId')==null?'':('&categoryId='+#httpServletRequest.getParameter('categoryId')))
+                    <div class="col-12">
+                        <div class="btn-group" th:if="${vm.getProductVMList().size() > 0 }">
+                            <th:block th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}">
+                                <th:block th:if="${page.number == i}">
+                                    <a class="btn btn-light" th:href="${''}"
+                                       th:text="${i+1}"></a>
+                                </th:block>
+                                <th:block th:unless="${page.number == i}">
+                                    <a class="btn btn-light" th:text="${i+1}"
+                                       th:href="${'?'+(#httpServletRequest.getParameter('categoryId')==null?'':('&categoryId='+#httpServletRequest.getParameter('categoryId')))
                                                                                        +('&page='+i)
                                                                                        +(#httpServletRequest.getParameter('maxSize')==null?'':('&maxSize='+#httpServletRequest.getParameter('maxSize')))
                                                                                        +(#httpServletRequest.getParameter('name')==null?'':('&name='+#httpServletRequest.getParameter('name')))}"></a>
+                                </th:block>
                             </th:block>
-                        </th:block>
+                        </div>
                     </div>
 
 
@@ -91,6 +165,12 @@
 <script th:src="@{/admin/assets/js/shared/off-canvas.js}"></script>
 <script th:src="@{/admin/assets/js/shared/misc.js}"></script>
 <!-- endinject -->
+<script th:src="@{/admin/assets/js/script.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<!--===============================================================================================-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+<!--===============================================================================================-->
+
 <!-- Custom js for this page-->
 <!-- End custom js for this page-->
 </body>
