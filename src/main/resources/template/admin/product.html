@@ -15,7 +15,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Product Table</h4>
-                                <button type="button" class="btn btn-outline-info btn-fw">
+                                <button type="button" class="btn btn-outline-info btn-fw add-product-new" data-target="#exampleModal" data-toggle="modal">
                                     <i class="mdi mdi-upload"></i>Add Product
                                 </button>
                                 <table class="table table-hover">
@@ -166,6 +166,9 @@
 <script th:src="@{/admin/assets/js/shared/misc.js}"></script>
 <!-- endinject -->
 <script th:src="@{/admin/assets/js/script.js}"></script>
+
+<script type="text/javascript" th:src="@{/user/vendor/sweetalert/sweetalert.min.js}"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 <!--===============================================================================================-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
