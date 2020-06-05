@@ -3,8 +3,6 @@ $(document).ready(function () {
     var dataProduct = {};
 
 
-
-
     $('.add-product-new').on('click', function () {
         var dataProduct = {};
         $('#input-product-name').val();
@@ -129,7 +127,7 @@ $(document).ready(function () {
                     'Delete Success ',
                     'success'
                 ).then(function () {
-                    location.reload();
+                    window.location.href = '/admin/product';
                 });
             } else {
                 swal(
