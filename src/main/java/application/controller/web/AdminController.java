@@ -9,6 +9,7 @@ import application.data.service.UserService;
 import application.model.viewmodel.CategoryVM;
 import application.model.viewmodel.ProductImageVM;
 import application.model.viewmodel.ProductVM;
+import application.model.viewmodel.admin.AdminCategoryVM;
 import application.model.viewmodel.admin.AdminProductVM;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -163,7 +164,23 @@ public class AdminController {
             return "redirect:/login";
         }
 
-        model.addAttribute("vm", "Test");
+        AdminCategoryVM vm = new AdminCategoryVM();
+
+        List<CategoryVM> categoryVMList = new ArrayList<>();
+
+        for (Category category : categoryService.getListAllCategories()) {
+            CategoryVM categoryVM = new CategoryVM();
+            categoryVM.setName(category.getName());
+            categoryVM.setShortDesc(category.getShortDesc());
+            categoryVM.setId(category.getCategoryId());
+            categoryVM.setCreatedDate(category.getCreatedDate());
+
+            categoryVMList.add(categoryVM);
+        }
+
+        vm.setCategoryVMList(categoryVMList);
+
+        model.addAttribute("vm", vm);
 
 
         return "admin/category";
