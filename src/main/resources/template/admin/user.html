@@ -11,7 +11,76 @@
         <div class="main-panel">
             <div class="content-wrapper">
                 <div class="row">
-                    User
+                    <div class="col-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>User</h4>
+                                <button type="button" class="btn btn-outline-info btn-fw add-product-new"
+                                        data-target="#exampleModal" data-toggle="modal">
+                                    <i class="mdi mdi-upload"></i>Add User
+                                </button>
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th> STT</th>
+                                        <th> Avatar</th>
+                                        <th> User Name</th>
+                                        <th> Full Name</th>
+                                        <th> Email</th>
+                                        <th> Gender</th>
+                                        <th> Address</th>
+                                        <th> Phone Number</th>
+                                        <th> Created Date</th>
+                                        <th> Role</th>
+                                        <th> Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="user, iter : ${vm.getUserVMList()}">
+                                        <td th:text="${iter.index + 1}"></td>
+                                        <td class="py-1">
+                                            <img th:src="${user.getAvatar()} ? ${user.getAvatar()} : '/link/no_image.jpg'"
+                                                 alt="image">
+                                        </td>
+                                        <td th:text="${user.getUserName()}"></td>
+                                        <td th:text="${user.getName()}"></td>
+                                        <td th:text="${user.getEmail()}"></td>
+                                        <td>
+                                            <span th:if="${user.getGender()} == 0">
+                                                Undefine
+                                            </span>
+                                            <span th:if="${user.getGender()} == 1">
+                                                Male
+                                            </span>
+                                            <span th:if="${user.getGender()} == 2">
+                                                Female
+                                            </span>
+                                        </td>
+                                        <td th:text="${user.getAddress()}"></td>
+                                        <td th:text="${user.getPhoneNumber()}"></td>
+                                        <td th:text="${user.getCreatedDate()}"></td>
+                                        <td>
+                                            <span th:if="${user.getRoleId()} == 1">
+                                                Admin
+                                            </span>
+                                            <span th:if="${user.getRoleId()} == 2">
+                                                User
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-secondary">
+                                                <i class="mdi mdi-cloud-download"></i>
+                                            </button>
+                                            <button class="btn btn-danger" type="button">
+                                                <i class="mdi mdi-delete"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

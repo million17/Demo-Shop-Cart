@@ -11,6 +11,8 @@ import application.model.viewmodel.ProductImageVM;
 import application.model.viewmodel.ProductVM;
 import application.model.viewmodel.admin.AdminCategoryVM;
 import application.model.viewmodel.admin.AdminProductVM;
+import application.model.viewmodel.admin.AdminUserVM;
+import application.model.viewmodel.user.UserVM;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -50,6 +53,7 @@ public class AdminController {
 
     @Autowired
     private CategoryService categoryService;
+
 
 
     @GetMapping("")
@@ -222,7 +226,40 @@ public class AdminController {
             return "redirect:/login";
         }
 
-        model.addAttribute("vm", "Test");
+        AdminUserVM vm = new AdminUserVM();
+
+        List<UserVM> userVMList = new ArrayList<>();
+
+        for (User user : userService.getListAllUsers()) {
+            UserVM userVM = new UserVM();
+
+            String pattern = "yyyy-MM-dd";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+
+            userVM.setUserId(user.getId());
+            userVM.setName(user.getName());
+            userVM.setEmail(user.getEmail());
+            userVM.setGender(user.getGender());
+            userVM.setAvatar(user.getAvatar());
+            userVM.setPhoneNumber(user.getPhoneNumber());
+            String date = simpleDateFormat.format(user.getCreatedDate());
+            userVM.setCreatedDate(date);
+            userVM.setUserName(user.getUserName());
+            userVM.setAddress(user.getAddress());
+            userVM.setRoleId(roleService.getRoleByUser(user.getId()).getRoleId());
+
+            userVM.setAddress(user.getAddress());
+
+            userVMList.add(userVM);
+
+        }
+
+        vm.setUserVMList(userVMList);
+
+
+
+        model.addAttribute("vm", vm);
 
 
         return "admin/user";
