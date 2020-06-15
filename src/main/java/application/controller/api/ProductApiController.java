@@ -85,10 +85,9 @@ public class ProductApiController {
         return result;
     }
 
-    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
-            produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public BaseApiResult createProduct(/*@RequestBody ProductDTO dto*/ ProductDTO dto) {
-        BaseApiResult result = new BaseApiResult();
+    @PostMapping(value = "/create")
+    public DataApiResult createProduct(@RequestBody ProductDTO dto /*ProductDTO dto*/) {
+        DataApiResult result = new DataApiResult();
         try {
             Product product = new Product();
             product.setProductName(dto.getProductName());
@@ -101,11 +100,13 @@ public class ProductApiController {
 
             productService.addNewProduct(product);
 
+            result.setData(product);
             result.setSuccess(true);
-            result.setMessage("Create product Success !");
+            result.setMessage("ok");
         } catch (Exception ex) {
             logger.error(ex.getMessage());
             result.setSuccess(false);
+            result.setData(null);
             result.setMessage("Create product Fail !");
         }
 
@@ -125,6 +126,7 @@ public class ProductApiController {
             productDTO.setProductName(product.getProductName());
             productDTO.setBrand(product.getBrand());
             productDTO.setMainImage(product.getMainImage());
+            productDTO.setCategoryId(product.getCategoryId());
             productDTO.setCategoryName(product.getCategory().getName());
             productDTO.setPrice(product.getPrice());
             productDTO.setCreatedDate(product.getCreatedDate());
