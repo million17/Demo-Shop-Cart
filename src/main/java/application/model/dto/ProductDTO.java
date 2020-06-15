@@ -11,11 +11,20 @@ public class ProductDTO {
     private String shortDesc;
     private String mainImage;
     private int categoryId;
+    private String categoryName;
     private Double price;
     private String brand;
 
     @JsonSerialize(using = CustomDateSerializer.class)
     private Date createdDate;
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 
     public int getId() {
         return id;

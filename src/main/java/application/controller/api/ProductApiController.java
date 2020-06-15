@@ -11,6 +11,7 @@ import application.model.dto.ProductDTO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -84,8 +85,9 @@ public class ProductApiController {
         return result;
     }
 
-    @PostMapping("/create")
-    public BaseApiResult createProduct(@RequestBody ProductDTO dto) {
+    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+            produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public BaseApiResult createProduct(/*@RequestBody ProductDTO dto*/ ProductDTO dto) {
         BaseApiResult result = new BaseApiResult();
         try {
             Product product = new Product();
@@ -106,6 +108,35 @@ public class ProductApiController {
             result.setSuccess(false);
             result.setMessage("Create product Fail !");
         }
+
+        return result;
+    }
+
+    @GetMapping("/list")
+    public DataApiResult getAllProduct() {
+        DataApiResult result = new DataApiResult();
+
+        List<Product> productList = productService.findAll();
+
+        List<ProductDTO> productDTOList = new ArrayList<>();
+        for (Product product : productList) {
+            ProductDTO productDTO = new ProductDTO();
+            productDTO.setId(product.getProductId());
+            productDTO.setProductName(product.getProductName());
+            productDTO.setBrand(product.getBrand());
+            productDTO.setMainImage(product.getMainImage());
+            productDTO.setCategoryName(product.getCategory().getName());
+            productDTO.setPrice(product.getPrice());
+            productDTO.setCreatedDate(product.getCreatedDate());
+            productDTO.setShortDesc(product.getShortDesc());
+
+            productDTOList.add(productDTO);
+        }
+
+        result.setData(productDTOList);
+        result.setMessage("Get All Success !");
+        result.setSuccess(true);
+
 
         return result;
     }

@@ -26,6 +26,10 @@ public class ProductService {
         productRepository.save(product);
     }
 
+    public List<Product> findAll() {
+        return productRepository.findAll();
+    }
+
     public Product findOne(int productId) {
         try {
             return productRepository.findOne(productId);
@@ -66,7 +70,7 @@ public class ProductService {
     }
 
     public Page<Product> getListProductByCategoryOrProductNameContaining(Pageable pageable, Integer categoryId, String productName) {
-        return productRepository.getListProductByCategoryOrProductNameContaining(pageable,categoryId,productName);
+        return productRepository.getListProductByCategoryOrProductNameContaining(pageable, categoryId, productName);
     }
 
     public List<Product> getListProductHot() {

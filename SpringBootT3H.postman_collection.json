@@ -35,8 +35,39 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"productName\" : \"Product 5\",\n\t\"shortDesc\" : \"Product 5 short description\",\n\t\"mainImage\" : \"/no_image.jpg\",\n\t\"categoryId\" : 2,\n\t\"price\" : 20.33,\n\t\"brand\" : \"Japan\"\n}",
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "productName",
+									"value": "Test Product",
+									"type": "text"
+								},
+								{
+									"key": "categoryId",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "20.3",
+									"type": "text"
+								},
+								{
+									"key": "mainImage",
+									"value": "/link/no_image.jpg",
+									"type": "text"
+								},
+								{
+									"key": "shortDesc",
+									"value": "Product 13 short description test",
+									"type": "text"
+								},
+								{
+									"key": "brand",
+									"value": "Viet Nam",
+									"type": "text"
+								}
+							],
 							"options": {
 								"raw": {
 									"language": "json"
@@ -106,6 +137,33 @@
 								"product",
 								"detail",
 								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost/api/product/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"product",
+								"list"
 							]
 						}
 					},
