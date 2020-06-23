@@ -15,7 +15,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4>User</h4>
-                                <button type="button" class="btn btn-outline-info btn-fw add-product-new"
+                                <button type="button" class="btn btn-outline-info btn-fw add-user-new"
                                         data-target="#exampleModal" data-toggle="modal">
                                     <i class="mdi mdi-upload"></i>Add User
                                 </button>
@@ -68,7 +68,8 @@
                                             </span>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-secondary">
+                                            <button type="button" class="btn btn-secondary edit_user"
+                                                    data-toggle="modal" data-target="#exampleModal" th:attr="data-id=${user.getUserId()}">
                                                 <i class="mdi mdi-cloud-download"></i>
                                             </button>
                                             <button class="btn btn-danger" type="button">
@@ -86,6 +87,71 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">User</h5>
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label class="d-block">User Name</label>
+                    <input type="text" id="input-user-userName"
+                           class="form-control form-control-lg"
+                           >
+                </div>
+
+                <div class="form-group">
+                    <label class="d-block">Full Name</label>
+                    <input type="text" id="input-user-name"
+                           class="form-control form-control-lg"
+                           placeholder="Name..">
+                </div>
+
+                <div class="form-group">
+                    <label class="d-block">Gender</label>
+                </div>
+
+                <div class="form-group">
+                    <label class="d-block">Email</label>
+                    <input type="text" id="input-user-email"
+                           class="form-control form-control-lg"
+                           placeholder="Email..">
+                </div>
+
+                <div class="form-group">
+                    <label class="d-block">Address</label>
+                    <input type="text" id="input-user-address"
+                           class="form-control form-control-lg"
+                           placeholder="Address..">
+                </div>
+
+                <div class="form-group">
+                    <label class="d-block">Phone Number</label>
+                    <input type="text" id="input-user-phoneNumber"
+                           class="form-control form-control-lg"
+                           placeholder="Name..">
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Close
+                </button>
+                <button type="button" class="btn btn-primary btn-save-user">Save changes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- container-scroller -->
 <!-- plugins:js -->
 <script th:src="@{/admin/assets/vendors/js/vendor.bundle.base.js}"></script>
@@ -97,6 +163,15 @@
 <script th:src="@{/admin/assets/js/shared/off-canvas.js}"></script>
 <script th:src="@{/admin/assets/js/shared/misc.js}"></script>
 <!-- endinject -->
+
+<script th:src="@{/admin/assets/js/admin-user.js}"></script>
+
+<script type="text/javascript" th:src="@{/user/vendor/sweetalert/sweetalert.min.js}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<!--===============================================================================================-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+<!--===============================================================================================-->
 <!-- Custom js for this page-->
 <!-- End custom js for this page-->
 </body>

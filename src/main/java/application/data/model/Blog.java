@@ -20,7 +20,8 @@ public class Blog {
     @Column(name = "content")
     private String content;
 
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    //Fetch Type = EAGER Sẽ không bị show hết 1 list các blog
+    @ManyToOne(optional = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 

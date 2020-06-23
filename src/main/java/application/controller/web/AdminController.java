@@ -12,6 +12,7 @@ import application.model.viewmodel.ProductVM;
 import application.model.viewmodel.admin.AdminCategoryVM;
 import application.model.viewmodel.admin.AdminProductVM;
 import application.model.viewmodel.admin.AdminUserVM;
+import application.model.viewmodel.user.RoleVM;
 import application.model.viewmodel.user.UserVM;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -53,7 +54,6 @@ public class AdminController {
 
     @Autowired
     private CategoryService categoryService;
-
 
 
     @GetMapping("")
@@ -255,8 +255,18 @@ public class AdminController {
 
         }
 
-        vm.setUserVMList(userVMList);
+        List<RoleVM> roleVMList = new ArrayList<>();
 
+        for (Role role : roleService.getListAllRole()) {
+            RoleVM roleVM = new RoleVM();
+            roleVM.setId(role.getRoleId());
+            roleVM.setName(role.getName());
+
+            roleVMList.add(roleVM);
+        }
+
+        vm.setUserVMList(userVMList);
+        vm.setRoleVMList(roleVMList);
 
 
         model.addAttribute("vm", vm);

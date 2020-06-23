@@ -60,7 +60,7 @@ public class UserApiController {
     @PostMapping("/update/{userId}")
     public BaseApiResult updateUser(@PathVariable Integer userId,
                                     @RequestBody UserDTO userDTO) {
-        DataApiResult rs = new DataApiResult();
+        BaseApiResult rs = new BaseApiResult();
 
         try {
             User userEntity = userService.findOne(userId);
@@ -80,7 +80,6 @@ public class UserApiController {
 
                 userService.updateUser(userEntity);
 
-                rs.setData(userEntity);
                 rs.setMessage("Update Success ! ");
                 rs.setSuccess(true);
 
@@ -100,5 +99,8 @@ public class UserApiController {
 
 
     }
+
+    @PostMapping("/create")
+    public BaseApiResult create
 
 }
