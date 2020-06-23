@@ -170,7 +170,7 @@ public class ProductApiController {
         return result;
     }
 
-    @GetMapping("/detail/{productId}")
+    @PostMapping("/detail/{productId}")
     public BaseApiResult detailMaterial(@PathVariable int productId) {
         DataApiResult result = new DataApiResult();
         try {
