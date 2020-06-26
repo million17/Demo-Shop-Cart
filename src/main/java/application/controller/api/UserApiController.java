@@ -100,7 +100,7 @@ public class UserApiController {
 
     }
 
-    @PostMapping("/create")
-    public BaseApiResult create
+    /*@PostMapping("/create")
+    public BaseApiResult create*/
 
 }
