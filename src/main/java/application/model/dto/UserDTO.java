@@ -12,11 +12,20 @@ public class UserDTO {
     private String avatar;
     private String name;
     private int gender;
+    private String password;
     private String address;
     private String phoneNumber;
 
     @JsonSerialize(using = CustomDateSerializer.class)
     private Date createdDate;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public int getId() {
         return id;

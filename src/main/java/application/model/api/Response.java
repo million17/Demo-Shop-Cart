@@ -1,27 +1,17 @@
 package application.model.api;
 
 public class Response {
-    private String status;
-    private Object data;
+    private String jwt;
 
-    public Response(String status, Object data) {
-        this.status = status;
-        this.data = data;
+    public Response(String jwt) {
+        this.jwt = jwt;
     }
 
-    public String getStatus() {
-        return status;
+    public String getJwt() {
+        return jwt;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
+    public void setJwt(String jwt) {
+        this.jwt = jwt;
     }
 }
