@@ -30,13 +30,13 @@ public class AuthenticateApiController {
 
     @RequestMapping(value = "/create" , method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody UserDTO userDTO) throws Exception {
-        try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(userDTO.getUserName(), userDTO.getPassword())
-            );
-        } catch (BadCredentialsException e) {
-            throw new Exception( "BadCredentialsException" + e);
-        }
+//        try {
+//            authenticationManager.authenticate(
+//                    new UsernamePasswordAuthenticationToken(userDTO.getUserName(), userDTO.getPassword())
+//            );
+//        } catch (BadCredentialsException e) {
+//            throw new Exception( "BadCredentialsException" + e);
+//        }
 
         final UserDetails userDetails = mySQLUserDetailsService.loadUserByUsername(userDTO.getUserName());
 
