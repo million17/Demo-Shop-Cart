@@ -18,7 +18,7 @@ $(document).ready(function () {
         NProgress.start();
         linkPost = "/api/product/detail/" + id;
 
-        axios.get(linkPost).then(function (res) {
+        axios.post(linkPost).then(function (res) {
             NProgress.done();
             if (res.data.success) {
                 dataProduct.id = id;

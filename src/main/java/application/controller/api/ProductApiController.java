@@ -11,6 +11,7 @@ import application.model.dto.ProductDTO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -84,9 +85,9 @@ public class ProductApiController {
         return result;
     }
 
-    @PostMapping("/create")
-    public BaseApiResult createProduct(@RequestBody ProductDTO dto) {
-        BaseApiResult result = new BaseApiResult();
+    @PostMapping(value = "/create")
+    public DataApiResult createProduct(@RequestBody ProductDTO dto /*ProductDTO dto*/) {
+        DataApiResult result = new DataApiResult();
         try {
             Product product = new Product();
             product.setProductName(dto.getProductName());
@@ -99,13 +100,45 @@ public class ProductApiController {
 
             productService.addNewProduct(product);
 
+            result.setData(product);
             result.setSuccess(true);
-            result.setMessage("Create product Success !");
+            result.setMessage("ok");
         } catch (Exception ex) {
             logger.error(ex.getMessage());
             result.setSuccess(false);
+            result.setData(null);
             result.setMessage("Create product Fail !");
         }
+
+        return result;
+    }
+
+    @GetMapping("/list")
+    public DataApiResult getAllProduct() {
+        DataApiResult result = new DataApiResult();
+
+        List<Product> productList = productService.findAll();
+
+        List<ProductDTO> productDTOList = new ArrayList<>();
+        for (Product product : productList) {
+            ProductDTO productDTO = new ProductDTO();
+            productDTO.setId(product.getProductId());
+            productDTO.setProductName(product.getProductName());
+            productDTO.setBrand(product.getBrand());
+            productDTO.setMainImage(product.getMainImage());
+            productDTO.setCategoryId(product.getCategoryId());
+            productDTO.setCategoryName(product.getCategory().getName());
+            productDTO.setPrice(product.getPrice());
+            productDTO.setCreatedDate(product.getCreatedDate());
+            productDTO.setShortDesc(product.getShortDesc());
+
+            productDTOList.add(productDTO);
+        }
+
+        result.setData(productDTOList);
+        result.setMessage("Get All Success !");
+        result.setSuccess(true);
+
 
         return result;
     }
@@ -137,7 +170,7 @@ public class ProductApiController {
         return result;
     }
 
-    @GetMapping("/detail/{productId}")
+    @PostMapping("/detail/{productId}")
     public BaseApiResult detailMaterial(@PathVariable int productId) {
         DataApiResult result = new DataApiResult();
         try {

@@ -11,6 +11,15 @@ public class UserVM {
     private String password;
     private String phoneNumber;
     private String createdDate;
+    private int roleId;
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
 
     public int getUserId() {
         return userId;

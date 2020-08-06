@@ -1,6 +1,8 @@
 package application.data.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +21,7 @@ public class Category {
     @Column(name = "short_desc")
     private String shortDesc;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "category")
     private List<Product> productList = new ArrayList<>();
 
